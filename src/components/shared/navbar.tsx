@@ -1,0 +1,101 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { RiMenuLine, RiCloseLine } from "@remixicon/react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+const navLinks = [
+  { href: "#services", label: "Services" },
+  { href: "#how-it-works", label: "How It Works" },
+  { href: "#why-us", label: "Why Us" },
+  { href: "#faq", label: "FAQ" },
+  { href: "#contact", label: "Contact" },
+];
+
+export function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        isScrolled
+          ? "bg-background/80 backdrop-blur-lg border-b border-border py-3"
+          : "bg-transparent py-5",
+      )}
+    >
+      <nav className="mx-auto max-w-7xl px-5 md:px-10 flex items-center justify-between">
+        {/* logo */}
+        <Link href="/" className="flex items-center gap-2">
+          <span className="font-display text-xl font-bold text-primary">
+            Vizit Africa
+          </span>
+        </Link>
+
+        {/* desktop navigation */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* cta button */}
+        <div className="hidden md:block">
+          <Button size="sm">Get Started</Button>
+        </div>
+
+        {/* mobile menu button */}
+        <button
+          type="button"
+          className="md:hidden p-2 text-foreground"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+        >
+          {isMobileMenuOpen ? (
+            <RiCloseLine className="size-6" />
+          ) : (
+            <RiMenuLine className="size-6" />
+          )}
+        </button>
+      </nav>
+
+      {/* mobile menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border">
+          <div className="px-5 py-4 space-y-3">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block text-sm font-medium text-muted-foreground hover:text-foreground py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Button size="sm" className="w-full mt-4">
+              Get Started
+            </Button>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
