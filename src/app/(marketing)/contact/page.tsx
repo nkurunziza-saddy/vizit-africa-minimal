@@ -198,10 +198,9 @@ export default function ContactPage() {
                 </form>
               </div>
 
-              {/* Quick Links */}
               <div className="mt-8 grid sm:grid-cols-2 gap-4">
                 <a
-                  href="#"
+                  href="/#faq"
                   className="flex items-center justify-between p-4 bg-white border border-border rounded-lg hover:border-primary/50 transition-colors group"
                 >
                   <span className="flex items-center gap-3 font-medium text-foreground">
@@ -211,7 +210,7 @@ export default function ContactPage() {
                   <RiArrowRightLine className="size-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
-                  href="#"
+                  href="mailto:support@vizitafrica.rw"
                   className="flex items-center justify-between p-4 bg-white border border-border rounded-lg hover:border-primary/50 transition-colors group"
                 >
                   <span className="flex items-center gap-3 font-medium text-foreground">

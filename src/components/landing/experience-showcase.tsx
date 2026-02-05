@@ -58,7 +58,7 @@ export function ExperienceShowcase() {
               change you. Discover the magic waiting for you.
             </p>
           </div>
-          <Link href="/services">
+          <Link href="/experiences">
             <Button variant="outline" className="gap-2">
               View All Experiences <RiArrowRightLine className="size-4" />
             </Button>

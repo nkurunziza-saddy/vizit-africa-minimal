@@ -8,16 +8,16 @@ import {
 
 const footerLinks = {
   services: [
-    { label: "Flights", href: "#" },
-    { label: "Hotels", href: "#" },
-    { label: "Car Rental", href: "#" },
-    { label: "Guides", href: "#" },
+    { label: "Trips & Packages", href: "/experiences" },
+    { label: "Custom Itineraries", href: "/plan-trip" },
+    { label: "Gallery", href: "/gallery" },
+    { label: "FAQ", href: "/#faq" },
   ],
   company: [
-    { label: "About", href: "#" },
-    { label: "FAQ", href: "#faq" },
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
+    { label: "About Us", href: "/about" },
+    { label: "Contact", href: "/contact" },
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms of Service", href: "/terms" },
   ],
   contact: [
     { label: "hello@vizitafrica.rw", href: "mailto:hello@vizitafrica.rw" },
@@ -27,10 +27,10 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { icon: RiTwitterXLine, href: "#", label: "Twitter" },
-  { icon: RiInstagramLine, href: "#", label: "Instagram" },
-  { icon: RiFacebookLine, href: "#", label: "Facebook" },
-  { icon: RiLinkedinLine, href: "#", label: "LinkedIn" },
+  { icon: RiTwitterXLine, href: "https://twitter.com", label: "Twitter" },
+  { icon: RiInstagramLine, href: "https://instagram.com", label: "Instagram" },
+  { icon: RiFacebookLine, href: "https://facebook.com", label: "Facebook" },
+  { icon: RiLinkedinLine, href: "https://linkedin.com", label: "LinkedIn" },
 ];
 
 export function Footer() {

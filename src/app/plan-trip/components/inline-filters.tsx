@@ -1,0 +1,179 @@
+"use client";
+
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { RiSearchLine, RiFilterOffLine } from "@remixicon/react";
+
+interface InlineFiltersProps {
+  activeTab: string;
+  // Hotel filters
+  hotelSearch: string;
+  setHotelSearch: (v: string) => void;
+  hotelPriceFilter: string;
+  setHotelPriceFilter: (v: string) => void;
+  hotelStarsFilter: string;
+  setHotelStarsFilter: (v: string) => void;
+  // Car filters
+  carSearch: string;
+  setCarSearch: (v: string) => void;
+  carCategoryFilter: string;
+  setCarCategoryFilter: (v: string) => void;
+  // Counts
+  hotelCount: number;
+  carCount: number;
+}
+
+export function InlineFilters({
+  activeTab,
+  hotelSearch,
+  setHotelSearch,
+  hotelPriceFilter,
+  setHotelPriceFilter,
+  hotelStarsFilter,
+  setHotelStarsFilter,
+  carSearch,
+  setCarSearch,
+  carCategoryFilter,
+  setCarCategoryFilter,
+  hotelCount,
+  carCount,
+}: InlineFiltersProps) {
+  const hasHotelFilters =
+    hotelSearch || hotelPriceFilter !== "all" || hotelStarsFilter !== "all";
+  const hasCarFilters = carSearch || carCategoryFilter !== "all";
+
+  const resetHotelFilters = () => {
+    setHotelSearch("");
+    setHotelPriceFilter("all");
+    setHotelStarsFilter("all");
+  };
+
+  const resetCarFilters = () => {
+    setCarSearch("");
+    setCarCategoryFilter("all");
+  };
+
+  // Hotel filters
+  if (activeTab === "hotels") {
+    return (
+      <div className=" mb-4">
+        <div className="flex flex-wrap items-center gap-3">
+          {/* Search */}
+          <div className="relative flex-1 min-w-[180px]">
+            <RiSearchLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+            <Input
+              placeholder="Search hotels..."
+              value={hotelSearch}
+              onChange={(e) => setHotelSearch(e.target.value)}
+              className="pl-9 h-9"
+            />
+          </div>
+
+          {/* Price Range */}
+          <Select value={hotelPriceFilter} onValueChange={setHotelPriceFilter}>
+            <SelectTrigger className="w-[140px]">
+              <SelectValue placeholder="Price" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Prices</SelectItem>
+              <SelectItem value="budget">Under $150</SelectItem>
+              <SelectItem value="mid">$150 - $200</SelectItem>
+              <SelectItem value="luxury">$200+</SelectItem>
+            </SelectContent>
+          </Select>
+
+          {/* Stars */}
+          <Select value={hotelStarsFilter} onValueChange={setHotelStarsFilter}>
+            <SelectTrigger className="w-[130px]">
+              <SelectValue placeholder="Stars" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Stars</SelectItem>
+              <SelectItem value="5">5 Stars</SelectItem>
+              <SelectItem value="4+">4+ Stars</SelectItem>
+              <SelectItem value="3">3 Stars</SelectItem>
+            </SelectContent>
+          </Select>
+
+          {/* Reset & Count */}
+          {hasHotelFilters && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={resetHotelFilters}
+              className="h-9 gap-1"
+            >
+              <RiFilterOffLine className="size-4" />
+              Reset
+            </Button>
+          )}
+          <span className="text-sm text-muted-foreground ml-auto">
+            {hotelCount} hotels
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  // Car filters
+  if (activeTab === "cars") {
+    return (
+      <div className="mb-4">
+        <div className="flex flex-wrap items-center gap-3">
+          {/* Search */}
+          <div className="relative flex-1 min-w-[180px]">
+            <RiSearchLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+            <Input
+              placeholder="Search vehicles..."
+              value={carSearch}
+              onChange={(e) => setCarSearch(e.target.value)}
+              className="pl-9"
+            />
+          </div>
+
+          {/* Category */}
+          <Select
+            value={carCategoryFilter}
+            onValueChange={setCarCategoryFilter}
+          >
+            <SelectTrigger className="w-[130px]">
+              <SelectValue placeholder="Type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Types</SelectItem>
+              <SelectItem value="sedan">Sedan</SelectItem>
+              <SelectItem value="suv">SUV</SelectItem>
+              <SelectItem value="van">Van</SelectItem>
+            </SelectContent>
+          </Select>
+
+          {/* Reset & Count */}
+          {hasCarFilters && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={resetCarFilters}
+              className="h-9 gap-1"
+            >
+              <RiFilterOffLine className="size-4" />
+              Reset
+            </Button>
+          )}
+          <span className="text-sm text-muted-foreground ml-auto">
+            {carCount} vehicles
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  // No filters for flights/guides
+  return null;
+}

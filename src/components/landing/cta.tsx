@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { RiArrowRightLine } from "@remixicon/react";
+import Link from "next/link";
 
 export function CTA() {
   return (
@@ -18,14 +19,16 @@ export function CTA() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button
-            size="lg"
-            variant="secondary"
-            className="h-14 px-8 text-base gap-2"
-          >
-            Start Your Trip
-            <RiArrowRightLine className="size-5" />
-          </Button>
+          <Link href="/plan-trip">
+            <Button
+              size="lg"
+              variant="secondary"
+              className="h-14 px-8 text-base gap-2"
+            >
+              Start Your Trip
+              <RiArrowRightLine className="size-5" />
+            </Button>
+          </Link>
         </div>
 
         <p className="mt-6 text-sm text-primary-foreground/60">

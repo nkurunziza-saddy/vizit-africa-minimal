@@ -27,7 +27,6 @@ export function GuideOptions({ guide }: GuideOptionsProps) {
         {/* photo */}
         <div className="size-20 rounded-full bg-muted shrink-0 flex items-center justify-center">
           {/* TODO: replace with actual guide photo */}
-          <span className="text-3xl">👤</span>
         </div>
 
         {/* info */}

@@ -1,0 +1,78 @@
+// Types for the Plan Trip page
+
+export interface Flight {
+  id: string;
+  airline: string;
+  flightNumber: string;
+  origin: string;
+  destination: string;
+  departureTime: string;
+  arrivalTime: string;
+  duration: string;
+  stops: string;
+  price: number;
+}
+
+export interface Hotel {
+  id: string;
+  name: string;
+  address: string;
+  stars: number;
+  pricePerNight: number;
+  amenities: string[];
+  rating: number;
+}
+
+export interface Car {
+  id: string;
+  model: string;
+  category: "sedan" | "suv" | "van";
+  pricePerDay: number;
+  seats: number;
+  transmission: string;
+  fuelType: string;
+  features: string[];
+}
+
+export interface Guide {
+  id: string;
+  type: string;
+  description: string;
+  price: number;
+  languages: string[];
+}
+
+export interface TripInfo {
+  // Travel details
+  departureCity: string;
+  arrivalDate: string;
+  departureDate: string;
+  adults: number;
+  children: number;
+  tripPurpose:
+    | "leisure"
+    | "business"
+    | "honeymoon"
+    | "family"
+    | "adventure"
+    | "other";
+  specialRequests: string;
+  // Contact info
+  name: string;
+  email: string;
+  phone: string;
+}
+
+export interface Selections {
+  hotel: Hotel | null;
+  car: Car | null;
+  carWithDriver: boolean;
+  guide: Guide | null;
+}
+
+export interface FilterState {
+  search: string;
+  priceRange: "all" | "budget" | "mid" | "luxury";
+  stars: "all" | "3" | "4" | "4+" | "5";
+  category: "all" | "sedan" | "suv" | "van";
+}

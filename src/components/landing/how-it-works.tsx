@@ -16,15 +16,16 @@ export function HowItWorks() {
 
         {/* steps */}
         <div className="relative">
-          {/* connector line - desktop only */}
-          <div className="hidden lg:block absolute top-8 left-[calc(12.5%+24px)] right-[calc(12.5%+24px)] h-0.5 bg-border" />
+          {/* desktop only */}
+          <div className="hidden lg:block absolute top-7 left-[calc(12.5%+24px)] right-[calc(12.5%+24px)] h-0.5 bg-border" />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
             {processSteps.map((step, index) => (
               <div key={step.step} className="relative text-center">
-                {/* step number */}
-                <div className="relative z-10 mx-auto size-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-display text-lg font-bold mb-4">
-                  {step.step}
+                <div className="relative z-10 mx-auto size-14 rounded-full bg-muted/50 flex items-center justify-center font-display font-bold mb-4">
+                  <div className="bg-primary size-12 text-primary-foreground flex items-center justify-center font-display text-lg font-bold rounded-full">
+                    {step.step}
+                  </div>
                 </div>
 
                 {/* arrow connector - mobile/tablet */}

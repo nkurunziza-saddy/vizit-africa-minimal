@@ -2,7 +2,7 @@ export * from "./hero";
 export * from "./faq";
 export * from "./cta";
 export * from "./footer";
-export * from "./partners";
+export * from "./social-proof";
 export * from "./services";
 export * from "./experience-showcase";
 export * from "./gallery";

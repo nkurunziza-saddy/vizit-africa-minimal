@@ -32,7 +32,6 @@ export function FlightSelector({ flight }: FlightSelectorProps) {
         <div className="flex items-center gap-4">
           <div className="size-12 rounded bg-muted flex items-center justify-center">
             {/* TODO: replace with actual airline logo */}
-            <span className="text-2xl">✈️</span>
           </div>
           <div>
             <p className="font-semibold text-foreground">{flight.airline}</p>

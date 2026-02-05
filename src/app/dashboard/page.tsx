@@ -37,7 +37,7 @@ export default function DashboardPage() {
                 Manage your trips and view your travel history.
               </p>
             </div>
-            <Link href="/request">
+            <Link href="/plan-trip">
               <Button className="gap-2">
                 <RiAddLine className="size-5" />
                 Plan New Trip

@@ -7,11 +7,11 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "#services", label: "Services" },
-  { href: "#how-it-works", label: "How It Works" },
-  { href: "#why-us", label: "Why Us" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contact", label: "Contact" },
+  { href: "/services", label: "Services" },
+  { href: "/experiences", label: "Experiences" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/about", label: "About Us" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function Navbar() {
@@ -58,7 +58,9 @@ export function Navbar() {
 
         {/* cta button */}
         <div className="hidden md:block">
-          <Button size="sm">Get Started</Button>
+          <Link href="/plan-trip">
+            <Button size="sm">Get Started</Button>
+          </Link>
         </div>
 
         {/* mobile menu button */}
@@ -90,9 +92,11 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Button size="sm" className="w-full mt-4">
-              Get Started
-            </Button>
+            <Link href="/plan-trip" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button size="sm" className="w-full mt-4">
+                Get Started
+              </Button>
+            </Link>
           </div>
         </div>
       )}

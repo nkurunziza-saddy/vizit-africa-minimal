@@ -15,23 +15,21 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const serviceIcons = {
-  plane: RiPlaneLine,
   building: RiHotelLine,
   car: RiCarLine,
   user: RiUserStarLine,
 };
 
 const serviceLinks = {
-  Flights: "/services/flights",
-  Hotels: "/services/accommodations",
-  "Car Rental": "/services/transport",
-  Guides: "/services/guides",
+  Hotels: "/plan-trip?service=hotels",
+  "Car Rental": "/plan-trip?service=transport",
+  Guides: "/plan-trip?service=guides",
 };
 
 export default function ServicesPage() {
   const [filter, setFilter] = useState("All");
 
-  const categories = ["All", "Flights", "Hotels", "Transport", "Guides"];
+  const categories = ["All", "Hotels", "Transport", "Guides"];
 
   const filteredServices =
     filter === "All"
@@ -69,6 +67,7 @@ export default function ServicesPage() {
               </div>
               {categories.map((cat) => (
                 <button
+                  type="button"
                   key={cat}
                   onClick={() => setFilter(cat)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
@@ -164,7 +163,7 @@ export default function ServicesPage() {
               </p>
             </div>
             <Link
-              href="/request"
+              href="/plan-trip"
               className="inline-flex items-center justify-center h-14 px-8 rounded-lg bg-white text-primary font-bold text-lg hover:bg-neutral-100 transition-colors shrink-0"
             >
               Request Custom Quote

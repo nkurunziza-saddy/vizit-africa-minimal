@@ -33,7 +33,6 @@ export function CarSelector({ car }: CarSelectorProps) {
       {/* image */}
       <div className="aspect-[4/3] bg-muted rounded-lg mb-4 flex items-center justify-center">
         {/* TODO: replace with actual car image */}
-        <span className="text-4xl">🚗</span>
       </div>
 
       {/* type badge */}

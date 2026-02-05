@@ -4,7 +4,7 @@ import {
   Footer,
   Hero,
   Services,
-  Partners,
+  SocialProof,
   ExperienceShowcase,
   Gallery,
   Testimonials,
@@ -18,7 +18,7 @@ export default function Home() {
     <>
       <Navbar />
       <Hero />
-      <Partners />
+      <SocialProof />
       <Services />
       <ExperienceShowcase />
       <HowItWorks />

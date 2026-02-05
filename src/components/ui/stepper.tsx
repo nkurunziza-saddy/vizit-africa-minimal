@@ -1,11 +1,11 @@
 "use client";
 
-import { CheckIcon, LoaderCircleIcon } from "lucide-react";
 import { Slot } from "radix-ui";
 import * as React from "react";
 import { createContext, useContext } from "react";
 
 import { cn } from "@/lib/utils";
+import { RiCheckLine, RiLoader2Line } from "@remixicon/react";
 
 // Types
 type StepperContextValue = {
@@ -147,8 +147,7 @@ function StepperItem({
 }
 
 // StepperTrigger
-interface StepperTriggerProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface StepperTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean;
 }
 
@@ -217,14 +216,14 @@ function StepperIndicator({
           <span className="transition-all group-data-[state=completed]/step:scale-0 group-data-loading/step:scale-0 group-data-[state=completed]/step:opacity-0 group-data-loading/step:opacity-0 group-data-loading/step:transition-none">
             {step}
           </span>
-          <CheckIcon
+          <RiCheckLine
             aria-hidden="true"
             className="absolute scale-0 opacity-0 transition-all group-data-[state=completed]/step:scale-100 group-data-[state=completed]/step:opacity-100"
             size={16}
           />
           {isLoading && (
             <span className="absolute transition-all">
-              <LoaderCircleIcon
+              <RiLoader2Line
                 aria-hidden="true"
                 className="animate-spin"
                 size={14}

@@ -4,7 +4,7 @@ import { RiStarFill, RiArrowRightLine } from "@remixicon/react";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[600px] h-[80vh] flex items-center bg-gradient-to-b from-primary-subtle to-background">
+    <section className="relative min-h-[600px] h-[100vh] flex items-center bg-gradient-to-b from-primary-subtle to-background">
       <div className="mx-auto max-w-7xl px-5 md:px-10 w-full">
         <div className="grid lg:grid-cols-5 gap-10 lg:gap-16 items-center">
           {/* left content - 60% */}
@@ -21,22 +21,21 @@ export function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <Button size="lg" className="gap-2">
-                Get Started
-                <RiArrowRightLine className="size-4" />
-              </Button>
-              <Button variant="outline" size="lg">
-                Learn More
-              </Button>
+              <Link href="/plan-trip">
+                <Button size="lg" className="gap-2">
+                  Get Started
+                  <RiArrowRightLine className="size-4" />
+                </Button>
+              </Link>
+              <Link href="/about">
+                <Button variant="outline" size="lg">
+                  Learn More
+                </Button>
+              </Link>
             </div>
 
             {/* rating */}
             <div className="flex items-center gap-3 pt-4">
-              <div className="flex">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <RiStarFill key={star} className="size-5 text-accent-warm" />
-                ))}
-              </div>
               <span className="text-sm text-muted-foreground">
                 <span className="font-semibold text-foreground">4.9/5</span>{" "}
                 from 200+ travelers

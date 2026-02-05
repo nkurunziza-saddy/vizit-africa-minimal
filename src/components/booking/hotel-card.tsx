@@ -26,9 +26,7 @@ export function HotelCard({ hotel }: HotelCardProps) {
       {/* image */}
       <div className="aspect-[16/10] bg-muted relative">
         {/* TODO: replace with actual hotel image */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-4xl">🏨</span>
-        </div>
+        <div className="absolute inset-0 flex items-center justify-center"></div>
 
         {/* rating badge */}
         <div className="absolute top-3 right-3 bg-card/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">

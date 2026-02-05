@@ -27,7 +27,15 @@ export const requestSchema = z.object({
   needsGuide: z.boolean().default(false),
   notes: z.string().optional(),
   status: z
-    .enum(["pending", "building", "ready", "selected", "paid", "fulfilled"])
+    .enum([
+      "pending",
+      "building",
+      "ready",
+      "selected",
+      "paid",
+      "fulfilled",
+      "quoted",
+    ])
     .default("pending"),
   createdAt: z.string(),
 });
