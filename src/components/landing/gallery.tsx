@@ -5,41 +5,42 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
 const galleryImages = [
   {
     id: 1,
-    src: "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=80&w=2600&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1629299342279-aa4b29356913?q=90&w=1600&auto=format&fit=crop",
     alt: "Imigongo Art",
     caption: "Cultural Heritage",
   },
   {
     id: 2,
-    src: "https://images.unsplash.com/photo-1543832923-44667a44c804?q=80&w=2600&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1648708511872-5426c0f29c27?q=90&w=1600&auto=format&fit=crop",
     alt: "Kigali Convention Center",
     caption: "Modern Kigali",
   },
   {
     id: 3,
-    src: "https://images.unsplash.com/photo-1504198458649-3128b932f49e?q=80&w=2600&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1602020277972-99978250c8bd?q=90&w=1600&auto=format&fit=crop",
     alt: "Tea Plantation",
     caption: "Nyungwe Tea",
   },
   {
     id: 4,
-    src: "https://images.unsplash.com/photo-1628105658145-2b0444319808?q=80&w=2600&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1676102818778-7dedb5cdad46?q=90&w=1600&auto=format&fit=crop",
     alt: "Gorilla Trekking",
     caption: "Once in a Lifetime",
   },
   {
     id: 5,
-    src: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?q=80&w=2600&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1516465675917-6856496ffa3d?q=90&w=1600&auto=format&fit=crop",
     alt: "Safari Sunset",
     caption: "Golden Plains",
   },
   {
     id: 6,
-    src: "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?q=80&w=2600&auto=format&fit=crop",
+    src: "https://images.unsplash.com/photo-1756245995172-3d2d50219fb1?q=90&w=1600&auto=format&fit=crop",
     alt: "Canopy Walk",
     caption: "Above the Trees",
   },
@@ -59,7 +60,7 @@ export function Gallery() {
   return (
     <section
       ref={containerRef}
-      className="py-24 bg-background border-t border-border/50 overflow-hidden"
+      className="py-32 bg-background border-t border-border/50 overflow-hidden"
     >
       <div className="mx-auto max-w-7xl px-5 md:px-10 mb-16 flex flex-col md:flex-row items-end justify-between gap-8">
         <div className="max-w-2xl">
@@ -79,24 +80,21 @@ export function Gallery() {
       </div>
 
       <div className="mx-auto max-w-7xl px-5 md:px-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Column 1 */}
         <motion.div style={{ y: y1 }} className="flex flex-col gap-8 md:mt-12">
           {galleryImages.slice(0, 2).map((img, i) => (
-            <GalleryCard key={i} img={img} className="aspect-[3/4]" />
+            <GalleryCard key={i} img={img} className="aspect-square" />
           ))}
         </motion.div>
 
-        {/* Column 2 */}
         <motion.div style={{ y: y2 }} className="flex flex-col gap-8">
           {galleryImages.slice(2, 4).map((img, i) => (
-            <GalleryCard key={i} img={img} className="aspect-[4/5]" />
+            <GalleryCard key={i} img={img} className="aspect-[4/3]" />
           ))}
         </motion.div>
 
-        {/* Column 3 */}
         <motion.div style={{ y: y3 }} className="flex flex-col gap-8 md:mt-24">
           {galleryImages.slice(4, 6).map((img, i) => (
-            <GalleryCard key={i} img={img} className="aspect-[3/4]" />
+            <GalleryCard key={i} img={img} className="aspect-square" />
           ))}
         </motion.div>
       </div>
@@ -122,9 +120,10 @@ function GalleryCard({
     <div
       className={`relative group overflow-hidden rounded-2xl cursor-pointer ${className}`}
     >
-      <img
+      <Image
         src={img.src}
         alt={img.alt}
+        fill
         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
       />
       <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />

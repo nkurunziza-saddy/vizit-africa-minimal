@@ -21,12 +21,12 @@ export function GuideCard({ guide, isSelected, onToggle }: GuideCardProps) {
       }`}
     >
       <div className="flex items-start gap-4">
-        {/* Icon */}
+
         <div className="size-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
           <RiUserStarLine className="size-6" />
         </div>
 
-        {/* Content */}
+
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
             <div>
@@ -36,7 +36,7 @@ export function GuideCard({ guide, isSelected, onToggle }: GuideCardProps) {
               </p>
             </div>
 
-            {/* Selected indicator */}
+
             {isSelected && (
               <div className="size-6 rounded-full bg-primary text-white flex items-center justify-center shrink-0">
                 <RiCheckLine className="size-4" />
@@ -44,7 +44,7 @@ export function GuideCard({ guide, isSelected, onToggle }: GuideCardProps) {
             )}
           </div>
 
-          {/* Languages */}
+
           <div className="flex flex-wrap gap-1 mb-3">
             {guide.languages.map((lang) => (
               <Badge key={lang} variant="secondary" className="text-xs">
@@ -53,7 +53,7 @@ export function GuideCard({ guide, isSelected, onToggle }: GuideCardProps) {
             ))}
           </div>
 
-          {/* Price */}
+
           <p className="font-bold text-lg text-foreground">${guide.price}</p>
         </div>
       </div>

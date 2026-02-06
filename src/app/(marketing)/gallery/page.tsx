@@ -1,12 +1,13 @@
 "use client";
 
+import Image from "next/image";
+
 import { useState } from "react";
 import { RiCloseLine, RiZoomInLine, RiFilter3Line } from "@remixicon/react";
 import { Navbar } from "@/components/shared";
 import { Footer } from "@/components/landing";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Real high-quality images for gallery
 const galleryImages = [
   {
     id: 1,
@@ -71,6 +72,48 @@ const galleryImages = [
     caption: "Akagera Giants",
     category: "wildlife",
   },
+  {
+    id: 10,
+    src: "https://images.unsplash.com/photo-1578323769534-7389c9df3ee0?q=80&w=2600&auto=format&fit=crop",
+    alt: "Traditional Dance",
+    caption: "Intore Dancers",
+    category: "culture",
+  },
+  {
+    id: 11,
+    src: "https://images.unsplash.com/photo-1517260739337-6799d2ffdeee?q=80&w=2600&auto=format&fit=crop",
+    alt: "Chimpanzee",
+    caption: "Primate Cousins",
+    category: "wildlife",
+  },
+  {
+    id: 12,
+    src: "https://images.unsplash.com/photo-1547823065-4c3f56846f43?q=80&w=2600&auto=format&fit=crop",
+    alt: "Coffee Cherries",
+    caption: "Rwanda's Gold",
+    category: "culture",
+  },
+  {
+    id: 13,
+    src: "https://images.unsplash.com/photo-1580060092265-d6d744235e16?q=80&w=2600&auto=format&fit=crop",
+    alt: "Kigali Night",
+    caption: "City Lights",
+    category: "urban",
+  },
+  {
+    id: 14,
+    src: "https://images.unsplash.com/photo-1623126860341-35c60205c08c?q=80&w=2600&auto=format&fit=crop",
+    alt: "Twin Lakes",
+    caption: "Burera & Ruhondo",
+    category: "nature",
+  },
+  {
+    id: 15,
+    src: "https://images.unsplash.com/photo-1544468625-2a2ec06f5053?q=80&w=2600&auto=format&fit=crop",
+    alt: "Zebras",
+    caption: "Striped Beauty",
+    category: "wildlife",
+  },
 ];
 
 const categories = [
@@ -95,21 +138,40 @@ export default function GalleryPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-neutral-50 pt-20">
-        <section className="bg-primary-subtle py-16 md:py-24 border-b border-border relative overflow-hidden">
-          <div className="absolute inset-0 bg-white/40" />
-          <div className="mx-auto max-w-7xl px-5 md:px-10 text-center relative z-10">
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Our Gallery
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-light">
-              Explore the beauty of Rwanda through our lens. From the misty
-              mountains to the vibrant city life.
-            </p>
+      <div className="min-h-screen bg-background">
+        <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=90&w=2600&auto=format&fit=crop" 
+              alt="Rwanda Gallery"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-black/50" />
+          </div>
+
+          <div className="relative z-10 text-center px-4 max-w-4xl mx-auto mt-20">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <span className="text-white/80 font-mono uppercase tracking-widest text-sm md:text-base mb-4 block">
+                Visual Journey
+              </span>
+              <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-6">
+                Our Gallery
+              </h1>
+              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-light leading-relaxed">
+                Explore the beauty of Rwanda through our lens. From the misty
+                mountains to the vibrant city life.
+              </p>
+            </motion.div>
           </div>
         </section>
 
-        <section className="py-4 border-b border-border bg-white/80 backdrop-blur-md sticky top-16 z-30 shadow-sm">
+        <section className="py-4 border-b border-border bg-card/80 backdrop-blur-md sticky top-16 z-30 shadow-sm">
           <div className="mx-auto max-w-7xl px-5 md:px-10">
             <div className="flex flex-wrap items-center justify-center gap-2">
               <div className="flex items-center gap-2 mr-4 text-muted-foreground hidden md:flex">
@@ -123,7 +185,7 @@ export default function GalleryPage() {
                   onClick={() => setActiveTab(tab)}
                   className={`px-4 py-2 rounded-full text-sm font-medium capitalize transition-all duration-300 ${
                     activeTab === tab
-                      ? "bg-primary text-white shadow-md shadow-primary/20 scale-105"
+                      ? "bg-primary text-white scale-105"
                       : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >
@@ -134,7 +196,7 @@ export default function GalleryPage() {
           </div>
         </section>
 
-        <section className="py-12 px-5 md:px-10 max-w-7xl mx-auto min-h-[50vh]">
+        <section className="py-24 px-5 md:px-10 max-w-7xl mx-auto min-h-[50vh]">
           <motion.div
             layout
             className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6"
@@ -152,15 +214,16 @@ export default function GalleryPage() {
                   }}
                   transition={{ duration: 0.4 }}
                   key={img.id}
-                  className="group relative overflow-hidden rounded-2xl bg-muted break-inside-avoid cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
+                  className="group relative overflow-hidden rounded-2xl bg-muted break-inside-avoid cursor-pointer transition-all duration-500"
                   onClick={() => setSelectedImage(img.src)}
                 >
-                  <div className="w-full relative">
-                    <img
+                  <div className="w-full relative aspect-4/3">
+                    <Image
                       src={img.src}
                       alt={img.alt}
-                      className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
-                      loading="lazy"
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
 
@@ -170,7 +233,7 @@ export default function GalleryPage() {
                     </div>
                   </div>
 
-                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0">
                     <p className="text-white text-lg font-bold font-display">
                       {img.caption}
                     </p>
@@ -186,14 +249,13 @@ export default function GalleryPage() {
       </div>
       <Footer />
 
-      {/* Improved Lightbox Modal */}
       <AnimatePresence>
         {selectedImage && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-60 bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm"
             onClick={() => setSelectedImage(null)}
           >
             <motion.button
@@ -210,13 +272,15 @@ export default function GalleryPage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="relative max-w-6xl w-full max-h-[90vh] rounded-lg overflow-hidden shadow-2xl"
+              className="relative max-w-6xl w-full max-h-[90vh] aspect-video rounded-lg overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <img
+              <Image
                 src={selectedImage}
                 alt="Full size preview"
-                className="w-full h-full object-contain max-h-[90vh]"
+                fill
+                className="object-contain"
+                sizes="100vw"
               />
             </motion.div>
           </motion.div>

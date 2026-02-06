@@ -1,8 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { RiArrowRightLine, RiArrowDownLine } from "@remixicon/react";
+import { RiArrowRightLine } from "@remixicon/react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 
 import { useRef } from "react";
 
@@ -17,15 +18,16 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative h-[100dvh] min-h-[800px] w-full overflow-hidden bg-zinc-950"
+      className="relative h-[100dvh] min-h-[700px] w-full overflow-hidden bg-zinc-950"
     >
       {/* Background with Parallax */}
       <motion.div
         style={{ y }}
         className="absolute inset-0 w-full h-[120%] -top-[10%] z-0"
       >
-        <img
-          src="https://images.unsplash.com/photo-1547619292-240402b5ae5d?q=80&w=2600&auto=format&fit=crop"
+        <Image
+          src="https://images.unsplash.com/photo-1546422724-3c4be0b20cb5?q=90&w=2400&auto=format&fit=crop"
+          fill
           alt="Rwanda Landscape"
           className="w-full h-full object-cover"
         />

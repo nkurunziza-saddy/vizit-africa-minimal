@@ -19,23 +19,19 @@ export function HotelCard({ hotel }: HotelCardProps) {
       className={cn(
         "w-full text-left bg-card border rounded-lg overflow-hidden transition-all duration-200",
         isSelected
-          ? "border-primary ring-2 ring-primary/20 shadow-sm"
-          : "border-border hover:border-primary/50 hover:shadow-sm",
+          ? "border-primary ring-2 ring-primary/20"
+          : "border-border hover:border-primary/50",
       )}
     >
-      {/* image */}
       <div className="aspect-[16/10] bg-muted relative">
-        {/* TODO: replace with actual hotel image */}
         <div className="absolute inset-0 flex items-center justify-center"></div>
 
-        {/* rating badge */}
         <div className="absolute top-3 right-3 bg-card/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
           <RiStarFill className="size-3 text-accent-warm" />
           <span className="text-xs font-medium">{hotel.rating}</span>
         </div>
       </div>
 
-      {/* content */}
       <div className="p-4">
         <h3 className="font-semibold text-foreground mb-1 line-clamp-1">
           {hotel.name}
@@ -46,7 +42,6 @@ export function HotelCard({ hotel }: HotelCardProps) {
           <span className="line-clamp-1">{hotel.area}</span>
         </div>
 
-        {/* amenities preview */}
         <div className="flex flex-wrap gap-2 mb-4">
           {hotel.amenities.slice(0, 3).map((amenity) => (
             <span
@@ -63,7 +58,6 @@ export function HotelCard({ hotel }: HotelCardProps) {
           )}
         </div>
 
-        {/* price */}
         <div className="flex items-baseline gap-1">
           <span className="font-mono text-xl font-bold text-foreground">
             ${hotel.pricePerNight}

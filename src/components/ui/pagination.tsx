@@ -52,7 +52,6 @@ function PaginationLink({
       variant={isActive ? "outline" : "ghost"}
       size={size}
       className={cn(className)}
-      nativeButton={false}
       render={
         <a
           aria-current={isActive ? "page" : undefined}
@@ -74,7 +73,7 @@ function PaginationPrevious({
     <PaginationLink
       aria-label="Go to previous page"
       size="default"
-      className={cn("pl-2!", className)}
+      className={cn("gap-1 pl-2!", className)}
       {...props}
     >
       <RiArrowLeftSLine data-icon="inline-start" />
@@ -94,7 +93,7 @@ function PaginationNext({
     <PaginationLink
       aria-label="Go to next page"
       size="default"
-      className={cn("pr-2!", className)}
+      className={cn("gap-1 pr-2!", className)}
       {...props}
     >
       <span className="hidden sm:block">{text}</span>

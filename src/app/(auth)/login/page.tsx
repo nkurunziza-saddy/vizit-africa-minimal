@@ -26,7 +26,6 @@ export default function LoginPage() {
 
   return (
     <div className="w-full max-w-md">
-      {/* Logo */}
       <div className="text-center mb-8">
         <Link href="/" className="inline-block">
           <span className="font-display text-3xl font-bold text-primary">
@@ -38,8 +37,7 @@ export default function LoginPage() {
         </p>
       </div>
 
-      {/* Login Card */}
-      <div className="bg-white/80 backdrop-blur-xl rounded-2xl border border-border/50 shadow-xl p-8">
+      <div className="bg-white/80 backdrop-blur-xl rounded-2xl border border-border/50 p-8">
         <form onSubmit={handleLogin} className="space-y-5">
           <div className="space-y-2">
             <Label htmlFor="email">Email Address</Label>
@@ -106,12 +104,6 @@ export default function LoginPage() {
           </Link>
         </p>
       </div>
-
-      {/* Demo hint */}
-      <p className="text-center text-xs text-muted-foreground mt-6">
-        <span className="font-medium">Demo:</span> Click &quot;Sign In&quot; for
-        user dashboard, or &quot;Admin Portal&quot; for admin view.
-      </p>
     </div>
   );
 }

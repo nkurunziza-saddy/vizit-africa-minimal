@@ -13,7 +13,6 @@ export function WhyUs() {
     >
       <div className="mx-auto max-w-7xl px-5 md:px-10">
         <div className="grid md:grid-cols-2 gap-16 items-start">
-          {/* Left Column: Header & Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -30,13 +29,13 @@ export function WhyUs() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-3 gap-8">
               {stats.map((stat, i) => (
                 <div key={i} className="border-l border-primary/20 pl-6">
                   <div className="font-display text-5xl font-bold text-primary mb-2">
                     {stat.value}
                   </div>
-                  <div className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+                  <div className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
                     {stat.label}
                   </div>
                 </div>
@@ -44,7 +43,6 @@ export function WhyUs() {
             </div>
           </motion.div>
 
-          {/* Right Column: Editorial List */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

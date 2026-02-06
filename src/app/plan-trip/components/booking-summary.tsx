@@ -47,15 +47,7 @@ export function BookingSummary({
             </div>
           </div>
 
-          {/* Selections */}
           <div className="space-y-2 text-sm">
-            <SummaryItem
-              label="Flight"
-              isSelected={!!selections.flight}
-              value={
-                selections.flight ? selections.flight.price * travelers : null
-              }
-            />
             <SummaryItem
               label="Hotel"
               isSelected={!!selections.hotel}
@@ -81,7 +73,6 @@ export function BookingSummary({
             />
           </div>
 
-          {/* Totals */}
           <div className="space-y-2 pt-4 border-t border-border">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Subtotal</span>
@@ -92,7 +83,7 @@ export function BookingSummary({
               <span>{formatCurrency(serviceFee)}</span>
             </div>
             <div className="flex justify-between text-lg font-bold pt-2 border-t border-border">
-              <span>Total</span>
+              <span>Total (excl. Flight)</span>
               <span className="text-primary">{formatCurrency(total)}</span>
             </div>
           </div>

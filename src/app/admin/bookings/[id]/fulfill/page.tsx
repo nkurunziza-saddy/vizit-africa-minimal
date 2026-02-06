@@ -94,7 +94,7 @@ export default function FulfillmentPage() {
                   type="checkbox"
                   checked={checklist.flightTickets}
                   onChange={() => toggleItem("flightTickets")}
-                  className="size-5 rounded border-gray-300 text-primary focus:ring-primary"
+                  className="size-5 rounded border-border text-primary focus:ring-primary"
                 />
                 <div className="flex-1">
                   <p className="font-medium text-foreground">
@@ -112,7 +112,7 @@ export default function FulfillmentPage() {
                   type="checkbox"
                   checked={checklist.hotelConfirmation}
                   onChange={() => toggleItem("hotelConfirmation")}
-                  className="size-5 rounded border-gray-300 text-primary focus:ring-primary"
+                  className="size-5 rounded border-border text-primary focus:ring-primary"
                 />
                 <div className="flex-1">
                   <p className="font-medium text-foreground">
@@ -130,7 +130,7 @@ export default function FulfillmentPage() {
                   type="checkbox"
                   checked={checklist.carVoucher}
                   onChange={() => toggleItem("carVoucher")}
-                  className="size-5 rounded border-gray-300 text-primary focus:ring-primary"
+                  className="size-5 rounded border-border text-primary focus:ring-primary"
                 />
                 <div className="flex-1">
                   <p className="font-medium text-foreground">
@@ -148,7 +148,7 @@ export default function FulfillmentPage() {
                   type="checkbox"
                   checked={checklist.guideItinerary}
                   onChange={() => toggleItem("guideItinerary")}
-                  className="size-5 rounded border-gray-300 text-primary focus:ring-primary"
+                  className="size-5 rounded border-border text-primary focus:ring-primary"
                 />
                 <div className="flex-1">
                   <p className="font-medium text-foreground">
@@ -166,7 +166,7 @@ export default function FulfillmentPage() {
                   type="checkbox"
                   checked={checklist.finalItinerarySent}
                   onChange={() => toggleItem("finalItinerarySent")}
-                  className="size-5 rounded border-gray-300 text-primary focus:ring-primary"
+                  className="size-5 rounded border-border text-primary focus:ring-primary"
                 />
                 <div className="flex-1">
                   <p className="font-medium text-foreground">

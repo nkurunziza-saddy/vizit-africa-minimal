@@ -19,7 +19,7 @@ const coolPlaces = [
     bestTime: "Jun - Sep",
     rating: 4.9,
     image:
-      "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?q=80&w=2600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1714669257443-51837247f0d2?w=1200&auto=format&fit=crop&q=90",
     highlights: [
       "Crater lake at summit",
       "6-hour challenging hike",
@@ -35,7 +35,7 @@ const coolPlaces = [
     bestTime: "Year-round",
     rating: 4.8,
     image:
-      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1514547085879-968fe519da2c?q=90&w=1200&auto=format&fit=crop",
     highlights: [
       "Island hopping",
       "Coffee plantation tours",
@@ -51,7 +51,7 @@ const coolPlaces = [
     bestTime: "Jun - Aug",
     rating: 4.7,
     image:
-      "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?q=80&w=2600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1489640818597-89b1edc97db5?w=1200&auto=format&fit=crop&q=90",
     highlights: ["Canopy walkway", "Chimpanzee tracking", "13 primate species"],
     color: "from-green-900/90 to-lime-700/60",
   },
@@ -63,7 +63,7 @@ const coolPlaces = [
     bestTime: "Year-round",
     rating: 4.6,
     image:
-      "https://images.unsplash.com/photo-1543832923-44667a44c804?q=80&w=2600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1648708511872-5426c0f29c27?q=90&w=1200&auto=format&fit=crop",
     highlights: ["Genocide Memorial", "Vibrant markets", "Art galleries"],
     color: "from-amber-900/90 to-orange-700/60",
   },
@@ -77,9 +77,9 @@ const springTransition = {
 
 export function CoolPlaces() {
   return (
-    <section className="py-24 bg-zinc-950">
-      <div className="container mx-auto px-5 md:px-10">
-        {/* Section Header - Centered for symmetry */}
+    <section className="py-32 bg-zinc-950">
+      <div className="container max-w-7xl mx-auto px-5 md:px-10">
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -99,7 +99,7 @@ export function CoolPlaces() {
           </p>
         </motion.div>
 
-        {/* Symmetrical 2x2 Grid */}
+
         <div className="grid md:grid-cols-2 gap-6">
           {coolPlaces.map((place, index) => (
             <motion.div
@@ -113,9 +113,9 @@ export function CoolPlaces() {
                 damping: 30,
                 delay: index * 0.1,
               }}
-              className="group relative h-[400px] md:h-[450px] rounded-3xl overflow-hidden cursor-pointer"
+              className="group relative h-[300px] md:h-[350px] rounded-3xl overflow-hidden cursor-pointer"
             >
-              {/* Background Image */}
+
               <div className="absolute inset-0">
                 <Image
                   src={place.image}
@@ -126,9 +126,9 @@ export function CoolPlaces() {
                 <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
               </div>
 
-              {/* Content Overlay */}
+
               <div className="absolute inset-0 p-8 flex flex-col justify-between">
-                {/* Top: Location & Rating */}
+      
                 <div className="flex justify-between items-start">
                   <div className="flex items-center gap-2 text-white/80 text-sm backdrop-blur-md bg-white/10 px-3 py-1.5 rounded-full">
                     <RiMapPinLine className="size-4" />
@@ -140,19 +140,19 @@ export function CoolPlaces() {
                   </div>
                 </div>
 
-                {/* Bottom: Title & Details */}
+          
                 <div>
-                  {/* Tagline */}
+         
                   <span className="text-white/60 font-mono text-xs uppercase tracking-widest mb-2 block">
                     {place.tagline}
                   </span>
 
-                  {/* Name */}
+   
                   <h3 className="font-display text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
                     {place.name}
                   </h3>
 
-                  {/* Highlights - Revealed on Hover */}
+       
                   <div className="flex flex-wrap gap-2 mb-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
                     {place.highlights.map((highlight) => (
                       <span
@@ -164,7 +164,7 @@ export function CoolPlaces() {
                     ))}
                   </div>
 
-                  {/* Best Time & CTA */}
+    
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-white/70 text-sm">
                       <RiTimeLine className="size-4" />

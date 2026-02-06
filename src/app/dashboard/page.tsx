@@ -54,7 +54,7 @@ export default function DashboardPage() {
                   Active Trip
                 </h2>
                 <div className="bg-white border border-border rounded-xl overflow-hidden shadow-sm">
-                  <div className="h-48 bg-neutral-200 relative">
+                  <div className="h-48 bg-muted relative">
                     {/* Placeholder for trip banner */}
                     <div className="absolute inset-0 flex items-center justify-center text-muted-foreground bg-primary/10">
                       <RiMapPinLine className="size-12 opacity-20" />

@@ -16,34 +16,34 @@ const services: Service[] = [
     description: "Private charters & premium class access.",
     className: "md:col-span-2 md:row-span-2",
     image:
-      "https://images.unsplash.com/photo-1540962351504-03099e0a754b?q=80&w=2600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1721402495451-41724ae641a4?q=90&w=1600&auto=format&fit=crop",
   },
   {
     title: "Curated Hotels",
     description: "From boutique lodges to 5-star resorts.",
     className: "md:col-span-1 md:row-span-1",
     image:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1756245994882-cf32d49fde5a?q=90&w=1600&auto=format&fit=crop",
   },
   {
     title: "Exclusive Experiences",
     description: "Gorilla trekking, tea plantations, and more.",
     className: "md:col-span-1 md:row-span-2",
     image:
-      "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=2600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1609861517208-e5b7b4cd4b87?q=90&w=1600&auto=format&fit=crop",
   },
   {
     title: "VIP Transfers",
     description: "Seamless ground transportation.",
     className: "md:col-span-1 md:row-span-1",
     image:
-      "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1664760536218-44efb2696288?q=90&w=1600&auto=format&fit=crop",
   },
 ];
 
 export function Services() {
   return (
-    <section className="container mx-auto px-5 py-24 mb-20">
+    <section className="container max-w-7xl mx-auto px-5 py-32 mb-20">
       <div className="max-w-2xl mb-20">
         <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
           World Class Services
@@ -54,16 +54,16 @@ export function Services() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Column 1 - Faster Parallax */}
-        <div className="flex flex-col gap-8 md:gap-16 md:mt-0">
+        <div className="flex flex-col gap-8 md:mt-0">
           {services.slice(0, 2).map((service, i) => (
             <ServiceCard key={i} service={service} />
           ))}
         </div>
 
         {/* Column 2 - Slower/Offset Parallax via margin */}
-        <div className="flex flex-col gap-8 md:gap-16 md:mt-24">
+        <div className="flex flex-col gap-8 md:mt-12">
           {services.slice(2, 4).map((service, i) => (
             <ServiceCard key={i} service={service} />
           ))}
@@ -80,7 +80,7 @@ function ServiceCard({ service }: { service: Service }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
       transition={{ duration: 0.8 }}
-      className="group relative overflow-hidden rounded-3xl aspect-[4/5] md:aspect-[3/4]"
+      className="group relative overflow-hidden rounded-3xl aspect-[4/3] md:aspect-[16/10]"
     >
       <div className="absolute inset-0">
         <Image

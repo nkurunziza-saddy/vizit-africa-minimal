@@ -12,7 +12,6 @@ import type {
   Booking,
 } from "./schemas";
 
-// INFO: dummy data for development - replace with actual api calls later
 
 export const flights: Flight[] = [
   {
@@ -230,6 +229,7 @@ export const cars: Car[] = [
     fuelType: "petrol",
     features: ["AC", "Bluetooth", "USB Charging", "GPS"],
     pricePerDay: 55,
+    withDriver: false,
     currency: "USD",
     available: true,
   },
@@ -245,6 +245,7 @@ export const cars: Car[] = [
     fuelType: "petrol",
     features: ["AC", "4WD", "Bluetooth", "USB Charging", "GPS", "Roof Rails"],
     pricePerDay: 85,
+    withDriver: false,
     currency: "USD",
     available: true,
   },
@@ -268,6 +269,7 @@ export const cars: Car[] = [
       "Off-road Capable",
     ],
     pricePerDay: 120,
+    withDriver: false,
     currency: "USD",
     available: true,
   },
@@ -283,6 +285,7 @@ export const cars: Car[] = [
     fuelType: "diesel",
     features: ["AC", "Large Luggage Space", "Group Travel"],
     pricePerDay: 150,
+    withDriver: false,
     currency: "USD",
     available: true,
   },
@@ -305,6 +308,7 @@ export const cars: Car[] = [
       "Executive Interior",
     ],
     pricePerDay: 200,
+    withDriver: false,
     currency: "USD",
     available: true,
   },

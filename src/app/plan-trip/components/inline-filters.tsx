@@ -65,7 +65,7 @@ export function InlineFilters({
     return (
       <div className=" mb-4">
         <div className="flex flex-wrap items-center gap-3">
-          {/* Search */}
+          {/* search */}
           <div className="relative flex-1 min-w-[180px]">
             <RiSearchLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
             <Input
@@ -76,8 +76,8 @@ export function InlineFilters({
             />
           </div>
 
-          {/* Price Range */}
-          <Select value={hotelPriceFilter} onValueChange={setHotelPriceFilter}>
+          {/* price range */}
+          <Select value={hotelPriceFilter} onValueChange={(val) => setHotelPriceFilter(val as string)}>
             <SelectTrigger className="w-[140px] bg-white">
               <SelectValue placeholder="Price" />
             </SelectTrigger>
@@ -89,8 +89,8 @@ export function InlineFilters({
             </SelectContent>
           </Select>
 
-          {/* Stars */}
-          <Select value={hotelStarsFilter} onValueChange={setHotelStarsFilter}>
+          {/* stars */}
+          <Select value={hotelStarsFilter} onValueChange={(val) => setHotelStarsFilter(val as string)}>
             <SelectTrigger className="w-[130px] bg-white">
               <SelectValue placeholder="Stars" />
             </SelectTrigger>
@@ -102,7 +102,7 @@ export function InlineFilters({
             </SelectContent>
           </Select>
 
-          {/* Reset & Count */}
+          {/* reset */}
           {hasHotelFilters && (
             <Button
               variant="ghost"
@@ -127,7 +127,7 @@ export function InlineFilters({
     return (
       <div className="mb-4">
         <div className="flex flex-wrap items-center gap-3">
-          {/* Search */}
+          {/* search */}
           <div className="relative flex-1 min-w-[180px]">
             <RiSearchLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
             <Input
@@ -138,10 +138,10 @@ export function InlineFilters({
             />
           </div>
 
-          {/* Category */}
+          {/* category */}
           <Select
             value={carCategoryFilter}
-            onValueChange={setCarCategoryFilter}
+            onValueChange={(val) => setCarCategoryFilter(val as string)}
           >
             <SelectTrigger className="w-[130px] bg-white">
               <SelectValue placeholder="Type" />
@@ -154,7 +154,7 @@ export function InlineFilters({
             </SelectContent>
           </Select>
 
-          {/* Reset & Count */}
+          {/* reset */}
           {hasCarFilters && (
             <Button
               variant="ghost"

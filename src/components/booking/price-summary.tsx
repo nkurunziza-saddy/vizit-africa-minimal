@@ -2,20 +2,16 @@
 
 import { Button } from "@/components/ui/button";
 import { RiLockLine, RiInformationLine } from "@remixicon/react";
-
-// INFO: in production this would use state management for selections
 export function PriceSummary() {
   // TODO: calculate based on actual selections
   const mockPricing = {
-    flight: 285,
-    hotel: 220 * 5, // 5 nights
-    car: 85 * 5, // 5 days
-    guide: 80 * 3, // 3 days
+    hotel: 220 * 5,
+    car: 85 * 5,
+    guide: 80 * 3,
     travelers: 2,
   };
 
   const subtotal =
-    mockPricing.flight * mockPricing.travelers +
     mockPricing.hotel +
     mockPricing.car +
     mockPricing.guide;
@@ -36,7 +32,7 @@ export function PriceSummary() {
               Flights (x{mockPricing.travelers})
             </span>
             <span className="font-medium">
-              ${mockPricing.flight * mockPricing.travelers}
+              -
             </span>
           </div>
           <div className="flex justify-between">
@@ -88,7 +84,6 @@ export function PriceSummary() {
         </div>
       </div>
 
-      {/* info card */}
       <div className="mt-4 bg-primary-subtle rounded-lg p-4">
         <p className="text-sm text-primary">
           <strong>Price guarantee:</strong> Your quoted price is locked for 48

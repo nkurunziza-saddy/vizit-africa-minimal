@@ -128,7 +128,7 @@ interface TestimonialData {
 
 function TestimonialCard({ testimonial }: { testimonial: TestimonialData }) {
   return (
-    <div className="shrink-0 w-[380px] p-6 bg-white rounded-2xl border border-border/40 shadow-sm hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 group">
+    <div className="shrink-0 w-[380px] p-6 bg-white rounded-2xl border border-border/40 transition-all duration-300 group">
       {/* Header with Avatar and Stars */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">

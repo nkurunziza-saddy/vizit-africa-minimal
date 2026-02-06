@@ -24,12 +24,9 @@ export function GuideOptions({ guide }: GuideOptionsProps) {
       )}
     >
       <div className="flex gap-5">
-        {/* photo */}
         <div className="size-20 rounded-full bg-muted shrink-0 flex items-center justify-center">
-          {/* TODO: replace with actual guide photo */}
         </div>
 
-        {/* info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-4">
             <div>
@@ -58,7 +55,6 @@ export function GuideOptions({ guide }: GuideOptionsProps) {
             </div>
           </div>
 
-          {/* languages */}
           <div className="flex items-center gap-2 mt-3">
             <RiGlobalLine className="size-4 text-muted-foreground" />
             <div className="flex flex-wrap gap-1">
@@ -73,7 +69,6 @@ export function GuideOptions({ guide }: GuideOptionsProps) {
             </div>
           </div>
 
-          {/* specialties */}
           <div className="flex flex-wrap gap-2 mt-3">
             {guide.specialties.map((specialty) => (
               <span
@@ -85,7 +80,6 @@ export function GuideOptions({ guide }: GuideOptionsProps) {
             ))}
           </div>
 
-          {/* bio */}
           <p className="text-sm text-muted-foreground mt-3 line-clamp-2">
             {guide.bio}
           </p>

@@ -11,6 +11,7 @@ import {
   RiFilter3Line,
 } from "@remixicon/react";
 import Link from "next/link";
+import NextImage from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -42,23 +43,41 @@ export default function ServicesPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-neutral-50 pt-20">
-        {/* Hero */}
-        <section className="bg-primary-subtle py-16 md:py-24 border-b border-border">
-          <div className="mx-auto max-w-7xl px-5 md:px-10 text-center">
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Our Services
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              From flights to guided tours, we offer comprehensive travel
-              solutions to make your Rwanda experience seamless and
-              unforgettable.
-            </p>
+      <div className="min-h-screen bg-background">
+        <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <NextImage
+              src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?q=90&w=2600&auto=format&fit=crop"
+              alt="Safari Service"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-black/50" />
+          </div>
+
+          <div className="relative z-10 text-center px-4 max-w-4xl mx-auto mt-20">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <span className="text-white/80 font-mono uppercase tracking-widest text-sm md:text-base mb-4 block">
+                Premium Support
+              </span>
+              <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-6">
+                Our Services
+              </h1>
+              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-light leading-relaxed">
+                From flights to guided tours, we offer comprehensive travel
+                solutions to make your Rwanda experience seamless and
+                unforgettable.
+              </p>
+            </motion.div>
           </div>
         </section>
 
-        {/* Filters */}
-        <section className="py-8 border-b border-border bg-white sticky top-16 z-10">
+        <section className="py-8 border-b border-border bg-card sticky top-16 z-10">
           <div className="mx-auto max-w-7xl px-5 md:px-10">
             <div className="flex flex-wrap items-center justify-center gap-2">
               <div className="flex items-center gap-2 mr-4 text-muted-foreground">
@@ -83,8 +102,7 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* Services Grid */}
-        <section className="py-12 px-5 md:px-10 max-w-7xl mx-auto">
+        <section className="py-24 px-5 md:px-10 max-w-7xl mx-auto">
           <motion.div layout className="grid md:grid-cols-2 gap-8">
             <AnimatePresence>
               {filteredServices.map((service) => {
@@ -103,7 +121,7 @@ export default function ServicesPage() {
                     exit={{ opacity: 0, scale: 0.9 }}
                     transition={{ duration: 0.2 }}
                     key={service.title}
-                    className="bg-white p-8 rounded-xl border border-border hover:border-primary hover:shadow-lg transition-all group"
+                    className="bg-card p-8 rounded-xl border border-border hover:border-primary hover:shadow-lg transition-all group"
                   >
                     <div className="flex items-start justify-between mb-6">
                       <div className="size-14 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
@@ -149,7 +167,6 @@ export default function ServicesPage() {
           </motion.div>
         </section>
 
-        {/* Custom Package CTA */}
         <section className="bg-primary text-primary-foreground py-20 border-t border-border mt-8">
           <div className="px-5 md:px-10 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="max-w-2xl">
@@ -164,7 +181,7 @@ export default function ServicesPage() {
             </div>
             <Link
               href="/plan-trip"
-              className="inline-flex items-center justify-center h-14 px-8 rounded-lg bg-white text-primary font-bold text-lg hover:bg-neutral-100 transition-colors shrink-0"
+              className="inline-flex items-center justify-center h-14 px-8 rounded-lg bg-card text-primary font-bold text-lg hover:bg-muted transition-colors shrink-0"
             >
               Request Custom Quote
             </Link>

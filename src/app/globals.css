@@ -98,13 +98,7 @@
 
   /* destructive */
   --destructive: oklch(58% 0.22 27);
-
-  /* charts */
-  --chart-1: oklch(52% 0.08 245);
-  --chart-2: oklch(42% 0.06 245);
-  --chart-3: oklch(65% 0.15 45);
-  --chart-4: oklch(60% 0.12 150);
-  --chart-5: oklch(32% 0.06 245);
+  --destructive-foreground: oklch(100% 0 0);
 
   --radius: 0.5rem;
 
@@ -158,13 +152,7 @@
 
   /* destructive */
   --destructive: oklch(70% 0.19 22);
-
-  /* charts - same for dark */
-  --chart-1: oklch(60% 0.1 245);
-  --chart-2: oklch(50% 0.08 245);
-  --chart-3: oklch(70% 0.12 45);
-  --chart-4: oklch(65% 0.1 150);
-  --chart-5: oklch(40% 0.06 245);
+  --destructive-foreground: oklch(100% 0 0);
 
   /* sidebar */
   --sidebar: oklch(18% 0 0);

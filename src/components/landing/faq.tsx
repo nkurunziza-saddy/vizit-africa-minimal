@@ -27,7 +27,6 @@ export function FAQ() {
     >
       <div className="mx-auto max-w-7xl px-5 md:px-10">
         <div className="grid md:grid-cols-12 gap-12 md:gap-24">
-          {/* Left Column - Sticky Header & Nav */}
           <div className="md:col-span-4 relative">
             <div className="sticky top-24">
               <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
@@ -41,13 +40,14 @@ export function FAQ() {
               <nav className="flex flex-col gap-2">
                 {categories.map((cat) => (
                   <button
+                    type="button"
                     key={cat.id}
                     onClick={() => setActiveTab(cat.id)}
                     className={cn(
-                      "text-left px-6 py-4 rounded-xl transition-all duration-300 text-lg font-medium",
+                      "text-left px-6 py-4 rounded-none transition-all duration-300 text-lg font-medium flex items-center",
                       activeTab === cat.id
-                        ? "bg-primary text-white shadow-lg shadow-primary/20"
-                        : "text-muted-foreground hover:bg-muted",
+                        ? "border-l-4 border-primary bg-primary/5 text-foreground"
+                        : "text-muted-foreground hover:bg-muted"
                     )}
                   >
                     {cat.label}
@@ -57,7 +57,6 @@ export function FAQ() {
             </div>
           </div>
 
-          {/* Right Column - Accordion Content */}
           <div className="md:col-span-8 pt-4">
             <motion.div
               key={activeTab}
@@ -65,19 +64,20 @@ export function FAQ() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              <Accordion type="single" collapsible className="w-full space-y-6">
+              <Accordion className="w-full space-y-4">
                 {categories
                   .find((c) => c.id === activeTab)
                   ?.items.map((item, index) => (
                     <AccordionItem
                       key={index}
                       value={`item-${index}`}
-                      className="border border-border/40 px-8 py-2 rounded-3xl bg-white shadow-sm hover:shadow-md transition-all duration-300"
+                      className="border border-border/20 px-6 py-4 rounded-2xl bg-white transition-all duration-300 data-[state=open]:ring-1 data-[state=open]:ring-primary/10 data-[state=open]:shadow-md"
                     >
-                      <AccordionTrigger className="hover:no-underline hover:text-primary transition-colors text-xl font-medium py-6 text-foreground text-left">
+                      <AccordionTrigger className="text-xl font-semibold py-2 text-foreground hover:no-underline hover:text-primary transition-colors text-left">
                         {item.question}
                       </AccordionTrigger>
-                      <AccordionContent className="text-muted-foreground text-lg leading-relaxed pb-6 font-light">
+
+                      <AccordionContent className="text-muted-foreground text-base leading-relaxed pb-4 font-light">
                         {item.answer}
                       </AccordionContent>
                     </AccordionItem>

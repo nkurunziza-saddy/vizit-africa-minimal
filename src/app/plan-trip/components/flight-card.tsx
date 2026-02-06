@@ -25,14 +25,14 @@ export function FlightCard({
           : "border-border hover:border-primary/50 hover:shadow-sm"
       }`}
     >
-      {/* Selected indicator */}
+
       {isSelected && (
         <div className="absolute top-3 right-3 size-6 rounded-full bg-primary text-white flex items-center justify-center">
           <RiCheckLine className="size-4" />
         </div>
       )}
 
-      {/* Airline & Flight Info */}
+
       <div className="flex items-center gap-3 mb-3">
         <div className="size-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
           <RiPlaneLine className="size-5" />
@@ -45,7 +45,7 @@ export function FlightCard({
         </div>
       </div>
 
-      {/* Route & Time */}
+
       <div className="flex items-center justify-between text-sm mb-3">
         <div className="flex items-center gap-2">
           <span className="font-medium">{flight.departureTime}</span>
@@ -55,12 +55,12 @@ export function FlightCard({
         <span className="text-muted-foreground">{flight.duration}</span>
       </div>
 
-      {/* Route */}
+
       <div className="text-xs text-muted-foreground mb-3">
         {flight.origin} → {flight.destination}
       </div>
 
-      {/* Price */}
+
       <div className="flex items-end justify-between pt-3 border-t border-border">
         <div>
           <p className="text-xs text-muted-foreground">Total for {travelers}</p>

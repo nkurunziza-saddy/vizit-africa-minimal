@@ -10,9 +10,9 @@ import {
   RiStarFill,
 } from "@remixicon/react";
 import Link from "next/link";
+import NextImage from "next/image";
 import { motion } from "framer-motion";
 
-// Mock data for experiences
 const experiences = [
   {
     id: "gorilla-trekking",
@@ -105,13 +105,13 @@ export default function ExperiencesPage() {
     <>
       <Navbar />
       <div className="min-h-screen bg-background">
-        {/* Improved Hero Section */}
         <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <img
-              src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=80&w=2600&auto=format&fit=crop"
+            <NextImage
+              src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=90&w=2600&auto=format&fit=crop"
               alt="Gorilla"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
             />
             <div className="absolute inset-0 bg-black/50" />
           </div>
@@ -136,7 +136,6 @@ export default function ExperiencesPage() {
           </div>
         </section>
 
-        {/* Listings */}
         <section className="py-24 px-5 md:px-10 max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {experiences.map((exp, index) => (
@@ -146,13 +145,14 @@ export default function ExperiencesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white border border-border rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col h-full"
+                className="bg-card border border-border rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col h-full"
               >
-                <div className="h-64 bg-neutral-200 relative overflow-hidden">
-                  <img
+                <div className="h-64 bg-muted relative overflow-hidden">
+                  <NextImage
                     src={exp.image}
                     alt={exp.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute top-4 left-4 flex gap-2">
                     {exp.tags.map((tag) => (

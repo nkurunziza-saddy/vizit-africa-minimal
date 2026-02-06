@@ -13,8 +13,8 @@ const experiences = [
     description:
       "Nestled in the amphitheatre of an eroded volcanic cone, Bisate offers a luxurious base for gorilla trekking with sustainable architecture.",
     image:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2600&auto=format&fit=crop",
-    color: "bg-[#2A3C35]", // Forest Green
+      "https://images.unsplash.com/photo-1667504320745-eade6c25e053?q=90&w=1600&auto=format&fit=crop",
+    color: "bg-[#2A3C35]",
   },
   {
     id: "magashi",
@@ -23,8 +23,8 @@ const experiences = [
     description:
       "A classic safari camp overlooking Lake Rwanyakazinga, offering exclusive access to Rwanda's only savannah big game area.",
     image:
-      "https://images.unsplash.com/photo-1547619292-240402b5ae5d?q=80&w=2600&auto=format&fit=crop",
-    color: "bg-[#8C6D46]", // Savannah Gold/Brown
+      "https://images.unsplash.com/photo-1511284281977-10b7b4377cfc?q=90&w=1600&auto=format&fit=crop",
+    color: "bg-[#8C6D46]",
   },
   {
     id: "nyungwe",
@@ -33,8 +33,8 @@ const experiences = [
     description:
       "Set amidst the rich tea plantations on the edge of the ancient rainforest, offering wellness and chimpanzee trekking.",
     image:
-      "https://images.unsplash.com/photo-1445019980597-93fa8acb746c?q=80&w=2600&auto=format&fit=crop",
-    color: "bg-[#3E4A35]", // Tea Green
+      "https://images.unsplash.com/photo-1489640818597-89b1edc97db5?q=90&w=1600&auto=format&fit=crop",
+    color: "bg-[#3E4A35]",
   },
 ];
 
@@ -67,9 +67,8 @@ function Card({
     >
       <motion.div
         style={{ scale, top: `calc(-10vh + ${index * 25}px)` }}
-        className="relative flex flex-col md:flex-row h-[70vh] w-full max-w-7xl rounded-3xl overflow-hidden shadow-2xl origin-top"
+        className="relative flex flex-col md:flex-row h-[500px] w-full max-w-7xl rounded-3xl overflow-hidden origin-top"
       >
-        {/* Image Half */}
         <div className="md:w-[60%] h-full relative overflow-hidden">
           <motion.div style={{ scale: imageScale }} className="w-full h-full">
             <img
@@ -81,10 +80,9 @@ function Card({
           <div className="absolute inset-0 bg-black/10" />
         </div>
 
-        {/* Content Half */}
         <div
           className={cn(
-            "md:w-[40%] h-full p-12 flex flex-col justify-between text-white",
+            "md:w-[40%] h-full p-8 flex flex-col justify-between text-white",
             data.color,
           )}
         >
@@ -133,7 +131,7 @@ export function ExperienceShowcase() {
 
   return (
     <section ref={container} className="bg-background relative">
-      <div className="container mx-auto px-5 mb-24 pt-24">
+      <div className="container max-w-7xl mx-auto px-5 mb-24 pt-32">
         <div className="max-w-2xl">
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
             Curated Stays

@@ -30,12 +30,11 @@ export function CarSelector({ car }: CarSelectorProps) {
           : "border-border hover:border-primary/50",
       )}
     >
-      {/* image */}
-      <div className="aspect-[4/3] bg-muted rounded-lg mb-4 flex items-center justify-center">
-        {/* TODO: replace with actual car image */}
+
+      <div className="aspect-4/3 bg-muted rounded-lg mb-4 flex items-center justify-center">
       </div>
 
-      {/* type badge */}
+
       <span className="inline-block text-xs font-medium bg-primary-subtle text-primary px-2 py-0.5 rounded mb-2">
         {typeLabels[car.type]}
       </span>
@@ -43,7 +42,6 @@ export function CarSelector({ car }: CarSelectorProps) {
       <h3 className="font-semibold text-foreground mb-1">{car.name}</h3>
       <p className="text-sm text-muted-foreground mb-3">{car.brand}</p>
 
-      {/* specs */}
       <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
         <div className="flex items-center gap-1">
           <RiUserLine className="size-4" />
@@ -59,7 +57,6 @@ export function CarSelector({ car }: CarSelectorProps) {
         </div>
       </div>
 
-      {/* features */}
       <div className="flex flex-wrap gap-1 mb-4">
         {car.features.slice(0, 3).map((feature) => (
           <span
@@ -71,7 +68,7 @@ export function CarSelector({ car }: CarSelectorProps) {
         ))}
       </div>
 
-      {/* price */}
+
       <div className="flex items-baseline gap-1">
         <span className="font-mono text-lg font-bold text-foreground">
           ${car.pricePerDay}

@@ -1,4 +1,3 @@
-// Types for the Plan Trip page
 
 export interface Flight {
   id: string;

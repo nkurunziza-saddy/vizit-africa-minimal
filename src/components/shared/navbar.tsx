@@ -6,21 +6,19 @@ import { usePathname } from "next/navigation";
 import { RiMenuLine, RiCloseLine } from "@remixicon/react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import Logo from "./logo";
+import { navLinks } from "./nav-links";
+import { NavbarMobile } from "./navbar-mobile";
 
-const navLinks = [
-  { href: "/services", label: "Services" },
-  { href: "/experiences", label: "Experiences" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/about", label: "About Us" },
-  { href: "/contact", label: "Contact" },
-];
+interface NavbarProps {
+  forceSolid?: boolean;
+}
 
-export function Navbar() {
+export function Navbar({ forceSolid = false }: NavbarProps) {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Routes that have a hero section and support transparent navbar
   const heroRoutes = [
     "/",
     "/experiences",
@@ -31,7 +29,9 @@ export function Navbar() {
   ];
 
   const hasHero = heroRoutes.includes(pathname);
-  const showSolid = isScrolled || !hasHero;
+  const showSolid = forceSolid || isScrolled || !hasHero;
+
+  const logoVariant = showSolid ? "default" : "light";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,119 +42,87 @@ export function Navbar() {
   }, []);
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        showSolid
-          ? "bg-background/80 backdrop-blur-lg border-b border-border py-3"
-          : "bg-transparent py-5",
-      )}
-    >
-      <nav className="mx-auto max-w-7xl px-5 md:px-10 flex items-center justify-between">
-        {/* logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span
-            className={cn(
-              "font-display text-xl font-bold transition-colors duration-300",
-              showSolid ? "text-primary" : "text-white",
-            )}
-          >
-            Vizit Africa
-          </span>
-        </Link>
+    <>
+      <header
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          showSolid
+            ? "bg-white/80 backdrop-blur-md border-b border-border/50 py-3 shadow-sm"
+            : "bg-transparent py-6",
+        )}
+      >
+        <nav className="mx-auto max-w-7xl px-5 md:px-10 flex items-center justify-between">
+          <Logo variant={logoVariant} />
 
-        {/* desktop navigation */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "text-sm font-medium transition-colors duration-300",
-                showSolid
-                  ? "text-muted-foreground hover:text-foreground"
-                  : "text-white/80 hover:text-white",
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-
-        {/* cta buttons */}
-        <div className="hidden md:flex items-center gap-3">
-          <Link
-            href="/login"
-            className={cn(
-              "text-sm font-medium transition-colors duration-300",
-              showSolid
-                ? "text-muted-foreground hover:text-foreground"
-                : "text-white/80 hover:text-white",
-            )}
-          >
-            Login
-          </Link>
-          <Link href="/plan-trip">
-            <Button
-              size="sm"
-              variant={showSolid ? "default" : "secondary"}
-              className={cn(
-                "rounded-full transition-all duration-300",
-                !showSolid && "bg-white text-primary hover:bg-white/90",
-              )}
-            >
-              Get Started
-            </Button>
-          </Link>
-        </div>
-
-        {/* mobile menu button */}
-        <button
-          type="button"
-          className={cn(
-            "md:hidden p-2 transition-colors duration-300",
-            showSolid ? "text-foreground" : "text-white",
-          )}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-        >
-          {isMobileMenuOpen ? (
-            <RiCloseLine className="size-6 text-foreground" />
-          ) : (
-            <RiMenuLine className="size-6" />
-          )}
-        </button>
-      </nav>
-
-      {/* mobile menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border">
-          <div className="px-5 py-4 space-y-3">
+          {/* desktop */}
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block text-sm font-medium text-muted-foreground hover:text-foreground py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
+                className={cn(
+                  "text-sm font-medium transition-colors duration-300",
+                  showSolid
+                    ? "text-muted-foreground hover:text-foreground"
+                    : "text-white/80 hover:text-white drop-shadow-sm",
+                )}
               >
                 {link.label}
               </Link>
             ))}
+          </div>
+
+          {/* cta */}
+          <div className="hidden md:flex items-center gap-3">
             <Link
               href="/login"
-              className="block text-sm font-medium text-muted-foreground hover:text-foreground py-2"
-              onClick={() => setIsMobileMenuOpen(false)}
+              className={cn(
+                "text-sm font-medium transition-colors duration-300",
+                showSolid
+                  ? "text-muted-foreground hover:text-foreground"
+                  : "text-white/80 hover:text-white drop-shadow-sm",
+              )}
             >
               Login
             </Link>
-            <Link href="/plan-trip" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button size="sm" className="w-full mt-4">
+            <Link href="/plan-trip">
+              <Button
+                size="sm"
+                variant={showSolid ? "default" : "secondary"}
+                className={cn(
+                  "rounded-full transition-all duration-300 font-medium px-6",
+                  !showSolid && "bg-white text-primary hover:bg-white/90 shadow-lg",
+                )}
+              >
                 Get Started
               </Button>
             </Link>
           </div>
-        </div>
-      )}
-    </header>
+
+          <button
+            type="button"
+            className={cn(
+              "md:hidden p-2 transition-colors duration-300 rounded-md",
+              showSolid 
+                ? "text-foreground hover:bg-muted" 
+                : "text-white hover:bg-white/10",
+            )}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {isMobileMenuOpen ? (
+              <RiCloseLine className={cn("size-6", showSolid ? "text-foreground" : "text-white")} />
+            ) : (
+              <RiMenuLine className="size-6" />
+            )}
+          </button>
+        </nav>
+      </header>
+
+      <NavbarMobile 
+        isOpen={isMobileMenuOpen} 
+        onClose={() => setIsMobileMenuOpen(false)} 
+      />
+    </>
   );
 }

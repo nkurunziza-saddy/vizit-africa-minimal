@@ -94,27 +94,21 @@ export default function PlanTripPage() {
     guide: null,
   });
 
-  // Active service tab
   const [activeTab, setActiveTab] = useState("hotels");
 
-  // Filter states
   const [hotelSearch, setHotelSearch] = useState("");
   const [hotelPriceFilter, setHotelPriceFilter] = useState("all");
   const [hotelStarsFilter, setHotelStarsFilter] = useState("all");
   const [carSearch, setCarSearch] = useState("");
   const [carCategoryFilter, setCarCategoryFilter] = useState("all");
 
-  // Pagination states
   const [hotelPage, setHotelPage] = useState(1);
   const [carPage, setCarPage] = useState(1);
 
-  // Quick view hotel modal
   const [quickViewHotel, setQuickViewHotel] = useState<Hotel | null>(null);
 
-  // Mobile summary sheet
   const [showMobileSummary, setShowMobileSummary] = useState(false);
 
-  // Calculate days
   const days = useMemo(() => {
     if (!tripInfo.arrivalDate || !tripInfo.departureDate) return 3;
     const arrival = new Date(tripInfo.arrivalDate);
@@ -125,7 +119,6 @@ export default function PlanTripPage() {
     return diff > 0 ? diff : 3;
   }, [tripInfo.arrivalDate, tripInfo.departureDate]);
 
-  // Filter hotels
   const filteredHotels = useMemo(() => {
     let result = MOCK_HOTELS;
 
@@ -157,7 +150,6 @@ export default function PlanTripPage() {
     return result;
   }, [hotelSearch, hotelPriceFilter, hotelStarsFilter]);
 
-  // Filter cars
   const filteredCars = useMemo(() => {
     let result = MOCK_CARS;
 
@@ -174,7 +166,6 @@ export default function PlanTripPage() {
     return result;
   }, [carSearch, carCategoryFilter]);
 
-  // Paginated data
   const paginatedHotels = useMemo(() => {
     const start = (hotelPage - 1) * ITEMS_PER_PAGE;
     return filteredHotels.slice(start, start + ITEMS_PER_PAGE);
@@ -246,6 +237,7 @@ export default function PlanTripPage() {
             {STEPS.map((step, i) => (
               <div key={step.num} className="flex items-center">
                 <button
+                type="button"
                   onClick={() => {
                     if (step.num <= currentStep) setCurrentStep(step.num);
                   }}
@@ -287,7 +279,7 @@ export default function PlanTripPage() {
           </div>
 
           <AnimatePresence mode="wait">
-            {/* STEP 1: Trip Details */}
+            {/* step 1: trip details */}
             {currentStep === 1 && (
               <motion.div
                 key="step1"
@@ -306,7 +298,7 @@ export default function PlanTripPage() {
                     </p>
                   </div>
 
-                  {/* Departure City */}
+                  {/* departure city */}
                   <div className="space-y-2">
                     <Label htmlFor="departureCity">Departing From</Label>
                     <div className="relative">
@@ -326,28 +318,27 @@ export default function PlanTripPage() {
                     </div>
                   </div>
 
-                  {/* Travel Dates */}
+                  {/* travel dates */}
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="arrival">Arrival in Rwanda</Label>
                       <div className="relative">
                         <Popover>
-                          <PopoverTrigger asChild>
-                            <Button
+                          <PopoverTrigger render={<Button
                               variant={"outline"}
                               className={cn(
                                 "w-full pl-10 text-left font-normal bg-white justify-start relative",
                                 !tripInfo.arrivalDate &&
                                   "text-muted-foreground",
                               )}
-                            >
+                            />}>
+                            
                               <RiCalendarLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                               {tripInfo.arrivalDate ? (
                                 format(new Date(tripInfo.arrivalDate), "PPP")
                               ) : (
                                 <span>Pick a date</span>
                               )}
-                            </Button>
                           </PopoverTrigger>
                           <PopoverContent className="w-auto p-0" align="start">
                             <Calendar
@@ -375,22 +366,21 @@ export default function PlanTripPage() {
                       <Label htmlFor="departure">Departure from Rwanda</Label>
                       <div className="relative">
                         <Popover>
-                          <PopoverTrigger asChild>
-                            <Button
+                          <PopoverTrigger render={<Button
                               variant={"outline"}
                               className={cn(
                                 "w-full pl-10 text-left font-normal bg-white justify-start relative",
                                 !tripInfo.departureDate &&
                                   "text-muted-foreground",
                               )}
-                            >
+                            />}>
+                            
                               <RiCalendarLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                               {tripInfo.departureDate ? (
                                 format(new Date(tripInfo.departureDate), "PPP")
                               ) : (
                                 <span>Pick a date</span>
                               )}
-                            </Button>
                           </PopoverTrigger>
                           <PopoverContent className="w-auto p-0" align="start">
                             <Calendar
@@ -416,7 +406,7 @@ export default function PlanTripPage() {
                     </div>
                   </div>
 
-                  {/* Number of Travelers */}
+                  {/* travelers */}
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="adults">Adults</Label>
@@ -460,7 +450,7 @@ export default function PlanTripPage() {
                     </div>
                   </div>
 
-                  {/* Trip Purpose */}
+                  {/* trip purpose */}
                   <div className="space-y-2">
                     <Label>Trip Purpose</Label>
                     <div className="grid grid-cols-3 gap-2">
@@ -493,7 +483,7 @@ export default function PlanTripPage() {
                     </div>
                   </div>
 
-                  {/* Special Requests */}
+                  {/* special requests */}
                   <div className="space-y-2">
                     <Label htmlFor="specialRequests">
                       Special Requests (Optional)
@@ -525,7 +515,7 @@ export default function PlanTripPage() {
               </motion.div>
             )}
 
-            {/* STEP 2: Contact Info */}
+            {/* step 2: contact info */}
             {currentStep === 2 && (
               <motion.div
                 key="step2"
@@ -621,7 +611,7 @@ export default function PlanTripPage() {
               </motion.div>
             )}
 
-            {/* STEP 3: Select Services */}
+            {/* step 3: select services */}
             {currentStep === 3 && (
               <motion.div
                 key="step3"
@@ -634,7 +624,7 @@ export default function PlanTripPage() {
                   onValueChange={setActiveTab}
                   className="w-full"
                 >
-                  {/* Service Category Tabs - Styled as segments */}
+                  {/* service tabs */}
                   <div className="flex items-center justify-between gap-4 mb-6">
                     <TabsList className="border">
                       <TabsTrigger value="hotels" className="">
@@ -684,11 +674,11 @@ export default function PlanTripPage() {
                     </div>
                   </div>
 
-                  {/* 2-Column Layout: Content + Summary */}
+                  {/* layout */}
                   <div className="grid lg:grid-cols-[1fr_280px] gap-6">
-                    {/* Main Content */}
+                    {/* main */}
                     <div>
-                      {/* Inline Filters */}
+                      {/* filters */}
                       <InlineFilters
                         activeTab={activeTab}
                         hotelSearch={hotelSearch}
@@ -705,7 +695,7 @@ export default function PlanTripPage() {
                         carCount={filteredCars.length}
                       />
 
-                      {/* Hotels Tab - 3 columns */}
+                      {/* hotels */}
                       <TabsContent value="hotels" className="mt-0">
                         {paginatedHotels.length === 0 ? (
                           <div className="text-center py-12 text-muted-foreground bg-white border rounded-xl">
@@ -735,7 +725,7 @@ export default function PlanTripPage() {
                         )}
                       </TabsContent>
 
-                      {/* Cars Tab - 3 columns */}
+                      {/* cars */}
                       <TabsContent value="cars" className="mt-0">
                         {paginatedCars.length === 0 ? (
                           <div className="text-center py-12 text-muted-foreground bg-white border rounded-xl">
@@ -773,7 +763,7 @@ export default function PlanTripPage() {
                         )}
                       </TabsContent>
 
-                      {/* Guides Tab - 2 columns */}
+                      {/* guides */}
                       <TabsContent value="guides" className="mt-0">
                         <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3 text-sm text-blue-900">
                           Guides are optional but highly recommended for
@@ -799,7 +789,7 @@ export default function PlanTripPage() {
                         </div>
                       </TabsContent>
 
-                      {/* Navigation */}
+                      {/* navigation */}
                       <div className="mt-6 flex justify-between">
                         <Button
                           variant="outline"
@@ -818,7 +808,7 @@ export default function PlanTripPage() {
                       </div>
                     </div>
 
-                    {/* Right: Summary Sidebar - Desktop */}
+                    {/* summary sidebar */}
                     <div className="hidden lg:block">
                       <BookingSummary
                         currentStep={currentStep}
@@ -837,8 +827,8 @@ export default function PlanTripPage() {
               </motion.div>
             )}
 
-            {/* STEP 3: Review & Submit */}
-            {/* STEP 4: Review */}
+            {/* step 4: review */}
+
             {currentStep === 4 && (
               <motion.div
                 key="step3"
@@ -857,7 +847,7 @@ export default function PlanTripPage() {
                     </p>
                   </div>
 
-                  {/* Trip Details */}
+                  {/* trip details */}
                   <div className="border-b pb-4">
                     <h3 className="font-semibold mb-3">Trip Details</h3>
                     <div className="grid md:grid-cols-2 gap-3 text-sm">
@@ -883,7 +873,7 @@ export default function PlanTripPage() {
                     </div>
                   </div>
 
-                  {/* Selected Services */}
+                  {/* selected services */}
                   <div className="space-y-3">
                     <h3 className="font-semibold">Selected Services</h3>
 
@@ -937,7 +927,7 @@ export default function PlanTripPage() {
                     )}
                   </div>
 
-                  {/* Total */}
+                  {/* total */}
                   <div className="border-t pt-4 space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Subtotal</span>
@@ -953,7 +943,7 @@ export default function PlanTripPage() {
                     </div>
                   </div>
 
-                  {/* Actions */}
+                  {/* actions */}
                   <div className="flex flex-col sm:flex-row justify-between gap-3 pt-4">
                     <Button variant="outline" onClick={() => setCurrentStep(3)}>
                       <RiArrowLeftLine className="mr-2" /> Back to Services
@@ -979,7 +969,7 @@ export default function PlanTripPage() {
           </AnimatePresence>
         </div>
 
-        {/* Mobile Summary FAB - Only on Services Step */}
+        {/* mobile fab */}
         {currentStep === 3 && (
           <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t lg:hidden shadow-lg z-20">
             <Sheet open={showMobileSummary} onOpenChange={setShowMobileSummary}>
@@ -1008,7 +998,7 @@ export default function PlanTripPage() {
           </div>
         )}
 
-        {/* Hotel Quick View Modal */}
+        {/* hotel modal */}
         <Dialog
           open={!!quickViewHotel}
           onOpenChange={() => setQuickViewHotel(null)}

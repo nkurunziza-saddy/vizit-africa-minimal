@@ -31,13 +31,13 @@ export function HotelCard({
           : "border-border bg-white hover:border-primary/50 hover:shadow-sm"
       }`}
     >
-      {/* Image placeholder */}
+
       <div className="aspect-video bg-muted relative">
         <div className="absolute inset-0 flex items-center justify-center">
           <RiHotelLine className="size-10 text-muted-foreground/50" />
         </div>
 
-        {/* Selected indicator */}
+
         {isSelected && (
           <div className="absolute top-2 right-2 size-6 rounded-full bg-primary text-white flex items-center justify-center">
             <RiCheckLine className="size-4" />
@@ -45,7 +45,7 @@ export function HotelCard({
         )}
       </div>
 
-      {/* Content */}
+
       <div className="p-4">
         <h4 className="font-semibold text-foreground mb-1 line-clamp-1">
           {hotel.name}
@@ -55,7 +55,7 @@ export function HotelCard({
           <span className="line-clamp-1">{hotel.address}</span>
         </p>
 
-        {/* Amenities */}
+
         <div className="flex flex-wrap gap-1 mb-3">
           {hotel.amenities.slice(0, 3).map((a) => (
             <Badge key={a} variant="secondary" className="text-xs">
@@ -69,7 +69,7 @@ export function HotelCard({
           )}
         </div>
 
-        {/* Price */}
+
         <div className="flex items-end justify-between pt-3 border-t border-border">
           <div>
             <p className="text-xs text-muted-foreground">{days} nights</p>

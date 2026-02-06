@@ -3,6 +3,7 @@
 import { RiArrowRightUpLine } from "@remixicon/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const regions = [
@@ -11,7 +12,7 @@ const regions = [
     name: "Volcanoes",
     subtitle: "The Kingdom of Gorillas",
     image:
-      "https://images.unsplash.com/photo-1664303847960-586318f59035?q=80&w=2600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1662612732223-1fe6ea43263e?q=90&w=1600&auto=format&fit=crop",
     desc: "Mist-covered peaks and rare encounters in the Virunga Massif.",
   },
   {
@@ -19,7 +20,7 @@ const regions = [
     name: "Akagera",
     subtitle: "Savannah Wilderness",
     image:
-      "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=2600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1621268405207-3dfc641fceeb?q=90&w=1600&auto=format&fit=crop",
     desc: "Where the Big Five roam free across golden plains.",
   },
   {
@@ -27,7 +28,7 @@ const regions = [
     name: "Nyungwe",
     subtitle: "Ancient Rainforest",
     image:
-      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=2600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1489640818597-89b1edc97db5?q=90&w=1600&auto=format&fit=crop",
     desc: "A primate paradise suspended in the clouds.",
   },
   {
@@ -35,7 +36,7 @@ const regions = [
     name: "Lake Kivu",
     subtitle: "Inland Sea",
     image:
-      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1514548383638-cef9251a73ec?q=90&w=1600&auto=format&fit=crop",
     desc: "Serene waters, islands, and the singing fishermen.",
   },
 ];
@@ -44,8 +45,8 @@ export function Destinations() {
   const [activeId, setActiveId] = useState<string | null>("volcanoes");
 
   return (
-    <section className="py-24 bg-slate-50 relative">
-      <div className="container mx-auto px-5 mb-12">
+    <section className="py-32 bg-slate-50 relative">
+      <div className="container max-w-7xl mx-auto px-5 mb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -62,8 +63,8 @@ export function Destinations() {
         </motion.div>
       </div>
 
-      <div className="container mx-auto px-5">
-        <div className="flex flex-col md:flex-row h-[80vh] w-full gap-2 md:gap-4">
+      <div className="container max-w-7xl mx-auto px-5">
+        <div className="flex flex-col md:flex-row h-[550px] w-full gap-2 md:gap-4">
           {regions.map((region) => {
             const isActive = activeId === region.id;
             return (
@@ -78,10 +79,11 @@ export function Destinations() {
               >
                 {/* Background Image */}
                 <div className="absolute inset-0">
-                  <img
+                  <Image
                     src={region.image}
                     alt={region.name}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                   />
                   <div
                     className={cn(
