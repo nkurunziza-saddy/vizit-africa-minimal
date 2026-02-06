@@ -38,10 +38,10 @@ export default function FulfillmentPage() {
     <div className="mx-auto max-w-5xl px-5 md:px-10 py-8">
       <div className="mb-8">
         <Link
-          href="/admin/requests"
+          href="/admin/bookings"
           className="text-sm font-medium text-muted-foreground hover:text-foreground flex items-center gap-1 mb-4"
         >
-          <RiArrowLeftLine className="size-4" /> Back to Dashboard
+          <RiArrowLeftLine className="size-4" /> Back to Bookings
         </Link>
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>

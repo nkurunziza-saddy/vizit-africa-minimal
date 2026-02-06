@@ -7,6 +7,7 @@ import {
   Services,
   SocialProof,
   ExperienceShowcase,
+  CoolPlaces,
   Gallery,
   Testimonials,
   WhyUs,
@@ -18,11 +19,11 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <Navbar />
       <Hero />
       <SocialProof />
 
       <Services />
+      <CoolPlaces />
       <Destinations />
       <ExperienceShowcase />
       <HowItWorks />

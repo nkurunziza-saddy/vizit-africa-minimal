@@ -126,7 +126,6 @@ export function Footer() {
           <p className="text-sm text-gray-500">
             © 2025 Vizit Africa. All rights reserved.
           </p>
-          <p className="text-sm text-gray-500">Made with ❤️ in Kigali</p>
         </div>
       </div>
     </footer>

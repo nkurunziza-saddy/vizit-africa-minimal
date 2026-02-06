@@ -211,7 +211,7 @@ export function FiltersSidebar({
                 placeholder="Vehicle model..."
                 value={carSearch}
                 onChange={(e) => setCarSearch(e.target.value)}
-                className="pl-9 h-9"
+                className="pl-9 h-9 bg-white"
               />
             </div>
           </div>

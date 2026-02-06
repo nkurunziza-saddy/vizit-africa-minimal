@@ -2,8 +2,8 @@
 
 import { RiArrowRightUpLine } from "@remixicon/react";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { useRef } from "react";
 
 const experiences = [
   {
@@ -13,7 +13,8 @@ const experiences = [
     description:
       "Nestled in the amphitheatre of an eroded volcanic cone, Bisate offers a luxurious base for gorilla trekking with sustainable architecture.",
     image:
-      "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2600&auto=format&fit=crop", // Luxury lodge vibe
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2600&auto=format&fit=crop",
+    color: "bg-[#2A3C35]", // Forest Green
   },
   {
     id: "magashi",
@@ -22,7 +23,8 @@ const experiences = [
     description:
       "A classic safari camp overlooking Lake Rwanyakazinga, offering exclusive access to Rwanda's only savannah big game area.",
     image:
-      "https://images.unsplash.com/photo-1547619292-240402b5ae5d?q=80&w=2600&auto=format&fit=crop", // Safari vibe
+      "https://images.unsplash.com/photo-1547619292-240402b5ae5d?q=80&w=2600&auto=format&fit=crop",
+    color: "bg-[#8C6D46]", // Savannah Gold/Brown
   },
   {
     id: "nyungwe",
@@ -31,102 +33,131 @@ const experiences = [
     description:
       "Set amidst the rich tea plantations on the edge of the ancient rainforest, offering wellness and chimpanzee trekking.",
     image:
-      "https://images.unsplash.com/photo-1445019980597-93fa8acb746c?q=80&w=2600&auto=format&fit=crop", // Forest vibe
+      "https://images.unsplash.com/photo-1445019980597-93fa8acb746c?q=80&w=2600&auto=format&fit=crop",
+    color: "bg-[#3E4A35]", // Tea Green
   },
 ];
 
-export function ExperienceShowcase() {
-  const [activeId, setActiveId] = useState(experiences[0].id);
+function Card({
+  data,
+  index,
+  progress,
+  range,
+  targetScale,
+}: {
+  data: (typeof experiences)[0];
+  index: number;
+  progress: MotionValue<number>;
+  range: number[];
+  targetScale: number;
+}) {
+  const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start end", "start start"],
+  });
+
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.2, 1]);
+  const scale = useTransform(progress, range, [1, targetScale]);
 
   return (
-    <section className="bg-background py-24 md:py-32 relative">
-      <div className="container mx-auto px-5 md:px-10">
-        <div className="flex flex-col md:flex-row gap-12 lg:gap-24">
-          {/* Sticky Image Section */}
-          <div className="md:w-1/2 h-[50vh] md:h-[80vh] sticky top-24 overflow-hidden rounded-2xl">
-            <AnimatePresence mode="popLayout">
-              {experiences.map(
-                (exp) =>
-                  exp.id === activeId && (
-                    <motion.div
-                      key={exp.id}
-                      initial={{ opacity: 0, scale: 1.1 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.7, ease: "easeInOut" }}
-                      className="absolute inset-0 w-full h-full bg-black rounded-2xl overflow-hidden" // Added rounded-2xl
-                    >
-                      <img
-                        src={exp.image}
-                        alt={exp.name}
-                        className="w-full h-full object-cover opacity-80"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+    <div
+      ref={container}
+      className="h-screen flex items-center justify-center sticky top-0"
+    >
+      <motion.div
+        style={{ scale, top: `calc(-10vh + ${index * 25}px)` }}
+        className="relative flex flex-col md:flex-row h-[70vh] w-full max-w-7xl rounded-3xl overflow-hidden shadow-2xl origin-top"
+      >
+        {/* Image Half */}
+        <div className="md:w-[60%] h-full relative overflow-hidden">
+          <motion.div style={{ scale: imageScale }} className="w-full h-full">
+            <img
+              src={data.image}
+              alt={data.name}
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+          <div className="absolute inset-0 bg-black/10" />
+        </div>
 
-                      <div className="absolute bottom-8 left-8 text-white">
-                        <p className="text-xs font-mono uppercase tracking-widest text-primary mb-2">
-                          {exp.location}
-                        </p>
-                        <h3 className="text-4xl font-black font-display uppercase tracking-tight">
-                          {exp.name}
-                        </h3>
-                      </div>
-                    </motion.div>
-                  ),
-              )}
-            </AnimatePresence>
+        {/* Content Half */}
+        <div
+          className={cn(
+            "md:w-[40%] h-full p-12 flex flex-col justify-between text-white",
+            data.color,
+          )}
+        >
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-xs uppercase tracking-widest opacity-80 border border-white/30 px-3 py-1 rounded-full">
+              0{index + 1}
+            </span>
+            <span className="font-mono text-xs uppercase tracking-widest opacity-80">
+              {data.location}
+            </span>
           </div>
 
-          {/* Scrollable Text Section */}
-          <div className="md:w-1/2 flex flex-col gap-24 py-12 md:py-24">
-            <div className="mb-12">
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Featured Stays
-              </h2>
-              <p className="text-muted-foreground text-lg font-light">
-                We partner with the most exclusive lodges that share our
-                commitment to conservation and luxury.
-              </p>
-            </div>
+          <div>
+            <h3 className="text-4xl md:text-5xl font-black font-display uppercase leading-tight mb-6">
+              {data.name}
+            </h3>
+            <p className="text-lg font-light leading-relaxed opacity-90 mb-8">
+              {data.description}
+            </p>
+            <button
+              type="button"
+              className="flex items-center gap-2 group cursor-pointer text-sm font-bold uppercase tracking-widest"
+            >
+              View Lodge
+              <span className="bg-white/20 p-2 rounded-full group-hover:bg-white group-hover:text-black transition-all duration-300">
+                <RiArrowRightUpLine className="size-4" />
+              </span>
+            </button>
+          </div>
 
-            {experiences.map((exp) => (
-              <motion.div
-                key={exp.id}
-                onViewportEnter={() => setActiveId(exp.id)}
-                viewport={{ amount: 0.5, margin: "-100px" }}
-                className={cn(
-                  "group cursor-pointer border-l-2 pl-8 transition-colors duration-500 py-4",
-                  activeId === exp.id ? "border-primary" : "border-border",
-                )}
-              >
-                <h3
-                  className={cn(
-                    "text-3xl font-black uppercase mb-4 transition-colors duration-300",
-                    activeId === exp.id
-                      ? "text-foreground"
-                      : "text-muted-foreground",
-                  )}
-                >
-                  {exp.name}
-                </h3>
-                <p className="text-muted-foreground text-lg font-light leading-relaxed mb-6 group-hover:text-foreground transition-colors duration-300">
-                  {exp.description}
-                </p>
-                <button
-                  type="button"
-                  className={cn(
-                    "flex items-center gap-2 text-sm font-bold uppercase tracking-widest transition-all duration-300",
-                    activeId === exp.id
-                      ? "text-primary translate-x-2"
-                      : "text-muted-foreground",
-                  )}
-                >
-                  View Lodge <RiArrowRightUpLine className="size-4" />
-                </button>
-              </motion.div>
-            ))}
+          <div className="opacity-20 text-[10rem] font-black leading-none -mb-16 -ml-4 pointer-events-none">
+            {index + 1}
           </div>
         </div>
+      </motion.div>
+    </div>
+  );
+}
+
+export function ExperienceShowcase() {
+  const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"],
+  });
+
+  return (
+    <section ref={container} className="bg-background relative">
+      <div className="container mx-auto px-5 mb-24 pt-24">
+        <div className="max-w-2xl">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
+            Curated Stays
+          </h2>
+          <p className="text-muted-foreground text-lg font-light">
+            Handpicked lodges that define luxury and sustainability.
+          </p>
+        </div>
+      </div>
+
+      <div className="pb-[50vh] px-5">
+        {experiences.map((exp, i) => {
+          const targetScale = 1 - (experiences.length - i) * 0.05;
+          return (
+            <Card
+              key={exp.id}
+              data={exp}
+              index={i}
+              progress={scrollYProgress}
+              range={[i * 0.25, 1]}
+              targetScale={targetScale}
+            />
+          );
+        })}
       </div>
     </section>
   );

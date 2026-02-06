@@ -1,4 +1,9 @@
+"use client";
+
 import { stats, benefits } from "@/lib/dummy-data";
+import { motion } from "framer-motion";
+
+const springGentle = { type: "spring", stiffness: 200, damping: 25 } as const;
 
 export function WhyUs() {
   return (
@@ -8,56 +13,63 @@ export function WhyUs() {
     >
       <div className="mx-auto max-w-7xl px-5 md:px-10">
         <div className="grid md:grid-cols-2 gap-16 items-start">
-          {/* left - Header & Stats */}
-          <div>
+          {/* Left Column: Header & Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={springGentle}
+          >
             <div className="mb-12">
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Why Choose Vizit Africa
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
+                The Vizit Difference
               </h2>
-              <p className="max-w-md text-lg text-muted-foreground font-light leading-relaxed">
-                We believe in travel that transforms. Numbers that reflect our
-                commitment to exceptional experiences.
+              <p className="text-lg text-muted-foreground font-light leading-relaxed max-w-md">
+                We don't just book trips; we craft personal legacies. Here is
+                what sets our journeys apart from the rest.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-y-10 gap-x-8">
-              {stats.map((stat) => (
-                <div key={stat.label}>
-                  <div className="font-display text-5xl md:text-6xl font-black text-primary mb-2 tracking-tighter">
+            <div className="grid grid-cols-2 gap-8">
+              {stats.map((stat, i) => (
+                <div key={i} className="border-l border-primary/20 pl-6">
+                  <div className="font-display text-5xl font-bold text-primary mb-2">
                     {stat.value}
                   </div>
-                  <div className="text-sm uppercase tracking-widest text-muted-foreground font-medium">
+                  <div className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
                     {stat.label}
                   </div>
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* right - benefits list (Clean Editorial) */}
-          <div className="pt-8 md:pt-20">
-            <h3 className="font-display text-xl font-bold uppercase tracking-widest text-foreground mb-8 border-b border-border pb-4">
-              The Standard
-            </h3>
-
-            <ul className="space-y-8">
+          {/* Right Column: Editorial List */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ ...springGentle, delay: 0.2 }}
+            className="pt-4"
+          >
+            <ul className="space-y-6">
               {benefits.map((benefit, i) => (
-                <li key={i} className="group">
-                  <div className="flex items-baseline gap-6">
-                    <span className="font-mono text-primary/40 text-sm">
-                      {(i + 1).toString().padStart(2, "0")}
-                    </span>
-                    <span className="text-xl md:text-2xl font-light text-foreground group-hover:text-primary transition-colors duration-300">
-                      {benefit}
-                    </span>
-                  </div>
+                <li
+                  key={i}
+                  className="group flex items-start gap-6 pb-6 border-b border-border/40 last:border-0 hover:border-primary/20 transition-colors duration-300"
+                >
+                  <span className="font-mono text-sm text-primary/40 pt-1 group-hover:text-primary transition-colors">
+                    {(i + 1).toString().padStart(2, "0")}
+                  </span>
+                  <h3 className="text-xl md:text-2xl font-light text-foreground group-hover:pl-2 transition-all duration-300">
+                    {benefit}
+                  </h3>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 }
-

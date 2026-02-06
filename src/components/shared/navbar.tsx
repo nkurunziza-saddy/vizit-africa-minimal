@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { RiMenuLine, RiCloseLine } from "@remixicon/react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -15,8 +16,22 @@ const navLinks = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Routes that have a hero section and support transparent navbar
+  const heroRoutes = [
+    "/",
+    "/experiences",
+    "/gallery",
+    "/about",
+    "/contact",
+    "/services",
+  ];
+
+  const hasHero = heroRoutes.includes(pathname);
+  const showSolid = isScrolled || !hasHero;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,7 +45,7 @@ export function Navbar() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled
+        showSolid
           ? "bg-background/80 backdrop-blur-lg border-b border-border py-3"
           : "bg-transparent py-5",
       )}
@@ -41,7 +56,7 @@ export function Navbar() {
           <span
             className={cn(
               "font-display text-xl font-bold transition-colors duration-300",
-              isScrolled ? "text-primary" : "text-white",
+              showSolid ? "text-primary" : "text-white",
             )}
           >
             Vizit Africa
@@ -56,7 +71,7 @@ export function Navbar() {
               href={link.href}
               className={cn(
                 "text-sm font-medium transition-colors duration-300",
-                isScrolled
+                showSolid
                   ? "text-muted-foreground hover:text-foreground"
                   : "text-white/80 hover:text-white",
               )}
@@ -66,15 +81,26 @@ export function Navbar() {
           ))}
         </div>
 
-        {/* cta button */}
-        <div className="hidden md:block">
+        {/* cta buttons */}
+        <div className="hidden md:flex items-center gap-3">
+          <Link
+            href="/login"
+            className={cn(
+              "text-sm font-medium transition-colors duration-300",
+              showSolid
+                ? "text-muted-foreground hover:text-foreground"
+                : "text-white/80 hover:text-white",
+            )}
+          >
+            Login
+          </Link>
           <Link href="/plan-trip">
             <Button
               size="sm"
-              variant={isScrolled ? "default" : "secondary"}
+              variant={showSolid ? "default" : "secondary"}
               className={cn(
                 "rounded-full transition-all duration-300",
-                !isScrolled && "bg-white text-primary hover:bg-white/90",
+                !showSolid && "bg-white text-primary hover:bg-white/90",
               )}
             >
               Get Started
@@ -87,7 +113,7 @@ export function Navbar() {
           type="button"
           className={cn(
             "md:hidden p-2 transition-colors duration-300",
-            isScrolled ? "text-foreground" : "text-white",
+            showSolid ? "text-foreground" : "text-white",
           )}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
@@ -114,6 +140,13 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              href="/login"
+              className="block text-sm font-medium text-muted-foreground hover:text-foreground py-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Login
+            </Link>
             <Link href="/plan-trip" onClick={() => setIsMobileMenuOpen(false)}>
               <Button size="sm" className="w-full mt-4">
                 Get Started

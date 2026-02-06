@@ -12,7 +12,7 @@ import {
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-// Mock data for experiences (could be moved to dummy-data)
+// Mock data for experiences
 const experiences = [
   {
     id: "gorilla-trekking",
@@ -22,7 +22,8 @@ const experiences = [
     price: 1500,
     rating: 5.0,
     reviews: 124,
-    image: "/images/experiences/gorilla.jpg",
+    image:
+      "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=80&w=2600&auto=format&fit=crop",
     description:
       "A once-in-a-lifetime encounter with the majestic mountain gorillas in their natural habitat. Trek through the misty forests of the Virunga volcanoes.",
     tags: ["Adventure", "Wildlife", "Physical"],
@@ -35,7 +36,8 @@ const experiences = [
     price: 80,
     rating: 4.8,
     reviews: 85,
-    image: "/images/experiences/kigali-memorial.jpg",
+    image:
+      "https://images.unsplash.com/photo-1543832923-44667a44c804?q=80&w=2600&auto=format&fit=crop",
     description:
       "Explore the vibrant heart of Rwanda. Visit the Kigali Genocide Memorial, Kimironko Market, and art galleries to understand the country's past and present.",
     tags: ["Culture", "History", "Urban"],
@@ -48,7 +50,8 @@ const experiences = [
     price: 450,
     rating: 4.9,
     reviews: 92,
-    image: "/images/experiences/safari.jpg",
+    image:
+      "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?q=80&w=2600&auto=format&fit=crop",
     description:
       "Spot the Big Five (Lions, Leopards, Rhinos, Elephants, Buffalos) in Rwanda's only savannah park. Enjoy boat trips on Lake Ihema.",
     tags: ["Wildlife", "Safari", "Nature"],
@@ -61,7 +64,8 @@ const experiences = [
     price: 200,
     rating: 4.7,
     reviews: 64,
-    image: "/images/experiences/nyungwe.jpg",
+    image:
+      "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?q=80&w=2600&auto=format&fit=crop",
     description:
       "Walk 60 meters above the forest floor on the famous canopy walkway and track chimpanzees in one of Africa's oldest rainforests.",
     tags: ["Adventure", "Nature", "Hiking"],
@@ -74,7 +78,8 @@ const experiences = [
     price: 350,
     rating: 4.8,
     reviews: 45,
-    image: "/images/experiences/kivu.jpg",
+    image:
+      "https://images.unsplash.com/photo-1565355866173-d5d140e69818?q=80&w=2600&auto=format&fit=crop",
     description:
       "Unwind on the sandy shores of Lake Kivu. Enjoy boat rides, coffee tours, and stunning sunsets at this beautiful rift valley lake.",
     tags: ["Relaxation", "Water", "Leisure"],
@@ -87,7 +92,8 @@ const experiences = [
     price: 75,
     rating: 4.6,
     reviews: 38,
-    image: "/images/experiences/bisoke.jpg",
+    image:
+      "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?q=80&w=2600&auto=format&fit=crop",
     description:
       "Challenging but rewarding hike to the summit of Mount Bisoke, featuring a beautiful crater lake at the top.",
     tags: ["Hiking", "Adventure", "Physical"],
@@ -98,26 +104,31 @@ export default function ExperiencesPage() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-neutral-50 pt-20">
-        {/* Hero */}
-        <section className="bg-neutral-900 text-white py-20 md:py-32 relative overflow-hidden">
-          <div className="absolute inset-0 bg-black/60 z-10" />
-          {/* Placeholder for hero image background */}
-          <div className="absolute inset-0 bg-neutral-800" />
+      <div className="min-h-screen bg-background">
+        {/* Improved Hero Section */}
+        <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img
+              src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=80&w=2600&auto=format&fit=crop"
+              alt="Gorilla"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/50" />
+          </div>
 
-          <div className="relative z-20 mx-auto max-w-7xl px-5 md:px-10 text-center">
+          <div className="relative z-10 text-center px-4 max-w-4xl mx-auto mt-20">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <span className="text-accent-warm font-medium tracking-wider uppercase text-sm mb-4 block">
+              <span className="text-white/80 font-mono uppercase tracking-widest text-sm md:text-base mb-4 block">
                 Discover Rwanda
               </span>
-              <h1 className="font-display text-4xl md:text-6xl font-bold mb-6">
+              <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-6">
                 Curated Experiences
               </h1>
-              <p className="text-lg text-white/80 max-w-2xl mx-auto mb-8">
+              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-light leading-relaxed">
                 From the misty mountains of the Virungas to the savannahs of
                 Akagera, choose your next great adventure.
               </p>
@@ -126,7 +137,7 @@ export default function ExperiencesPage() {
         </section>
 
         {/* Listings */}
-        <section className="py-20 px-5 md:px-10 max-w-7xl mx-auto">
+        <section className="py-24 px-5 md:px-10 max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {experiences.map((exp, index) => (
               <motion.div
@@ -138,10 +149,11 @@ export default function ExperiencesPage() {
                 className="bg-white border border-border rounded-xl overflow-hidden hover:shadow-xl transition-all group flex flex-col h-full"
               >
                 <div className="h-64 bg-neutral-200 relative overflow-hidden">
-                  {/* Placeholder */}
-                  <div className="w-full h-full flex items-center justify-center text-muted-foreground bg-neutral-300">
-                    {exp.title}
-                  </div>
+                  <img
+                    src={exp.image}
+                    alt={exp.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
                   <div className="absolute top-4 left-4 flex gap-2">
                     {exp.tags.map((tag) => (
                       <span

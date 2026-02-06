@@ -3,6 +3,7 @@ export * from "./destinations";
 export * from "./services";
 export * from "./social-proof";
 export * from "./experience-showcase";
+export * from "./coolplaces";
 export * from "./gallery";
 export * from "./testimonials";
 export * from "./why-us";

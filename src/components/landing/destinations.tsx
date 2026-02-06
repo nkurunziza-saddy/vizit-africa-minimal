@@ -1,7 +1,6 @@
 "use client";
 
 import { RiArrowRightUpLine } from "@remixicon/react";
-
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -45,96 +44,106 @@ export function Destinations() {
   const [activeId, setActiveId] = useState<string | null>("volcanoes");
 
   return (
-    <section className="py-24 bg-zinc-950 relative">
+    <section className="py-24 bg-slate-50 relative">
       <div className="container mx-auto px-5 mb-12">
-        <div className="max-w-2xl">
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-2xl"
+        >
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
             Explore Regions
           </h2>
-          <p className="text-white/60 text-lg font-light">
+          <p className="text-muted-foreground text-lg font-light">
             From the mist-covered Virunga volcanoes to the golden savannah of
             Akagera.
           </p>
-        </div>
+        </motion.div>
       </div>
 
-      <div className="container mx-auto px-0 md:px-5">
-        <div className="h-[70vh] flex flex-col md:flex-row w-full overflow-hidden md:rounded-2xl">
-          {regions.map((region) => (
-            <motion.div
-              key={region.id}
-              layout
-              onClick={() => setActiveId(region.id)}
-              className={cn(
-                "relative h-full cursor-pointer overflow-hidden border-r border-white/5 group transition-[flex] duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]",
-                activeId === region.id
-                  ? "flex-[5]"
-                  : "flex-[1] hover:flex-[1.5]",
-              )}
-            >
-              {/* background image */}
-              <div className="absolute inset-0">
-                <img
-                  src={region.image}
-                  alt={region.name}
-                  className="w-full h-full object-cover transition-transform duration-1000 ease-out scale-105 group-hover:scale-110"
-                />
-                <div
-                  className={cn(
-                    "absolute inset-0 bg-black/60 transition-opacity duration-500",
-                    activeId === region.id
-                      ? "opacity-20 translate-x-0"
-                      : "opacity-60 group-hover:opacity-40",
-                  )}
-                />
-              </div>
-
-              <div
+      <div className="container mx-auto px-5">
+        <div className="flex flex-col md:flex-row h-[80vh] w-full gap-2 md:gap-4">
+          {regions.map((region) => {
+            const isActive = activeId === region.id;
+            return (
+              <motion.div
+                key={region.id}
+                layout
+                onClick={() => setActiveId(region.id)}
                 className={cn(
-                  "absolute bottom-8 left-8 origin-bottom-left -rotate-90 whitespace-nowrap z-20 transition-opacity duration-300",
-                  activeId === region.id
-                    ? "opacity-0 pointer-events-none"
-                    : "opacity-100",
+                  "relative cursor-pointer overflow-hidden rounded-3xl transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]",
+                  isActive ? "flex-[10]" : "flex-[2] hover:flex-[3]",
                 )}
               >
-                <span className="text-2xl font-black uppercase text-white tracking-widest">
-                  {region.name}
-                </span>
-              </div>
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <img
+                    src={region.image}
+                    alt={region.name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div
+                    className={cn(
+                      "absolute inset-0 transition-colors duration-500",
+                      isActive
+                        ? "bg-black/20"
+                        : "bg-black/50 group-hover:bg-black/30",
+                    )}
+                  />
+                </div>
 
-              <AnimatePresence mode="wait">
-                {activeId === region.id && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                    transition={{ delay: 0.3, duration: 0.5 }}
-                    className="absolute bottom-0 left-0 p-8 md:p-16 z-20 w-full bg-linear-to-t from-black/80 to-transparent"
-                  >
-                    <h3 className="text-6xl md:text-8xl font-black font-serif uppercase text-white tracking-tighter mb-2 leading-[0.8]">
-                      {region.name}
-                    </h3>
-                    <p className="text-primary font-mono uppercase tracking-widest text-sm mb-6">
-                      {region.subtitle}
-                    </p>
-                    <p className="text-white/80 max-w-lg text-lg font-light mb-8">
-                      {region.desc}
-                    </p>
+                {/* Inactive State: Vertical Text */}
+                <div
+                  className={cn(
+                    "absolute inset-0 flex items-center justify-center transition-opacity duration-300",
+                    isActive ? "opacity-0 pointer-events-none" : "opacity-100",
+                  )}
+                >
+                  <h3 className="text-2xl font-bold font-display uppercase text-white tracking-widest [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">
+                    {region.name}
+                  </h3>
+                </div>
 
-                    <button
-                      type="button"
-                      className="flex items-center gap-3 text-white uppercase font-bold tracking-[0.2em] group/btn"
+                {/* Active State: Rich Content */}
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ delay: 0.2, duration: 0.5 }}
+                      className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end bg-gradient-to-t from-black/80 via-transparent to-transparent"
                     >
-                      Discover Region
-                      <span className="bg-primary rounded-full p-2 group-hover/btn:rotate-45 transition-transform duration-300 text-foreground">
-                        <RiArrowRightUpLine className="w-4 h-4 text-white" />
-                      </span>
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+                      <div className="max-w-xl">
+                        <motion.span
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.3 }}
+                          className="inline-block px-3 py-1 mb-4 text-xs font-mono uppercase tracking-widest text-white border border-white/30 rounded-full backdrop-blur-md"
+                        >
+                          {region.subtitle}
+                        </motion.span>
+                        <h3 className="text-5xl md:text-7xl font-black font-display uppercase text-white tracking-tighter mb-6 leading-[0.9]">
+                          {region.name}
+                        </h3>
+                        <p className="text-white/90 text-lg md:text-xl font-light leading-relaxed mb-8">
+                          {region.desc}
+                        </p>
+                        <button
+                          type="button"
+                          className="flex items-center gap-3 bg-white text-black px-6 py-3 rounded-full font-bold uppercase tracking-wider text-sm hover:bg-white/90 transition-colors"
+                        >
+                          Explore Region
+                          <RiArrowRightUpLine className="size-4" />
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

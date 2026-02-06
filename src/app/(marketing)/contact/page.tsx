@@ -9,6 +9,7 @@ import {
   RiTimeLine,
   RiQuestionLine,
   RiArrowRightLine,
+  RiSendPlaneLine,
 } from "@remixicon/react";
 
 export default function ContactPage() {
@@ -16,25 +17,32 @@ export default function ContactPage() {
     <>
       <Navbar />
       <div className="min-h-screen bg-neutral-50 pt-20">
-        {/* Hero Section */}
-        <section className="bg-primary-subtle py-16 md:py-24">
-          <div className="mx-auto max-w-7xl px-5 md:px-10">
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
+        {/* Hero Section with Image */}
+        <section className="relative h-[40vh] md:h-[50vh] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img
+              src="https://images.unsplash.com/photo-1596701725345-3dbd4d7a7836?q=80&w=2600&auto=format&fit=crop"
+              alt="Contact Support"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/60" />
+          </div>
+          <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-10 text-center text-white">
+            <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
               Get in Touch
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl">
+            <p className="text-lg text-white/90 max-w-2xl mx-auto font-light">
               Have questions about your Rwanda trip? We're here to help you plan
-              the perfect experience. Reach out to us directly or fill out the
-              form below.
+              the perfect experience.
             </p>
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-5 md:px-10 py-12 md:py-20">
-          <div className="grid lg:grid-cols-5 gap-12">
+        <section className="mx-auto max-w-7xl px-5 md:px-10 py-12 md:py-20 -mt-10 relative z-20">
+          <div className="grid lg:grid-cols-5 gap-8">
             {/* Contact Info - Left Column */}
-            <div className="lg:col-span-2 space-y-8">
-              <div className="bg-card border border-border rounded-lg p-6 md:p-8">
+            <div className="lg:col-span-2 space-y-6">
+              <div className="bg-white border border-border rounded-xl p-6 md:p-8 shadow-sm">
                 <h2 className="font-display text-2xl font-bold text-foreground mb-6">
                   Contact Information
                 </h2>
@@ -104,7 +112,7 @@ export default function ContactPage() {
                       <p className="font-medium text-foreground">
                         Visit Our Office
                       </p>
-                      <p className="text-muted-foreground">
+                      <p className="text-muted-foreground text-sm leading-relaxed">
                         Kigali Heights, 4th Floor
                         <br />
                         KG 7 Ave, Kigali, Rwanda
@@ -114,12 +122,12 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="bg-primary text-primary-foreground rounded-lg p-6 md:p-8">
+              <div className="bg-primary text-primary-foreground rounded-xl p-6 md:p-8 shadow-md">
                 <h3 className="font-bold text-lg mb-2 flex items-center gap-2">
                   <RiTimeLine className="size-5" />
                   Office Hours
                 </h3>
-                <div className="space-y-2 text-primary-foreground/90">
+                <div className="space-y-2 text-primary-foreground/90 text-sm">
                   <div className="flex justify-between">
                     <span>Monday - Friday</span>
                     <span>8:00 AM - 6:00 PM</span>
@@ -138,7 +146,7 @@ export default function ContactPage() {
 
             {/* Contact Form - Right Column */}
             <div className="lg:col-span-3">
-              <div className="bg-card border border-border rounded-lg p-6 md:p-8 shadow-sm">
+              <div className="bg-white border border-border rounded-xl p-6 md:p-8 shadow-sm">
                 <h2 className="font-display text-2xl font-bold text-foreground mb-6">
                   Send us a Message
                 </h2>
@@ -148,7 +156,11 @@ export default function ContactPage() {
                       <label htmlFor="name" className="text-sm font-medium">
                         Name
                       </label>
-                      <Input id="name" placeholder="Your full name" />
+                      <Input
+                        id="name"
+                        placeholder="Your full name"
+                        className="bg-neutral-50"
+                      />
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-sm font-medium">
@@ -158,6 +170,7 @@ export default function ContactPage() {
                         id="email"
                         type="email"
                         placeholder="you@example.com"
+                        className="bg-neutral-50"
                       />
                     </div>
                   </div>
@@ -166,7 +179,11 @@ export default function ContactPage() {
                     <label htmlFor="phone" className="text-sm font-medium">
                       Phone Number
                     </label>
-                    <Input id="phone" placeholder="+1 (555) 000-0000" />
+                    <Input
+                      id="phone"
+                      placeholder="+1 (555) 000-0000"
+                      className="bg-neutral-50"
+                    />
                   </div>
 
                   <div className="space-y-2">
@@ -176,6 +193,7 @@ export default function ContactPage() {
                     <Input
                       id="subject"
                       placeholder="What can we help you with?"
+                      className="bg-neutral-50"
                     />
                   </div>
 
@@ -186,19 +204,19 @@ export default function ContactPage() {
                     <textarea
                       id="message"
                       rows={6}
-                      className="w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                      className="w-full rounded-md border border-input bg-neutral-50 px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                       placeholder="Tell us about your travel plans or questions..."
                     />
                   </div>
 
-                  <Button className="w-full md:w-auto h-12 px-8 text-base">
+                  <Button className="w-full md:w-auto h-12 px-8 text-base shadow-lg shadow-primary/20">
                     Send Message
                     <RiArrowRightLine className="ml-2 size-5" />
                   </Button>
                 </form>
               </div>
 
-              <div className="mt-8 grid sm:grid-cols-2 gap-4">
+              <div className="mt-6 grid sm:grid-cols-2 gap-4">
                 <a
                   href="/#faq"
                   className="flex items-center justify-between p-4 bg-white border border-border rounded-lg hover:border-primary/50 transition-colors group"

@@ -32,6 +32,14 @@ import {
   RiStarFill,
   RiMapPinLine,
 } from "@remixicon/react";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 import type { TripInfo, Selections, Hotel } from "./types";
 import {
@@ -313,7 +321,7 @@ export default function PlanTripPage() {
                             departureCity: e.target.value,
                           })
                         }
-                        className="pl-10"
+                        className="pl-10 bg-white"
                       />
                     </div>
                   </div>
@@ -323,37 +331,87 @@ export default function PlanTripPage() {
                     <div className="space-y-2">
                       <Label htmlFor="arrival">Arrival in Rwanda</Label>
                       <div className="relative">
-                        <RiCalendarLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                        <Input
-                          id="arrival"
-                          type="date"
-                          value={tripInfo.arrivalDate}
-                          onChange={(e) =>
-                            setTripInfo({
-                              ...tripInfo,
-                              arrivalDate: e.target.value,
-                            })
-                          }
-                          className="pl-10"
-                        />
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "w-full pl-10 text-left font-normal bg-white justify-start relative",
+                                !tripInfo.arrivalDate &&
+                                  "text-muted-foreground",
+                              )}
+                            >
+                              <RiCalendarLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                              {tripInfo.arrivalDate ? (
+                                format(new Date(tripInfo.arrivalDate), "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={
+                                tripInfo.arrivalDate
+                                  ? new Date(tripInfo.arrivalDate)
+                                  : undefined
+                              }
+                              onSelect={(date) =>
+                                setTripInfo({
+                                  ...tripInfo,
+                                  arrivalDate: date
+                                    ? format(date, "yyyy-MM-dd")
+                                    : "",
+                                })
+                              }
+                              initialFocus
+                            />
+                          </PopoverContent>
+                        </Popover>
                       </div>
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="departure">Departure from Rwanda</Label>
                       <div className="relative">
-                        <RiCalendarLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                        <Input
-                          id="departure"
-                          type="date"
-                          value={tripInfo.departureDate}
-                          onChange={(e) =>
-                            setTripInfo({
-                              ...tripInfo,
-                              departureDate: e.target.value,
-                            })
-                          }
-                          className="pl-10"
-                        />
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "w-full pl-10 text-left font-normal bg-white justify-start relative",
+                                !tripInfo.departureDate &&
+                                  "text-muted-foreground",
+                              )}
+                            >
+                              <RiCalendarLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                              {tripInfo.departureDate ? (
+                                format(new Date(tripInfo.departureDate), "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={
+                                tripInfo.departureDate
+                                  ? new Date(tripInfo.departureDate)
+                                  : undefined
+                              }
+                              onSelect={(date) =>
+                                setTripInfo({
+                                  ...tripInfo,
+                                  departureDate: date
+                                    ? format(date, "yyyy-MM-dd")
+                                    : "",
+                                })
+                              }
+                              initialFocus
+                            />
+                          </PopoverContent>
+                        </Popover>
                       </div>
                     </div>
                   </div>
@@ -376,7 +434,7 @@ export default function PlanTripPage() {
                               adults: parseInt(e.target.value) || 1,
                             })
                           }
-                          className="pl-10"
+                          className="pl-10 bg-white"
                         />
                       </div>
                     </div>
@@ -396,7 +454,7 @@ export default function PlanTripPage() {
                               children: parseInt(e.target.value) || 0,
                             })
                           }
-                          className="pl-10"
+                          className="pl-10 bg-white"
                         />
                       </div>
                     </div>
@@ -450,7 +508,7 @@ export default function PlanTripPage() {
                           specialRequests: e.target.value,
                         })
                       }
-                      className="flex min-h-[100px] w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="flex min-h-[100px] w-full rounded-lg border border-input bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     />
                   </div>
 
@@ -496,6 +554,7 @@ export default function PlanTripPage() {
                         onChange={(e) =>
                           setTripInfo({ ...tripInfo, name: e.target.value })
                         }
+                        className="bg-white"
                       />
                     </div>
                     <div className="grid sm:grid-cols-2 gap-4">
@@ -514,7 +573,7 @@ export default function PlanTripPage() {
                                 email: e.target.value,
                               })
                             }
-                            className="pl-10"
+                            className="pl-10 bg-white"
                           />
                         </div>
                       </div>
@@ -533,7 +592,7 @@ export default function PlanTripPage() {
                                 phone: e.target.value,
                               })
                             }
-                            className="pl-10"
+                            className="pl-10 bg-white"
                           />
                         </div>
                       </div>

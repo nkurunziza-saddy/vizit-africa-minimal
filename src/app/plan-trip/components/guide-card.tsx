@@ -16,8 +16,8 @@ export function GuideCard({ guide, isSelected, onToggle }: GuideCardProps) {
       onClick={onToggle}
       className={`group relative border-2 rounded-xl p-4 cursor-pointer transition-all ${
         isSelected
-          ? "border-primary bg-primary/5 shadow-sm"
-          : "border-border hover:border-primary/50 hover:shadow-sm"
+          ? "border-primary bg-primary-subtle shadow-sm"
+          : "border-border bg-white hover:border-primary/50 hover:shadow-sm"
       }`}
     >
       <div className="flex items-start gap-4">

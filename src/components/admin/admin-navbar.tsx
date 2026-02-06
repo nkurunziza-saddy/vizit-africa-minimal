@@ -9,6 +9,7 @@ import {
   RiSettings3Line,
   RiLogoutBoxRLine,
   RiGlobalLine,
+  RiCheckboxCircleLine,
 } from "@remixicon/react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ import { Button } from "@/components/ui/button";
 const adminLinks = [
   { href: "/admin", label: "Overview", icon: RiDashboardLine },
   { href: "/admin/requests", label: "Requests", icon: RiFileListLine },
+  { href: "/admin/bookings", label: "Bookings", icon: RiCheckboxCircleLine },
   { href: "/admin/inventory", label: "Inventory", icon: RiStoreLine },
   { href: "/admin/settings", label: "Settings", icon: RiSettings3Line },
 ];
