@@ -1,6 +1,6 @@
 "use client";
 
-import type { Car } from "../types";
+import type { Car } from "../../lib/plan_trip-types";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -43,18 +43,16 @@ export function CarCard({
           : "border-border bg-white hover:border-primary/50 hover:shadow-sm"
       }`}
     >
-      {/* Image placeholder */}
+      {/* placeholder */}
       <div className="aspect-video bg-muted relative">
         <div className="absolute inset-0 flex items-center justify-center">
           <RiCarLine className="size-10 text-muted-foreground/50" />
         </div>
 
-        {/* Category badge */}
         <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm rounded-full px-2 py-1">
           <span className="text-xs font-medium capitalize">{car.category}</span>
         </div>
 
-        {/* Selected indicator */}
         {isSelected && (
           <div className="absolute top-2 right-2 size-6 rounded-full bg-primary text-white flex items-center justify-center">
             <RiCheckLine className="size-4" />
@@ -62,11 +60,9 @@ export function CarCard({
         )}
       </div>
 
-      {/* Content */}
       <div className="p-4">
         <h4 className="font-semibold text-foreground mb-2">{car.model}</h4>
 
-        {/* Specs */}
         <div className="flex items-center gap-3 text-sm text-muted-foreground mb-3">
           <span className="flex items-center gap-1">
             <RiUserLine className="size-3" />
@@ -79,7 +75,6 @@ export function CarCard({
           <span className="text-xs">{car.fuelType}</span>
         </div>
 
-        {/* Features */}
         <div className="flex flex-wrap gap-1 mb-3">
           {car.features.slice(0, 3).map((f) => (
             <Badge key={f} variant="secondary" className="text-xs">
@@ -88,7 +83,6 @@ export function CarCard({
           ))}
         </div>
 
-        {/* Driver option - only show when selected */}
         {isSelected && (
           <div
             className="bg-muted/50 rounded-lg p-3 mb-3"
@@ -130,7 +124,6 @@ export function CarCard({
           </div>
         )}
 
-        {/* Price */}
         <div className="flex items-end justify-between pt-3 border-t border-border">
           <div>
             <p className="text-xs text-muted-foreground">{days} days total</p>

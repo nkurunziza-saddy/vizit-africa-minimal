@@ -66,7 +66,6 @@ export default function FulfillmentPage() {
 
       <div className="grid lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
-          {/* Progress Card */}
           <div className="bg-white border border-border rounded-xl p-6 shadow-sm">
             <div className="flex justify-between items-end mb-2">
               <h3 className="font-bold">Fulfillment Progress</h3>
@@ -80,7 +79,6 @@ export default function FulfillmentPage() {
             </div>
           </div>
 
-          {/* Checklist */}
           <div className="bg-white border border-border rounded-xl overflow-hidden shadow-sm">
             <div className="p-4 border-b border-border bg-muted/30">
               <h3 className="font-bold flex items-center gap-2">

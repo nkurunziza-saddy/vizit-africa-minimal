@@ -22,14 +22,12 @@ export default function BookingsPage() {
         </div>
       </div>
 
-      {/* bookings grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sampleBookings.map((booking) => (
           <div
             key={booking.id}
             className="bg-white border border-border rounded-xl overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all"
           >
-            {/* Header */}
             <div className="p-5 border-b border-border bg-linear-to-r from-primary/5 to-transparent">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono text-muted-foreground">
@@ -44,7 +42,6 @@ export default function BookingsPage() {
               </h3>
             </div>
 
-            {/* Details */}
             <div className="p-5 space-y-4">
               <div className="flex items-center gap-3 text-sm">
                 <RiUserLine className="size-4 text-muted-foreground" />
@@ -80,7 +77,6 @@ export default function BookingsPage() {
               </div>
             </div>
 
-            {/* Action */}
             <div className="p-5 border-t border-border bg-muted/30">
               <Link
                 href={`/admin/bookings/${booking.id}/fulfill`}
@@ -97,7 +93,6 @@ export default function BookingsPage() {
         ))}
       </div>
 
-      {/* Empty state if needed */}
       {sampleBookings.length === 0 && (
         <div className="text-center py-12 bg-muted/30 rounded-xl border border-dashed border-border">
           <RiCheckboxCircleLine className="size-12 text-muted-foreground mx-auto mb-4" />

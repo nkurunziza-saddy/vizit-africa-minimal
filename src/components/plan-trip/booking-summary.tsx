@@ -1,6 +1,6 @@
 "use client";
 
-import type { Selections, TripInfo } from "../types";
+import type { Selections, TripInfo } from "../../lib/plan_trip-types";
 import { RiCheckLine } from "@remixicon/react";
 
 interface BookingSummaryProps {
@@ -35,7 +35,7 @@ export function BookingSummary({
 
       {currentStep >= 3 ? (
         <>
-          {/* Trip Info */}
+          {/* info */}
           <div className="text-sm space-y-2 pb-4 border-b border-border">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Duration</span>

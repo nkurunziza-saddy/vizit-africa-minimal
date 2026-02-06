@@ -41,7 +41,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-import type { TripInfo, Selections, Hotel } from "./types";
+import type { TripInfo, Selections, Hotel } from "../../lib/plan_trip-types";
 import {
   MOCK_HOTELS,
   MOCK_CARS,
@@ -49,7 +49,7 @@ import {
   DRIVER_SURCHARGE,
   SERVICE_FEE_RATE,
   ITEMS_PER_PAGE,
-} from "./data";
+} from "../../lib/plan-trip-data";
 import {
   FlightCard,
   HotelCard,
@@ -58,9 +58,8 @@ import {
   InlineFilters,
   Pagination,
   BookingSummary,
-} from "./components";
+} from "../../components/plan-trip";
 
-// Step indicator data
 const STEPS = [
   { num: 1, label: "Trip Details" },
   { num: 2, label: "Contact" },
@@ -69,10 +68,8 @@ const STEPS = [
 ];
 
 export default function PlanTripPage() {
-  // Step navigation
   const [currentStep, setCurrentStep] = useState(1);
 
-  // Trip info form
   const [tripInfo, setTripInfo] = useState<TripInfo>({
     departureCity: "",
     arrivalDate: "",
@@ -86,7 +83,6 @@ export default function PlanTripPage() {
     phone: "",
   });
 
-  // Service selections
   const [selections, setSelections] = useState<Selections>({
     hotel: null,
     car: null,
@@ -199,17 +195,14 @@ export default function PlanTripPage() {
   const serviceFee = subtotal * SERVICE_FEE_RATE;
   const total = subtotal + serviceFee;
 
-  // Total travelers
   const travelers = tripInfo.adults + tripInfo.children;
 
-  // Validation for step 1: Trip Details
   const canProceedToContact =
     tripInfo.departureCity &&
     tripInfo.arrivalDate &&
     tripInfo.departureDate &&
     tripInfo.adults >= 1;
 
-  // Validation for step 2: Contact
   const canProceedToServices = tripInfo.name && tripInfo.email;
 
   const canProceedToReview = selections.hotel && selections.car;
@@ -318,7 +311,7 @@ export default function PlanTripPage() {
                     </div>
                   </div>
 
-                  {/* travel dates */}
+          
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="arrival">Arrival in Rwanda</Label>
@@ -356,7 +349,7 @@ export default function PlanTripPage() {
                                     : "",
                                 })
                               }
-                              initialFocus
+                              autoFocus
                             />
                           </PopoverContent>
                         </Popover>
@@ -398,7 +391,7 @@ export default function PlanTripPage() {
                                     : "",
                                 })
                               }
-                              initialFocus
+                              autoFocus
                             />
                           </PopoverContent>
                         </Popover>
@@ -450,7 +443,7 @@ export default function PlanTripPage() {
                     </div>
                   </div>
 
-                  {/* trip purpose */}
+         
                   <div className="space-y-2">
                     <Label>Trip Purpose</Label>
                     <div className="grid grid-cols-3 gap-2">
@@ -483,7 +476,6 @@ export default function PlanTripPage() {
                     </div>
                   </div>
 
-                  {/* special requests */}
                   <div className="space-y-2">
                     <Label htmlFor="specialRequests">
                       Special Requests (Optional)

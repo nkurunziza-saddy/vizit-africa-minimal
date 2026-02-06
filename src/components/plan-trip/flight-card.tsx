@@ -1,6 +1,6 @@
 "use client";
 
-import type { Flight } from "../types";
+import type { Flight } from "../../lib/plan_trip-types";
 import { RiPlaneLine, RiCheckLine } from "@remixicon/react";
 
 interface FlightCardProps {

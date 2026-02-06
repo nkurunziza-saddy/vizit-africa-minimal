@@ -8,19 +8,16 @@ import { RiSearchLine, RiFilterOffLine } from "@remixicon/react";
 
 interface FiltersSidebarProps {
   activeTab: string;
-  // Hotel filters
   hotelSearch: string;
   setHotelSearch: (v: string) => void;
   hotelPriceFilter: string;
   setHotelPriceFilter: (v: string) => void;
   hotelStarsFilter: string;
   setHotelStarsFilter: (v: string) => void;
-  // Car filters
   carSearch: string;
   setCarSearch: (v: string) => void;
   carCategoryFilter: string;
   setCarCategoryFilter: (v: string) => void;
-  // Counts
   hotelCount: number;
   carCount: number;
 }
@@ -82,10 +79,8 @@ export function FiltersSidebar({
         )}
       </div>
 
-      {/* Hotel Filters */}
       {activeTab === "hotels" && (
         <>
-          {/* Search */}
           <div className="space-y-2">
             <Label className="text-sm">Search</Label>
             <div className="relative">
@@ -99,7 +94,6 @@ export function FiltersSidebar({
             </div>
           </div>
 
-          {/* Price Range */}
           <div className="space-y-3">
             <Label className="text-sm">Price Range</Label>
             <RadioGroup
@@ -146,7 +140,6 @@ export function FiltersSidebar({
             </RadioGroup>
           </div>
 
-          {/* Star Rating */}
           <div className="space-y-3">
             <Label className="text-sm">Star Rating</Label>
             <RadioGroup
@@ -199,10 +192,8 @@ export function FiltersSidebar({
         </>
       )}
 
-      {/* Car Filters */}
       {activeTab === "cars" && (
         <>
-          {/* Search */}
           <div className="space-y-2">
             <Label className="text-sm">Search</Label>
             <div className="relative">
@@ -216,7 +207,6 @@ export function FiltersSidebar({
             </div>
           </div>
 
-          {/* Vehicle Type */}
           <div className="space-y-3">
             <Label className="text-sm">Vehicle Type</Label>
             <RadioGroup
@@ -269,7 +259,6 @@ export function FiltersSidebar({
         </>
       )}
 
-      {/* No filters for flights/guides */}
       {(activeTab === "flights" || activeTab === "guides") && (
         <div className="text-sm text-muted-foreground py-4">
           No filters available for this category.

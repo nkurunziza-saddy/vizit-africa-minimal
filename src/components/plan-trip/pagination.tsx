@@ -18,7 +18,6 @@ export function Pagination({
 
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
-  // Show limited pages with ellipsis for many pages
   const getVisiblePages = () => {
     if (totalPages <= 5) return pages;
 

@@ -1,6 +1,6 @@
 "use client";
 
-import type { Guide } from "../types";
+import type { Guide } from "../../lib/plan_trip-types";
 import { Badge } from "@/components/ui/badge";
 import { RiUserStarLine, RiCheckLine } from "@remixicon/react";
 

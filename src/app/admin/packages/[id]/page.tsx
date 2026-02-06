@@ -25,12 +25,10 @@ interface PackageBuilderProps {
 export default async function PackageBuilder({ params }: PackageBuilderProps) {
   const { id } = await params;
 
-  // INFO: in production this would fetch from api
   const request = sampleRequests.find((r) => r.id === id) || sampleRequests[0];
 
   return (
     <div className="mx-auto max-w-7xl px-5 md:px-10 py-8">
-      {/* header */}
       <div className="flex items-center justify-between mb-8">
         <div>
           <Link
@@ -54,7 +52,6 @@ export default async function PackageBuilder({ params }: PackageBuilderProps) {
       </div>
 
       <div className="grid lg:grid-cols-3 gap-8">
-        {/* request details */}
         <div className="lg:col-span-1">
           <div className="bg-card border border-border rounded-lg p-5 sticky top-28">
             <h2 className="font-semibold text-foreground mb-4">
@@ -118,9 +115,7 @@ export default async function PackageBuilder({ params }: PackageBuilderProps) {
           </div>
         </div>
 
-        {/* package builder */}
         <div className="lg:col-span-2 space-y-6">
-          {/* flights section */}
           {request.needsFlights && (
             <div className="bg-card border border-border rounded-lg overflow-hidden">
               <div className="p-4 border-b border-border flex items-center justify-between">
@@ -171,7 +166,6 @@ export default async function PackageBuilder({ params }: PackageBuilderProps) {
             </div>
           )}
 
-          {/* hotels section */}
           {request.needsHotel && (
             <div className="bg-card border border-border rounded-lg overflow-hidden">
               <div className="p-4 border-b border-border flex items-center justify-between">
@@ -221,7 +215,6 @@ export default async function PackageBuilder({ params }: PackageBuilderProps) {
             </div>
           )}
 
-          {/* cars section */}
           {request.needsCar && (
             <div className="bg-card border border-border rounded-lg overflow-hidden">
               <div className="p-4 border-b border-border flex items-center justify-between">
@@ -269,7 +262,6 @@ export default async function PackageBuilder({ params }: PackageBuilderProps) {
             </div>
           )}
 
-          {/* guides section */}
           {request.needsGuide && (
             <div className="bg-card border border-border rounded-lg overflow-hidden">
               <div className="p-4 border-b border-border flex items-center justify-between">

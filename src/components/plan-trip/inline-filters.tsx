@@ -13,19 +13,16 @@ import { RiSearchLine, RiFilterOffLine } from "@remixicon/react";
 
 interface InlineFiltersProps {
   activeTab: string;
-  // Hotel filters
   hotelSearch: string;
   setHotelSearch: (v: string) => void;
   hotelPriceFilter: string;
   setHotelPriceFilter: (v: string) => void;
   hotelStarsFilter: string;
   setHotelStarsFilter: (v: string) => void;
-  // Car filters
   carSearch: string;
   setCarSearch: (v: string) => void;
   carCategoryFilter: string;
   setCarCategoryFilter: (v: string) => void;
-  // Counts
   hotelCount: number;
   carCount: number;
 }
@@ -60,12 +57,10 @@ export function InlineFilters({
     setCarCategoryFilter("all");
   };
 
-  // Hotel filters
   if (activeTab === "hotels") {
     return (
       <div className=" mb-4">
         <div className="flex flex-wrap items-center gap-3">
-          {/* search */}
           <div className="relative flex-1 min-w-[180px]">
             <RiSearchLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
             <Input
@@ -76,7 +71,6 @@ export function InlineFilters({
             />
           </div>
 
-          {/* price range */}
           <Select value={hotelPriceFilter} onValueChange={(val) => setHotelPriceFilter(val as string)}>
             <SelectTrigger className="w-[140px] bg-white">
               <SelectValue placeholder="Price" />
@@ -89,7 +83,6 @@ export function InlineFilters({
             </SelectContent>
           </Select>
 
-          {/* stars */}
           <Select value={hotelStarsFilter} onValueChange={(val) => setHotelStarsFilter(val as string)}>
             <SelectTrigger className="w-[130px] bg-white">
               <SelectValue placeholder="Stars" />
@@ -102,7 +95,6 @@ export function InlineFilters({
             </SelectContent>
           </Select>
 
-          {/* reset */}
           {hasHotelFilters && (
             <Button
               variant="ghost"
@@ -122,7 +114,6 @@ export function InlineFilters({
     );
   }
 
-  // Car filters
   if (activeTab === "cars") {
     return (
       <div className="mb-4">
@@ -138,7 +129,6 @@ export function InlineFilters({
             />
           </div>
 
-          {/* category */}
           <Select
             value={carCategoryFilter}
             onValueChange={(val) => setCarCategoryFilter(val as string)}
@@ -154,7 +144,6 @@ export function InlineFilters({
             </SelectContent>
           </Select>
 
-          {/* reset */}
           {hasCarFilters && (
             <Button
               variant="ghost"
@@ -174,6 +163,5 @@ export function InlineFilters({
     );
   }
 
-  // No filters for flights/guides
   return null;
 }

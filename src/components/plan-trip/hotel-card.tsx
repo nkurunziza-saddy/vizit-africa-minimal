@@ -1,6 +1,6 @@
 "use client";
 
-import type { Hotel } from "../types";
+import type { Hotel } from "../../lib/plan_trip-types";
 import { Badge } from "@/components/ui/badge";
 import {
   RiStarFill,

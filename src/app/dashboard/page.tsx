@@ -10,14 +10,12 @@ import {
   RiFlightTakeoffLine,
   RiHotelBedLine,
   RiCarLine,
-  RiMore2Fill,
   RiCheckLine,
   RiTimeLine,
   RiUserSmileLine,
   RiAddLine,
 } from "@remixicon/react";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function DashboardPage() {
   const activeTrip = sampleBookings[0];
@@ -46,16 +44,14 @@ export default function DashboardPage() {
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* Main Content */}
             <div className="lg:col-span-2 space-y-8">
-              {/* Active Trip Card */}
               <section>
                 <h2 className="font-display text-xl font-bold text-foreground mb-4">
                   Active Trip
                 </h2>
                 <div className="bg-white border border-border rounded-xl overflow-hidden shadow-sm">
                   <div className="h-48 bg-muted relative">
-                    {/* Placeholder for trip banner */}
+                    {/* placeholder */}
                     <div className="absolute inset-0 flex items-center justify-center text-muted-foreground bg-primary/10">
                       <RiMapPinLine className="size-12 opacity-20" />
                     </div>
@@ -130,7 +126,6 @@ export default function DashboardPage() {
                     </div>
                   </div>
 
-                  {/* Status Steps */}
                   <div className="bg-muted/30 px-6 py-4 border-t border-border flex items-center justify-between gap-2 overflow-x-auto text-sm">
                     <div className="flex items-center gap-2 text-accent-success font-medium whitespace-nowrap">
                       <div className="size-6 bg-accent-success rounded-full flex items-center justify-center text-white text-xs">
@@ -156,7 +151,6 @@ export default function DashboardPage() {
                 </div>
               </section>
 
-              {/* Pending Requests */}
               <section>
                 <h2 className="font-display text-xl font-bold text-foreground mb-4">
                   Pending Requests
@@ -208,7 +202,6 @@ export default function DashboardPage() {
               </section>
             </div>
 
-            {/* Sidebar info */}
             <div className="space-y-6">
               <div className="bg-white border border-border rounded-xl p-6 shadow-sm">
                 <h3 className="font-display text-lg font-bold mb-4">

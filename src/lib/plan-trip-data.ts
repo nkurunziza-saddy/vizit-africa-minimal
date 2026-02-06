@@ -1,4 +1,4 @@
-import type { Flight, Hotel, Car, Guide } from "./types";
+import type { Flight, Hotel, Car, Guide } from "./plan_trip-types";
 
 export const MOCK_FLIGHTS: Flight[] = [
   {
