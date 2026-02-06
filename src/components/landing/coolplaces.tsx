@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import {
   RiMapPinLine,
   RiTimeLine,
@@ -79,7 +79,6 @@ export function CoolPlaces() {
   return (
     <section className="py-32 bg-zinc-950">
       <div className="container max-w-7xl mx-auto px-5 md:px-10">
-
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -99,7 +98,6 @@ export function CoolPlaces() {
           </p>
         </motion.div>
 
-
         <div className="grid md:grid-cols-2 gap-6">
           {coolPlaces.map((place, index) => (
             <motion.div
@@ -115,7 +113,6 @@ export function CoolPlaces() {
               }}
               className="group relative h-[300px] md:h-[350px] rounded-3xl overflow-hidden cursor-pointer"
             >
-
               <div className="absolute inset-0">
                 <Image
                   src={place.image}
@@ -126,9 +123,7 @@ export function CoolPlaces() {
                 <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
               </div>
 
-
               <div className="absolute inset-0 p-8 flex flex-col justify-between">
-      
                 <div className="flex justify-between items-start">
                   <div className="flex items-center gap-2 text-white/80 text-sm backdrop-blur-md bg-white/10 px-3 py-1.5 rounded-full">
                     <RiMapPinLine className="size-4" />
@@ -140,19 +135,15 @@ export function CoolPlaces() {
                   </div>
                 </div>
 
-          
                 <div>
-         
                   <span className="text-white/60 font-mono text-xs uppercase tracking-widest mb-2 block">
                     {place.tagline}
                   </span>
 
-   
                   <h3 className="font-display text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
                     {place.name}
                   </h3>
 
-       
                   <div className="flex flex-wrap gap-2 mb-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
                     {place.highlights.map((highlight) => (
                       <span
@@ -164,7 +155,6 @@ export function CoolPlaces() {
                     ))}
                   </div>
 
-    
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-white/70 text-sm">
                       <RiTimeLine className="size-4" />

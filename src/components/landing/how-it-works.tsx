@@ -1,7 +1,7 @@
 "use client";
 
 import { processSteps } from "@/lib/dummy-data";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import {
   RiChat3Line,
   RiSearchLine,

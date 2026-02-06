@@ -1,7 +1,7 @@
 "use client";
 
 import { RiDoubleQuotesL, RiStarFill } from "@remixicon/react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import Image from "next/image";
 

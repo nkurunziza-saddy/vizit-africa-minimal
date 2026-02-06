@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Navbar } from "@/components/shared/navbar";
 import { Footer } from "@/components/landing";
 import { Button } from "@/components/ui/button";
@@ -230,7 +230,7 @@ export default function PlanTripPage() {
             {STEPS.map((step, i) => (
               <div key={step.num} className="flex items-center">
                 <button
-                type="button"
+                  type="button"
                   onClick={() => {
                     if (step.num <= currentStep) setCurrentStep(step.num);
                   }}
@@ -311,27 +311,29 @@ export default function PlanTripPage() {
                     </div>
                   </div>
 
-          
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="arrival">Arrival in Rwanda</Label>
                       <div className="relative">
                         <Popover>
-                          <PopoverTrigger render={<Button
-                              variant={"outline"}
-                              className={cn(
-                                "w-full pl-10 text-left font-normal bg-white justify-start relative",
-                                !tripInfo.arrivalDate &&
-                                  "text-muted-foreground",
-                              )}
-                            />}>
-                            
-                              <RiCalendarLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                              {tripInfo.arrivalDate ? (
-                                format(new Date(tripInfo.arrivalDate), "PPP")
-                              ) : (
-                                <span>Pick a date</span>
-                              )}
+                          <PopoverTrigger
+                            render={
+                              <Button
+                                variant={"outline"}
+                                className={cn(
+                                  "w-full pl-10 text-left font-normal bg-white justify-start relative",
+                                  !tripInfo.arrivalDate &&
+                                    "text-muted-foreground",
+                                )}
+                              />
+                            }
+                          >
+                            <RiCalendarLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                            {tripInfo.arrivalDate ? (
+                              format(new Date(tripInfo.arrivalDate), "PPP")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
                           </PopoverTrigger>
                           <PopoverContent className="w-auto p-0" align="start">
                             <Calendar
@@ -359,21 +361,24 @@ export default function PlanTripPage() {
                       <Label htmlFor="departure">Departure from Rwanda</Label>
                       <div className="relative">
                         <Popover>
-                          <PopoverTrigger render={<Button
-                              variant={"outline"}
-                              className={cn(
-                                "w-full pl-10 text-left font-normal bg-white justify-start relative",
-                                !tripInfo.departureDate &&
-                                  "text-muted-foreground",
-                              )}
-                            />}>
-                            
-                              <RiCalendarLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                              {tripInfo.departureDate ? (
-                                format(new Date(tripInfo.departureDate), "PPP")
-                              ) : (
-                                <span>Pick a date</span>
-                              )}
+                          <PopoverTrigger
+                            render={
+                              <Button
+                                variant={"outline"}
+                                className={cn(
+                                  "w-full pl-10 text-left font-normal bg-white justify-start relative",
+                                  !tripInfo.departureDate &&
+                                    "text-muted-foreground",
+                                )}
+                              />
+                            }
+                          >
+                            <RiCalendarLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                            {tripInfo.departureDate ? (
+                              format(new Date(tripInfo.departureDate), "PPP")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
                           </PopoverTrigger>
                           <PopoverContent className="w-auto p-0" align="start">
                             <Calendar
@@ -443,7 +448,6 @@ export default function PlanTripPage() {
                     </div>
                   </div>
 
-         
                   <div className="space-y-2">
                     <Label>Trip Purpose</Label>
                     <div className="grid grid-cols-3 gap-2">

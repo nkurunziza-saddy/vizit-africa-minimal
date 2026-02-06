@@ -13,7 +13,7 @@ import {
 import Link from "next/link";
 import NextImage from "next/image";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 
 const serviceIcons = {
   building: RiHotelLine,

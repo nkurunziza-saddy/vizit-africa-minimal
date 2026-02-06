@@ -11,7 +11,7 @@ import {
 } from "@remixicon/react";
 import Link from "next/link";
 import NextImage from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const experiences = [
   {

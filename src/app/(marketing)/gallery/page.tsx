@@ -6,7 +6,7 @@ import { useState } from "react";
 import { RiCloseLine, RiZoomInLine, RiFilter3Line } from "@remixicon/react";
 import { Navbar } from "@/components/shared";
 import { Footer } from "@/components/landing";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 
 const galleryImages = [
   {
@@ -142,7 +142,7 @@ export default function GalleryPage() {
         <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <Image
-              src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=90&w=2600&auto=format&fit=crop" 
+              src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=90&w=2600&auto=format&fit=crop"
               alt="Rwanda Gallery"
               fill
               className="object-cover"

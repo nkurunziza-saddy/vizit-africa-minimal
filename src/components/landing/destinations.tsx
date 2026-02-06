@@ -1,7 +1,7 @@
 "use client";
 
 import { RiArrowRightUpLine } from "@remixicon/react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";

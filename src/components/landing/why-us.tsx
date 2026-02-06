@@ -1,7 +1,7 @@
 "use client";
 
 import { stats, benefits } from "@/lib/dummy-data";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const springGentle = { type: "spring", stiffness: 200, damping: 25 } as const;
 

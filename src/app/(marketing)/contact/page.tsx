@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Navbar } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,7 +12,7 @@ import {
   RiArrowRightLine,
 } from "@remixicon/react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function ContactPage() {
   return (
@@ -43,8 +43,8 @@ export default function ContactPage() {
                 Get in Touch
               </h1>
               <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-light leading-relaxed">
-                Have questions about your Rwanda trip? We're here to help you plan
-                the perfect experience.
+                Have questions about your Rwanda trip? We're here to help you
+                plan the perfect experience.
               </p>
             </motion.div>
           </div>

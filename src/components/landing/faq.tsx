@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -47,7 +47,7 @@ export function FAQ() {
                       "text-left px-6 py-4 rounded-none transition-all duration-300 text-lg font-medium flex items-center",
                       activeTab === cat.id
                         ? "border-l-4 border-primary bg-primary/5 text-foreground"
-                        : "text-muted-foreground hover:bg-muted"
+                        : "text-muted-foreground hover:bg-muted",
                     )}
                   >
                     {cat.label}

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Navbar } from "@/components/shared";
 import { teamMembers } from "@/lib/dummy-data";
 import {
@@ -8,7 +8,7 @@ import {
   RiStarLine,
 } from "@remixicon/react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const avatars = [
   "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=1000&auto=format&fit=crop",
@@ -49,8 +49,8 @@ export default function AboutPage() {
               </h1>
               <p className="text-xl md:text-2xl text-white/90 leading-relaxed font-light">
                 Founded from a passion for sharing Rwanda's breathtaking beauty
-                and resilience with the world. We believe in travel that connects,
-                inspires, and transforms.
+                and resilience with the world. We believe in travel that
+                connects, inspires, and transforms.
               </p>
             </motion.div>
           </div>
