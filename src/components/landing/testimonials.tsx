@@ -77,7 +77,7 @@ export function Testimonials() {
   return (
     <section
       ref={containerRef}
-      className="py-24 bg-zinc-50/50 text-foreground border-t border-border/50 overflow-hidden"
+      className="py-24 bg-muted/50 text-foreground border-t border-border/50 overflow-hidden"
     >
       <div className="mx-auto max-w-7xl px-5 md:px-10 mb-16">
         <h2 className="font-display text-4xl md:text-5xl font-bold mb-4 text-foreground text-center">

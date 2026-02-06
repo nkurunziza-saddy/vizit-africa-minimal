@@ -77,7 +77,7 @@ const springTransition = {
 
 export function CoolPlaces() {
   return (
-    <section className="py-32 bg-zinc-950">
+    <section className="py-32 bg-[oklch(14%_0_0)]">
       <div className="container max-w-7xl mx-auto px-5 md:px-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

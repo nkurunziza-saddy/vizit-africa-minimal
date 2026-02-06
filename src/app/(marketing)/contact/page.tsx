@@ -2,6 +2,7 @@
 import { Navbar } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   RiMailLine,
   RiPhoneLine,
@@ -211,10 +212,10 @@ export default function ContactPage() {
                     <label htmlFor="message" className="text-sm font-medium">
                       Message
                     </label>
-                    <textarea
+                    <Textarea
                       id="message"
                       rows={6}
-                      className="w-full rounded-md border border-input bg-muted px-3 py-2 text-sm  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                      className="bg-muted"
                       placeholder="Tell us about your travel plans or questions..."
                     />
                   </div>

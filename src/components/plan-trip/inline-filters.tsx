@@ -10,19 +10,20 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RiSearchLine, RiFilterOffLine } from "@remixicon/react";
+import type { FilterState } from "@/lib/plan_trip-types";
 
 interface InlineFiltersProps {
   activeTab: string;
   hotelSearch: string;
   setHotelSearch: (v: string) => void;
-  hotelPriceFilter: string;
-  setHotelPriceFilter: (v: string) => void;
-  hotelStarsFilter: string;
-  setHotelStarsFilter: (v: string) => void;
+  hotelPriceFilter: FilterState["priceRange"];
+  setHotelPriceFilter: (v: FilterState["priceRange"]) => void;
+  hotelStarsFilter: FilterState["stars"];
+  setHotelStarsFilter: (v: FilterState["stars"]) => void;
   carSearch: string;
   setCarSearch: (v: string) => void;
-  carCategoryFilter: string;
-  setCarCategoryFilter: (v: string) => void;
+  carCategoryFilter: FilterState["category"];
+  setCarCategoryFilter: (v: FilterState["category"]) => void;
   hotelCount: number;
   carCount: number;
 }
@@ -71,7 +72,12 @@ export function InlineFilters({
             />
           </div>
 
-          <Select value={hotelPriceFilter} onValueChange={(val) => setHotelPriceFilter(val as string)}>
+          <Select
+            value={hotelPriceFilter}
+            onValueChange={(val) =>
+              setHotelPriceFilter(val as FilterState["priceRange"])
+            }
+          >
             <SelectTrigger className="w-[140px] bg-white">
               <SelectValue placeholder="Price" />
             </SelectTrigger>
@@ -83,7 +89,12 @@ export function InlineFilters({
             </SelectContent>
           </Select>
 
-          <Select value={hotelStarsFilter} onValueChange={(val) => setHotelStarsFilter(val as string)}>
+          <Select
+            value={hotelStarsFilter}
+            onValueChange={(val) =>
+              setHotelStarsFilter(val as FilterState["stars"])
+            }
+          >
             <SelectTrigger className="w-[130px] bg-white">
               <SelectValue placeholder="Stars" />
             </SelectTrigger>
@@ -131,7 +142,9 @@ export function InlineFilters({
 
           <Select
             value={carCategoryFilter}
-            onValueChange={(val) => setCarCategoryFilter(val as string)}
+            onValueChange={(val) =>
+              setCarCategoryFilter(val as FilterState["category"])
+            }
           >
             <SelectTrigger className="w-[130px] bg-white">
               <SelectValue placeholder="Type" />
