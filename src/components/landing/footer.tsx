@@ -1,30 +1,13 @@
-import Link from "next/link";
+"use client";
+
 import {
   RiTwitterXLine,
   RiInstagramLine,
   RiFacebookLine,
   RiLinkedinLine,
 } from "@remixicon/react";
-
-const footerLinks = {
-  services: [
-    { label: "Trips & Packages", href: "/experiences" },
-    { label: "Custom Itineraries", href: "/plan-trip" },
-    { label: "Gallery", href: "/gallery" },
-    { label: "FAQ", href: "/#faq" },
-  ],
-  company: [
-    { label: "About Us", href: "/about" },
-    { label: "Contact", href: "/contact" },
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Service", href: "/terms" },
-  ],
-  contact: [
-    { label: "hello@vizitafrica.rw", href: "mailto:hello@vizitafrica.rw" },
-    { label: "+250 788 000 000", href: "tel:+250788000000" },
-    { label: "WhatsApp", href: "https://wa.me/250788000000" },
-  ],
-};
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 const socialLinks = [
   { icon: RiTwitterXLine, href: "https://twitter.com", label: "Twitter" },
@@ -34,6 +17,29 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const t = useTranslations("Footer");
+  const tCommon = useTranslations("Common");
+
+  const footerLinks = {
+    services: [
+      { label: t("links.tripsPackages"), href: "/experiences" },
+      { label: t("links.customItineraries"), href: "/plan-trip" },
+      { label: t("links.gallery"), href: "/gallery" },
+      { label: t("links.faq"), href: "/#faq" },
+    ],
+    company: [
+      { label: t("links.aboutUs"), href: "/about" },
+      { label: t("links.contactUs"), href: "/contact" },
+      { label: t("links.privacyPolicy"), href: "/privacy" },
+      { label: t("links.termsOfService"), href: "/terms" },
+    ],
+    contact: [
+      { label: "hello@vizitafrica.rw", href: "mailto:hello@vizitafrica.rw" },
+      { label: "+250 788 000 000", href: "tel:+250788000000" },
+      { label: "WhatsApp", href: "https://wa.me/250788000000" },
+    ],
+  };
+
   return (
     <footer
       id="main-footer"
@@ -44,12 +50,11 @@ export function Footer() {
           <div className="md:col-span-5 lg:col-span-4 space-y-8">
             <Link href="/" className="inline-block">
               <span className="font-display text-3xl font-bold uppercase tracking-tight text-white">
-                Vizit Africa
+                {tCommon("brandName")}
               </span>
             </Link>
             <p className="text-base text-gray-400 leading-relaxed max-w-sm font-light">
-              Your trusted Rwanda travel partner. Professional planning for
-              unforgettable African experiences.
+              {t("tagline")}
             </p>
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (
@@ -68,7 +73,7 @@ export function Footer() {
           <div className="md:col-span-7 lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-12">
             <div>
               <h4 className="font-display font-bold text-sm uppercase tracking-widest text-white mb-8">
-                Explore
+                {t("explore")}
               </h4>
               <ul className="space-y-4">
                 {footerLinks.services.map((link) => (
@@ -86,7 +91,7 @@ export function Footer() {
 
             <div>
               <h4 className="font-display font-bold text-sm uppercase tracking-widest text-white mb-8">
-                Company
+                {t("company")}
               </h4>
               <ul className="space-y-4">
                 {footerLinks.company.map((link) => (
@@ -104,7 +109,7 @@ export function Footer() {
 
             <div className="col-span-2 md:col-span-1">
               <h4 className="font-display font-bold text-sm uppercase tracking-widest text-white mb-8">
-                Contact
+                {t("contact")}
               </h4>
               <ul className="space-y-4">
                 {footerLinks.contact.map((link) => (
@@ -124,20 +129,20 @@ export function Footer() {
 
         <div className="mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-xs text-gray-500 uppercase tracking-wider">
-            © 2025 Vizit Africa. All rights reserved.
+            {t("copyright")}
           </p>
           <div className="flex gap-8">
             <Link
               href="/privacy"
               className="text-xs text-gray-500 hover:text-white uppercase tracking-wider transition-colors"
             >
-              Privacy
+              {t("privacy")}
             </Link>
             <Link
               href="/terms"
               className="text-xs text-gray-500 hover:text-white uppercase tracking-wider transition-colors"
             >
-              Terms
+              {t("terms")}
             </Link>
           </div>
         </div>

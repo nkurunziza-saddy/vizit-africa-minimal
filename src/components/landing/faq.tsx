@@ -1,6 +1,5 @@
 "use client";
 
-import { faqData } from "@/lib/dummy-data";
 import { SectionTitle } from "./section-title";
 import {
   Accordion,
@@ -9,8 +8,19 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+
+const faqKeys = ["1", "2", "3", "4", "5", "6", "7", "8"] as const;
 
 export function FAQ() {
+  const t = useTranslations("FAQ");
+
+  const faqData = faqKeys.map((key) => ({
+    question: t(`items.${key}.question`),
+    answer: t(`items.${key}.answer`),
+  }));
+
   return (
     <section id="faq" className="py-24 md:py-32 bg-background relative">
       <div className="container max-w-7xl mx-auto px-5 md:px-10">
@@ -23,27 +33,27 @@ export function FAQ() {
             className="md:sticky md:top-24"
           >
             <SectionTitle
-              overline="Got Questions?"
+              overline={t("overline")}
               title={
                 <>
-                  We Have <br />
-                  Answers
+                  {t("title").split(" ").slice(0, 2).join(" ")} <br />
+                  {t("title").split(" ").slice(2).join(" ")}
                 </>
               }
-              description="Everything you need to know about planning your unforgettable journey to Rwanda."
+              description={t("description")}
               className="mb-8"
             />
             <div className="hidden md:block">
               <div className="flex items-center gap-4 text-muted-foreground">
                 <div className="w-12 h-px bg-border" />
-                <span className="text-sm">Can't find your answer?</span>
+                <span className="text-sm">{t("cantFindAnswer")}</span>
               </div>
-              <a
+              <Link
                 href="/contact"
                 className="inline-block mt-4 text-primary font-bold hover:underline underline-offset-4"
               >
-                Contact our team
-              </a>
+                {t("contactTeam")}
+              </Link>
             </div>
           </motion.div>
 
@@ -67,14 +77,14 @@ export function FAQ() {
 
             <div className="mt-12 md:hidden text-center">
               <p className="text-muted-foreground mb-4">
-                Can't find what you're looking for?
+                {t("cantFindMobile")}
               </p>
-              <a
+              <Link
                 href="/contact"
                 className="text-primary font-bold hover:underline underline-offset-4"
               >
-                Contact our team
-              </a>
+                {t("contactTeam")}
+              </Link>
             </div>
           </div>
         </div>

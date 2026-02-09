@@ -5,44 +5,40 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { SectionTitle } from "./section-title";
+import { useTranslations } from "next-intl";
 
-const regions = [
+const regionData = [
   {
     id: "volcanoes",
-    name: "Volcanoes N.P.",
-    subtitle: "Gorilla Trekking",
+    key: "volcanoes",
     image:
       "https://images.unsplash.com/photo-1662612732223-1fe6ea43263e?q=90&w=1600&auto=format&fit=crop",
     className: "md:col-span-2 md:row-span-2",
   },
   {
     id: "akagera",
-    name: "Akagera N.P.",
-    subtitle: "Big 5 Safari",
+    key: "akagera",
     image:
       "https://images.unsplash.com/photo-1621268405207-3dfc641fceeb?q=90&w=1600&auto=format&fit=crop",
     className: "md:col-span-1 md:row-span-1",
   },
   {
     id: "nyungwe",
-    name: "Nyungwe Forest",
-    subtitle: "Primate Trekking",
+    key: "nyungwe",
     image:
       "https://images.unsplash.com/photo-1489640818597-89b1edc97db5?q=90&w=1600&auto=format&fit=crop",
     className: "md:col-span-1 md:row-span-2",
   },
   {
     id: "kivu",
-    name: "Lake Kivu",
-    subtitle: "Coastal Relaxation",
+    key: "kivu",
     image:
       "https://images.unsplash.com/photo-1514548383638-cef9251a73ec?q=90&w=1600&auto=format&fit=crop",
     className: "md:col-span-1 md:row-span-1",
   },
   {
     id: "kigali",
-    name: "Kigali City",
-    subtitle: "Urban Culture",
+    key: "kigali",
     image:
       "https://images.unsplash.com/photo-1555699875-577bf68b68ec?q=90&w=1600&auto=format&fit=crop",
     className: "md:col-span-1 md:row-span-1",
@@ -50,15 +46,24 @@ const regions = [
 ];
 
 export function Destinations() {
+  const t = useTranslations("Destinations");
+
+  const regions = regionData.map((r) => ({
+    ...r,
+    name: t(`regions.${r.key}.name`),
+    subtitle: t(`regions.${r.key}.subtitle`),
+  }));
+
   return (
     <section className="py-32 bg-background relative overflow-hidden">
       <div className="container max-w-7xl mx-auto px-5">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <SectionTitle
-            overline="Discover Rwanda"
+            overline={t("overline")}
             title={
               <>
-                Diverse <br /> Landscapes
+                {t("title").split(" ")[0]} <br />{" "}
+                {t("title").split(" ").slice(1).join(" ")}
               </>
             }
             className="mb-0 max-w-2xl"
@@ -71,8 +76,7 @@ export function Destinations() {
             className="mb-2"
           >
             <p className="max-w-xs text-muted-foreground text-lg leading-relaxed">
-              From mist-covered mountains to golden savannahs, explore the
-              varied beauty of the land of a thousand hills.
+              {t("description")}
             </p>
           </motion.div>
         </div>

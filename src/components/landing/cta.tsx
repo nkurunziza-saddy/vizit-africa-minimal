@@ -8,11 +8,14 @@ import {
   RiWhatsappLine,
   RiArrowRightUpLine,
 } from "@remixicon/react";
-import Link from "next/link";
 import Image from "next/image";
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export function CTA() {
+  const t = useTranslations("CTA");
+
   return (
     <section id="contact" className="py-24 md:py-32 bg-background">
       <div className="container max-w-7xl mx-auto px-5 md:px-10">
@@ -46,7 +49,7 @@ export function CTA() {
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-accent-warm" />
                   <span className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
-                    The Journey Begins
+                    {t("overline")}
                   </span>
                 </motion.div>
 
@@ -57,9 +60,9 @@ export function CTA() {
                   transition={{ delay: 0.1 }}
                   className="font-display text-primary-foreground text-6xl md:text-8xl font-black uppercase leading-[0.85] tracking-tight mb-8"
                 >
-                  Ready to <br />
+                  {t("title")} <br />
                   <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-white/80 font-serif italic pr-4">
-                    Disappear?
+                    {t("titleHighlight")}
                   </span>
                 </motion.h2>
 
@@ -70,8 +73,7 @@ export function CTA() {
                   transition={{ delay: 0.2 }}
                   className="text-lg md:text-xl text-white/60 font-light max-w-md leading-relaxed mb-12"
                 >
-                  Escape the ordinary. We handle the logistics, permits, and
-                  luxury accommodations. You just show up and breathe.
+                  {t("description")}
                 </motion.p>
               </div>
 
@@ -86,7 +88,7 @@ export function CTA() {
                   <Magnetic>
                     <Button className="w-full sm:w-auto h-20 px-10 rounded-sm bg-white text-black hover:bg-white/95 text-xl font-medium transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white group">
                       <span className="flex items-center gap-2">
-                        Start Planning
+                        {t("startPlanning")}
                         <RiArrowRightLine className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-0.5" />
                       </span>
                     </Button>
@@ -96,7 +98,7 @@ export function CTA() {
                   <Magnetic>
                     <div className="w-full sm:w-auto h-20 px-8 rounded-sm border border-white/20 flex items-center justify-center gap-3 cursor-pointer hover:bg-white/5 transition-colors duration-200 group focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                       <span className="text-sm font-medium uppercase tracking-wider">
-                        Contact Team
+                        {t("contactTeam")}
                       </span>
                       <RiArrowRightUpLine
                         className="w-5 h-5 text-white/50 group-hover:text-white transition-colors duration-200"
@@ -122,7 +124,7 @@ export function CTA() {
                   <div className="bg-[#0a0a0a]/80 rounded-sm p-6">
                     <div className="flex items-center justify-between mb-6">
                       <span className="text-[10px] font-mono uppercase tracking-widest text-white/40">
-                        Concierge Direct
+                        {t("concierge")}
                       </span>
                     </div>
 
@@ -137,7 +139,7 @@ export function CTA() {
                         </div>
                         <div className="overflow-hidden">
                           <span className="block text-xs text-white/40 uppercase tracking-wider mb-0.5">
-                            Email Us
+                            {t("emailUs")}
                           </span>
                           <span className="block text-white font-medium truncate group-hover/item:text-accent-warm transition-colors duration-200">
                             hello@vizit.africa
@@ -155,7 +157,7 @@ export function CTA() {
                         </div>
                         <div className="overflow-hidden">
                           <span className="block text-xs text-white/40 uppercase tracking-wider mb-0.5">
-                            WhatsApp
+                            {t("whatsapp")}
                           </span>
                           <span className="block text-white font-medium truncate group-hover/item:text-green-400 transition-colors duration-200">
                             +250 788 123 456

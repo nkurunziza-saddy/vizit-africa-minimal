@@ -30,6 +30,7 @@ import type {
   FilterState,
 } from "@/lib/plan_trip-types";
 import { MOCK_GUIDES, DRIVER_SURCHARGE } from "@/lib/plan-trip-data";
+import { useTranslations } from "next-intl";
 
 interface ServicesStepProps {
   selections: Selections;
@@ -111,6 +112,9 @@ export function ServicesStep({
   onBack,
   canProceed,
 }: ServicesStepProps) {
+  const t = useTranslations("PlanTrip.services");
+  const tCommon = useTranslations("Common");
+
   return (
     <motion.div
       key="step3"
@@ -129,21 +133,21 @@ export function ServicesStep({
               className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-0 pb-2 text-base font-display font-medium uppercase tracking-wide"
             >
               <RiHotelLine className="size-4 mr-2" />
-              Hotels
+              {t("tabs.hotels")}
             </TabsTrigger>
             <TabsTrigger
               value="cars"
               className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-0 pb-2 text-base font-display font-medium uppercase tracking-wide"
             >
               <RiCarLine className="size-4 mr-2" />
-              Cars
+              {t("tabs.cars")}
             </TabsTrigger>
             <TabsTrigger
               value="guides"
               className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-0 pb-2 text-base font-display font-medium uppercase tracking-wide"
             >
               <RiUserStarLine className="size-4 mr-2" />
-              Guides
+              {t("tabs.guides")}
             </TabsTrigger>
           </TabsList>
 
@@ -190,7 +194,7 @@ export function ServicesStep({
             <TabsContent value="hotels" className="mt-0">
               {paginatedHotels.length === 0 ? (
                 <div className="text-center py-12 text-muted-foreground bg-white border rounded-xl">
-                  No hotels match your filters
+                  {t("noHotels")}
                 </div>
               ) : (
                 <>
@@ -217,7 +221,7 @@ export function ServicesStep({
             <TabsContent value="cars" className="mt-0">
               {paginatedCars.length === 0 ? (
                 <div className="text-center py-12 text-muted-foreground bg-white border rounded-xl">
-                  No vehicles match your filters
+                  {t("noCars")}
                 </div>
               ) : (
                 <>
@@ -252,8 +256,7 @@ export function ServicesStep({
             <TabsContent value="guides" className="mt-0">
               <Alert className="mb-3 bg-primary-subtle border-primary/20">
                 <AlertDescription className="text-foreground">
-                  Guides are optional but highly recommended for first-time
-                  visitors!
+                  {t("guidesAlert")}
                 </AlertDescription>
               </Alert>
               <div className="grid sm:grid-cols-2 gap-3">
@@ -275,10 +278,10 @@ export function ServicesStep({
 
             <div className="mt-6 flex justify-between">
               <Button variant="outline" onClick={onBack}>
-                <RiArrowLeftLine /> Back
+                <RiArrowLeftLine /> {tCommon("back")}
               </Button>
               <Button size="lg" disabled={!canProceed} onClick={onNext}>
-                Review Booking
+                {t("reviewBooking")}
                 <RiArrowRightLine />
               </Button>
             </div>

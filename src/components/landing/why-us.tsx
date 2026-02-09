@@ -1,10 +1,20 @@
 "use client";
 
-import { stats, benefits } from "@/lib/dummy-data";
 import { motion } from "motion/react";
 import { SectionTitle } from "./section-title";
+import { useTranslations } from "next-intl";
 
 export function WhyUs() {
+  const t = useTranslations("WhyUs");
+
+  const stats = [
+    { value: t("stats.travelers.value"), label: t("stats.travelers.label") },
+    { value: t("stats.countries.value"), label: t("stats.countries.label") },
+    { value: t("stats.rating.value"), label: t("stats.rating.label") },
+  ];
+
+  const benefits = t.raw("benefits") as string[];
+
   return (
     <section id="why-us" className="py-24 md:py-32 bg-background">
       <div className="container max-w-7xl mx-auto px-5 md:px-10">
@@ -16,9 +26,9 @@ export function WhyUs() {
             transition={{ duration: 0.6 }}
           >
             <SectionTitle
-              overline="Why Choose Us"
-              title="The Vizit Difference"
-              description="We don't just book trips; we craft personal legacies. Here is what sets our journeys apart from the rest."
+              overline={t("overline")}
+              title={t("title")}
+              description={t("description")}
               className="mb-12"
             />
 

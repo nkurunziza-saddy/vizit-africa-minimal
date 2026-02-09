@@ -8,6 +8,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { BookingSummary } from "@/components/plan-trip";
 import type { TripInfo, Selections } from "@/lib/plan_trip-types";
 import { DRIVER_SURCHARGE } from "@/lib/plan-trip-data";
+import { useTranslations } from "next-intl";
 
 interface ReviewStepProps {
   tripInfo: TripInfo;
@@ -32,6 +33,9 @@ export function ReviewStep({
   onBack,
   onSubmit,
 }: ReviewStepProps) {
+  const t = useTranslations("PlanTrip.review");
+  const tCommon = useTranslations("Common");
+
   return (
     <motion.div
       key="step4"
@@ -46,10 +50,10 @@ export function ReviewStep({
             <RiCheckLine className="size-10" />
           </div>
           <h2 className="font-display text-3xl font-bold uppercase tracking-tight">
-            Review Your Trip
+            {t("title")}
           </h2>
           <p className="text-muted-foreground text-lg font-light">
-            Please review your details before confirming
+            {t("subtitle")}
           </p>
         </div>
 
@@ -67,8 +71,7 @@ export function ReviewStep({
 
         <Alert className="bg-primary/5 border-primary/20 rounded-none">
           <AlertDescription className="text-foreground text-center font-medium">
-            After submitting, we'll review your request and send you a payment
-            link within 24 hours.
+            {t("alert")}
           </AlertDescription>
         </Alert>
 
@@ -79,10 +82,10 @@ export function ReviewStep({
             onClick={onBack}
             className="flex-1"
           >
-            <RiArrowLeftLine className="mr-2" /> Back
+            <RiArrowLeftLine className="mr-2" /> {tCommon("back")}
           </Button>
           <Button size="lg" className="flex-[2]" onClick={onSubmit}>
-            Submit Booking Request
+            {t("submit")}
           </Button>
         </div>
       </div>

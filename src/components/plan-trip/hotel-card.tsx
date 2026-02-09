@@ -2,6 +2,7 @@
 
 import type { Hotel } from "../../lib/plan_trip-types";
 import { RiMapPinLine, RiCheckLine, RiHotelLine } from "@remixicon/react";
+import { useTranslations } from "next-intl";
 
 interface HotelCardProps {
   hotel: Hotel;
@@ -16,6 +17,9 @@ export function HotelCard({
   days,
   onSelect,
 }: HotelCardProps) {
+  const tSummary = useTranslations("PlanTrip.summary");
+  const tAmenities = useTranslations("PlanTrip.data.amenities");
+
   return (
     <div
       onClick={onSelect}
@@ -68,7 +72,7 @@ export function HotelCard({
                 key={a}
                 className="text-[10px] uppercase tracking-wider px-2 py-1 border border-border text-muted-foreground"
               >
-                {a}
+                {tAmenities(a as any)}
               </span>
             ))}
             {hotel.amenities.length > 3 && (
@@ -81,7 +85,7 @@ export function HotelCard({
           <div className="mt-auto pt-4 border-t border-border/50 flex items-end justify-between">
             <div>
               <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">
-                Total ({days} nights)
+                Total ({days} {tSummary("nights")})
               </p>
               <p className="font-display text-xl font-bold text-foreground">
                 ${hotel.pricePerNight * days}
@@ -89,7 +93,7 @@ export function HotelCard({
             </div>
             <p className="text-sm font-medium text-muted-foreground">
               ${hotel.pricePerNight}
-              <span className="text-xs font-light">/night</span>
+              <span className="text-xs font-light">{tSummary("perNight")}</span>
             </p>
           </div>
         </div>

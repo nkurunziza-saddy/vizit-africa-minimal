@@ -1,16 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { RiMenuLine, RiCloseLine } from "@remixicon/react";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/ui/magnetic";
 import { cn } from "@/lib/utils";
 import Logo from "./logo";
-import { navLinks } from "./nav-links";
 import { NavbarMobile } from "./navbar-mobile";
+import { useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/navigation";
+import { LanguageSwitcher } from "./language-switcher";
 
 interface NavbarProps {
   forceSolid?: boolean;
@@ -18,16 +18,24 @@ interface NavbarProps {
 
 export function Navbar({ forceSolid = false }: NavbarProps) {
   const pathname = usePathname();
+  const t = useTranslations("Navigation");
+  const tCommon = useTranslations("Common");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
 
   const heroRoutes = ["/"];
-
   const hasHero = heroRoutes.includes(pathname);
   const showSolid = forceSolid || isScrolled || !hasHero;
-
   const logoVariant = showSolid ? "default" : "light";
+
+  const navLinks = [
+    { href: "/services", label: t("services") },
+    { href: "/experiences", label: t("experiences") },
+    { href: "/gallery", label: t("gallery") },
+    { href: "/about", label: t("aboutUs") },
+    { href: "/contact", label: t("contact") },
+  ];
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 20);
@@ -48,7 +56,6 @@ export function Navbar({ forceSolid = false }: NavbarProps) {
       >
         <nav className="mx-auto max-w-7xl px-5 md:px-10 flex items-center justify-between">
           <Logo variant={logoVariant} />
-
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
@@ -66,6 +73,7 @@ export function Navbar({ forceSolid = false }: NavbarProps) {
             ))}
           </div>
           <div className="hidden md:flex items-center gap-6">
+            <LanguageSwitcher variant={showSolid ? "default" : "light"} />
             <Link
               href="/login"
               className={cn(
@@ -75,7 +83,7 @@ export function Navbar({ forceSolid = false }: NavbarProps) {
                   : "text-white/80 hover:text-white",
               )}
             >
-              Log in
+              {tCommon("login")}
             </Link>
             <Link href="/plan-trip">
               <Magnetic>
@@ -87,12 +95,11 @@ export function Navbar({ forceSolid = false }: NavbarProps) {
                     !showSolid && "bg-white text-primary hover:bg-white/90",
                   )}
                 >
-                  Start Planning
+                  {tCommon("startPlanning")}
                 </Button>
               </Magnetic>
             </Link>
           </div>
-
           <button
             type="button"
             className={cn(

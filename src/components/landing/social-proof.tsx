@@ -2,13 +2,16 @@
 
 import { partnerLogos } from "@/lib/dummy-data";
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
 
 export function SocialProof() {
+  const t = useTranslations("SocialProof");
+
   return (
     <section className="bg-muted/30 py-10 overflow-hidden relative">
       <div className="container max-w-7xl mx-auto px-5 mb-8 text-center">
         <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest">
-          Trusted by global travelers & partners
+          {t("tagline")}
         </p>
       </div>
 

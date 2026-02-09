@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import type { TripInfo } from "@/lib/plan_trip-types";
+import { useTranslations } from "next-intl";
 
 interface TripDetailsStepProps {
   tripInfo: TripInfo;
@@ -39,6 +40,8 @@ export function TripDetailsStep({
   onNext,
   canProceed,
 }: TripDetailsStepProps) {
+  const t = useTranslations("PlanTrip.tripDetails");
+
   return (
     <motion.div
       key="step1"
@@ -49,19 +52,17 @@ export function TripDetailsStep({
     >
       <div className="space-y-8">
         <div>
-          <h2 className="font-display text-2xl font-bold mb-2">Trip Details</h2>
-          <p className="text-muted-foreground">
-            Tell us where you're coming from and when
-          </p>
+          <h2 className="font-display text-2xl font-bold mb-2">{t("title")}</h2>
+          <p className="text-muted-foreground">{t("subtitle")}</p>
         </div>
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="departureCity">Departing From</Label>
+            <Label htmlFor="departureCity">{t("departingFrom")}</Label>
             <InputGroup>
               <InputGroupInput
                 id="departureCity"
-                placeholder="e.g. New York, London, Dubai"
+                placeholder={t("departingPlaceholder")}
                 value={tripInfo.departureCity}
                 onChange={(e) =>
                   setTripInfo({
@@ -79,7 +80,7 @@ export function TripDetailsStep({
 
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="arrival">Arrival in Rwanda</Label>
+            <Label htmlFor="arrival">{t("arrival")}</Label>
             <div className="relative">
               <Popover>
                 <PopoverTrigger
@@ -97,7 +98,7 @@ export function TripDetailsStep({
                   {tripInfo.arrivalDate ? (
                     format(new Date(tripInfo.arrivalDate), "PPP")
                   ) : (
-                    <span>Pick a date</span>
+                    <span>{t("pickDate")}</span>
                   )}
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
@@ -121,7 +122,7 @@ export function TripDetailsStep({
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="departure">Departure from Rwanda</Label>
+            <Label htmlFor="departure">{t("departure")}</Label>
             <div className="relative">
               <Popover>
                 <PopoverTrigger
@@ -139,7 +140,7 @@ export function TripDetailsStep({
                   {tripInfo.departureDate ? (
                     format(new Date(tripInfo.departureDate), "PPP")
                   ) : (
-                    <span>Pick a date</span>
+                    <span>{t("pickDate")}</span>
                   )}
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
@@ -166,7 +167,7 @@ export function TripDetailsStep({
 
         <div className="grid sm:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <Label htmlFor="adults">Adults</Label>
+            <Label htmlFor="adults">{t("adults")}</Label>
             <InputGroup>
               <InputGroupInput
                 id="adults"
@@ -187,7 +188,7 @@ export function TripDetailsStep({
             </InputGroup>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="children">Children (0-12)</Label>
+            <Label htmlFor="children">{t("children")}</Label>
             <InputGroup>
               <InputGroupInput
                 id="children"
@@ -210,7 +211,7 @@ export function TripDetailsStep({
         </div>
 
         <div className="space-y-2">
-          <Label>Trip Purpose</Label>
+          <Label>{t("tripPurpose")}</Label>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {[
               "leisure",
@@ -235,17 +236,17 @@ export function TripDetailsStep({
                     : "bg-background text-foreground border-border hover:border-primary"
                 }`}
               >
-                {purpose}
+                {t(`purposes.${purpose}`)}
               </button>
             ))}
           </div>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="specialRequests">Special Requests (Optional)</Label>
+          <Label htmlFor="specialRequests">{t("specialRequests")}</Label>
           <Textarea
             id="specialRequests"
-            placeholder="Any dietary requirements, accessibility needs, or special occasions..."
+            placeholder={t("requestsPlaceholder")}
             value={tripInfo.specialRequests}
             onChange={(e) =>
               setTripInfo({
@@ -263,7 +264,7 @@ export function TripDetailsStep({
           disabled={!canProceed}
           onClick={onNext}
         >
-          Continue to Contact Info
+          {t("continue")}
           <RiArrowRightLine className="ml-2" />
         </Button>
       </div>

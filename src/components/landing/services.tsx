@@ -6,49 +6,22 @@ import { SectionTitle } from "./section-title";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslations } from "next-intl";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Service {
-  title: string;
-  description: string;
-  className: string;
-  image: string;
-}
-
-const services: Service[] = [
-  {
-    title: "Luxury Flights",
-    description: "Private charters & premium class access.",
-    className: "md:col-span-2 md:row-span-2",
-    image:
-      "https://images.unsplash.com/photo-1721402495451-41724ae641a4?q=90&w=1600&auto=format&fit=crop",
-  },
-  {
-    title: "Curated Hotels",
-    description: "From boutique lodges to 5-star resorts.",
-    className: "md:col-span-1 md:row-span-1",
-    image:
-      "https://images.unsplash.com/photo-1756245994882-cf32d49fde5a?q=90&w=1600&auto=format&fit=crop",
-  },
-  {
-    title: "Exclusive Experiences",
-    description: "Gorilla trekking, tea plantations, and more.",
-    className: "md:col-span-1 md:row-span-2",
-    image:
-      "https://images.unsplash.com/photo-1609861517208-e5b7b4cd4b87?q=90&w=1600&auto=format&fit=crop",
-  },
-  {
-    title: "VIP Transfers",
-    description: "Seamless ground transportation.",
-    className: "md:col-span-1 md:row-span-1",
-    image:
-      "https://images.unsplash.com/photo-1664760536218-44efb2696288?q=90&w=1600&auto=format&fit=crop",
-  },
+const serviceImages = [
+  "https://images.unsplash.com/photo-1721402495451-41724ae641a4?q=90&w=1600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1756245994882-cf32d49fde5a?q=90&w=1600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1609861517208-e5b7b4cd4b87?q=90&w=1600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1664760536218-44efb2696288?q=90&w=1600&auto=format&fit=crop",
 ];
+
+const serviceKeys = ["flights", "hotels", "experiences", "transfers"] as const;
 
 export function Services() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations("Services");
 
   useGSAP(
     () => {
@@ -78,13 +51,19 @@ export function Services() {
     { scope: containerRef },
   );
 
+  const services = serviceKeys.map((key, index) => ({
+    title: t(`items.${key}.title`),
+    description: t(`items.${key}.description`),
+    image: serviceImages[index],
+  }));
+
   return (
     <section ref={containerRef} className="py-24 md:py-32 bg-background">
       <div className="container max-w-7xl mx-auto px-5 md:px-10">
         <SectionTitle
-          overline="Our Services"
-          title="World Class Services"
-          description="We handle everything from the moment you leave your doorstep until you return, changed forever."
+          overline={t("overline")}
+          title={t("title")}
+          description={t("description")}
           className="max-w-2xl mb-16"
         />
 
@@ -106,7 +85,11 @@ export function Services() {
   );
 }
 
-function ServiceCard({ service }: { service: Service }) {
+function ServiceCard({
+  service,
+}: {
+  service: { title: string; description: string; image: string };
+}) {
   return (
     <div className="service-card group relative overflow-hidden rounded-sm aspect-[4/3] md:aspect-[16/10]">
       <div className="absolute inset-0">

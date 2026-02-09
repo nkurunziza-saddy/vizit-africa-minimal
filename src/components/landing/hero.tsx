@@ -7,7 +7,6 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { Magnetic } from "@/components/ui/magnetic";
-import { HERO_SLIDES } from "@/lib/landing-data";
 import { RiArrowRightLine } from "@remixicon/react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -15,14 +14,50 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const HERO_SLIDES = [
+  {
+    id: 1,
+    image:
+      "https://images.unsplash.com/photo-1546422724-3c4be0b20cb5?q=90&w=2400&auto=format&fit=crop",
+    key: "1",
+  },
+  {
+    id: 2,
+    image:
+      "https://images.unsplash.com/photo-1547471080-7528385f7017?q=90&w=2400&auto=format&fit=crop",
+    key: "2",
+  },
+  {
+    id: 3,
+    image:
+      "https://images.unsplash.com/photo-1517309995815-46fd4252e1f4?q=90&w=2400&auto=format&fit=crop",
+    key: "3",
+  },
+  {
+    id: 4,
+    image:
+      "https://images.unsplash.com/photo-1505245208761-ba872912fac0?q=90&w=2400&auto=format&fit=crop",
+    key: "4",
+  },
+  {
+    id: 5,
+    image:
+      "https://images.unsplash.com/photo-1489640818597-89b1edc97db5?q=90&w=2400&auto=format&fit=crop",
+    key: "5",
+  },
+];
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const t = useTranslations("Hero");
+  const tCommon = useTranslations("Common");
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -36,6 +71,12 @@ export function Hero() {
   };
 
   const slide = HERO_SLIDES[currentSlide];
+  const slideContent = {
+    subheading: t(`slides.${slide.key}.subheading`),
+    heading1: t(`slides.${slide.key}.heading1`),
+    heading2: t(`slides.${slide.key}.heading2`),
+    description: t(`slides.${slide.key}.description`),
+  };
 
   useGSAP(
     () => {
@@ -88,7 +129,7 @@ export function Hero() {
             <Image
               src={slide.image}
               fill
-              alt={`${slide.heading1} ${slide.heading2}`}
+              alt={`${slideContent.heading1} ${slideContent.heading2}`}
               className="w-full h-full object-cover"
               priority
             />
@@ -123,7 +164,7 @@ export function Hero() {
               >
                 <div className="w-12 h-px bg-white/60" />
                 <span className="text-white/80 uppercase tracking-[0.3em] text-xs font-medium">
-                  {slide.subheading}
+                  {slideContent.subheading}
                 </span>
               </motion.div>
 
@@ -134,7 +175,7 @@ export function Hero() {
                   transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                   className="text-7xl md:text-9xl lg:text-[11rem] font-black font-display text-white uppercase leading-[0.8] tracking-tighter"
                 >
-                  {slide.heading1}
+                  {slideContent.heading1}
                 </motion.h1>
               </div>
 
@@ -150,7 +191,7 @@ export function Hero() {
                     }}
                     className="text-7xl md:text-9xl lg:text-[11rem] font-black font-display text-transparent bg-clip-text bg-linear-to-r from-primary-light to-white uppercase leading-[0.8] tracking-tighter"
                   >
-                    {slide.heading2}
+                    {slideContent.heading2}
                   </motion.h1>
                 </div>
 
@@ -160,7 +201,7 @@ export function Hero() {
                   transition={{ duration: 0.8, delay: 0.6 }}
                   className="text-lg md:text-xl text-white/80 max-w-md font-light leading-relaxed mb-6 md:mb-4"
                 >
-                  {slide.description}
+                  {slideContent.description}
                 </motion.p>
               </div>
             </motion.div>
@@ -177,7 +218,7 @@ export function Hero() {
                 size="lg"
                 className="rounded-sm h-16 px-10 text-lg bg-primary hover:bg-primary-light text-white border-none transition-transform hover:scale-105 w-full md:w-auto"
               >
-                Start Planning
+                {tCommon("startPlanning")}
                 <RiArrowRightLine />
               </Button>
             </Magnetic>
@@ -203,8 +244,13 @@ export function Hero() {
 
       <div className="hidden lg:flex absolute right-10 bottom-10 z-30 flex-col items-end gap-12">
         <div className="flex flex-col gap-4 text-right">
-          {HERO_SLIDES.map((slide, index) => {
+          {HERO_SLIDES.map((s, index) => {
             const isActive = index === currentSlide;
+            const hoverContent = {
+              subheading: t(`slides.${s.key}.subheading`),
+              heading1: t(`slides.${s.key}.heading1`),
+              heading2: t(`slides.${s.key}.heading2`),
+            };
             return (
               <HoverCard key={index}>
                 <HoverCardTrigger
@@ -234,18 +280,18 @@ export function Hero() {
                 >
                   <div className="relative h-32 w-full">
                     <Image
-                      src={slide.image}
-                      alt={slide.heading1}
+                      src={s.image}
+                      alt={hoverContent.heading1}
                       fill
                       className="object-cover opacity-80"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent" />
                     <div className="absolute bottom-3 left-4 right-4">
                       <p className="text-[10px] uppercase tracking-[0.2em] text-white/70 mb-1">
-                        {slide.subheading}
+                        {hoverContent.subheading}
                       </p>
                       <h3 className="text-xl font-display font-medium text-white uppercase leading-tight">
-                        {slide.heading1} {slide.heading2}
+                        {hoverContent.heading1} {hoverContent.heading2}
                       </h3>
                     </div>
                   </div>
@@ -258,12 +304,14 @@ export function Hero() {
         <div className="flex flex-col gap-6 text-right text-white/50 font-mono text-[10px] uppercase tracking-[0.2em] border-r border-white/20 pr-6">
           <div className="group cursor-default">
             <span className="block text-white mb-1 group-hover:text-primary transition-colors">
-              Volcanoes N.P.
+              {t("location")}
             </span>
-            1°28'S, 29°32'E
+            {t("coordinates")}
           </div>
           <div>
-            <span className="block text-white mb-1">Local Time</span>
+            <span className="block text-white mb-1">
+              {tCommon("localTime")}
+            </span>
             <span className="tabular-nums">GMT+2 (CAT)</span>
           </div>
         </div>

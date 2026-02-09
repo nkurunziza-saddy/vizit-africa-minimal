@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { navLinks } from "./nav-links";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { LanguageSwitcher } from "./language-switcher";
 
 interface NavbarMobileProps {
   isOpen: boolean;
@@ -10,6 +11,17 @@ interface NavbarMobileProps {
 }
 
 export function NavbarMobile({ isOpen, onClose }: NavbarMobileProps) {
+  const t = useTranslations("Navigation");
+  const tCommon = useTranslations("Common");
+
+  const navLinks = [
+    { href: "/services", label: t("services") },
+    { href: "/experiences", label: t("experiences") },
+    { href: "/gallery", label: t("gallery") },
+    { href: "/about", label: t("aboutUs") },
+    { href: "/contact", label: t("contact") },
+  ];
+
   if (!isOpen) return null;
 
   return (
@@ -25,20 +37,23 @@ export function NavbarMobile({ isOpen, onClose }: NavbarMobileProps) {
             {link.label}
           </Link>
         ))}
-        <div className="pt-4 space-y-3">
+        <div className="pt-4 space-y-3 border-t border-border/50">
+          <div className="flex justify-center py-2">
+            <LanguageSwitcher />
+          </div>
           <Link
             href="/login"
             className="block text-center font-display font-medium uppercase tracking-widest text-xs text-muted-foreground hover:text-foreground py-2"
             onClick={onClose}
           >
-            Log in
+            {tCommon("login")}
           </Link>
           <Link href="/plan-trip" onClick={onClose} className="block">
             <Button
               size="lg"
               className="w-full rounded-sm font-display font-bold uppercase tracking-wider text-xs"
             >
-              Start Planning
+              {tCommon("startPlanning")}
             </Button>
           </Link>
         </div>

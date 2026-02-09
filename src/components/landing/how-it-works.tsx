@@ -1,9 +1,9 @@
 "use client";
 
-import { processSteps } from "@/lib/dummy-data";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { SectionTitle } from "./section-title";
+import { useTranslations } from "next-intl";
 
 const stepImages = [
   "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=90&w=800&auto=format&fit=crop",
@@ -12,7 +12,17 @@ const stepImages = [
   "https://images.unsplash.com/photo-1503220317375-aaad61436b1b?q=90&w=800&auto=format&fit=crop",
 ];
 
+const stepKeys = ["1", "2", "3", "4"] as const;
+
 export function HowItWorks() {
+  const t = useTranslations("HowItWorks");
+
+  const processSteps = stepKeys.map((key, index) => ({
+    step: index + 1,
+    title: t(`steps.${key}.title`),
+    description: t(`steps.${key}.description`),
+  }));
+
   return (
     <section
       id="how-it-works"
@@ -20,14 +30,14 @@ export function HowItWorks() {
     >
       <div className="container max-w-7xl mx-auto px-5 md:px-10">
         <SectionTitle
-          overline="Your Journey Starts Here"
+          overline={t("overline")}
           title={
             <>
-              Four Steps to <br />
-              Paradise
+              {t("title").split(" ").slice(0, 3).join(" ")} <br />
+              {t("title").split(" ").slice(3).join(" ")}
             </>
           }
-          description="From your first inquiry to landing in Kigali — we orchestrate every detail so you can focus on the adventure."
+          description={t("description")}
           className="mb-20 max-w-3xl"
           dark
         />

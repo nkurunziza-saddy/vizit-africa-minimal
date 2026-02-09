@@ -9,6 +9,7 @@ import {
   RiSettings4Line,
   RiCheckLine,
 } from "@remixicon/react";
+import { useTranslations } from "next-intl";
 
 interface CarCardProps {
   car: Car;
@@ -32,6 +33,11 @@ export function CarCard({
   const baseTotal = car.pricePerDay * days;
   const driverTotal = driverSurcharge * days;
   const total = baseTotal + (isSelected && withDriver ? driverTotal : 0);
+
+  const tSummary = useTranslations("PlanTrip.summary");
+  const tFeatures = useTranslations("PlanTrip.data.features");
+  const tAttributes = useTranslations("PlanTrip.data.carAttributes");
+  const tTypes = useTranslations("PlanTrip.data.carTypes");
 
   return (
     <div
@@ -57,7 +63,7 @@ export function CarCard({
           </div>
           <div className="absolute top-0 left-0 bg-white/90 backdrop-blur-sm px-4 py-2 border-b border-r border-border">
             <span className="text-xs font-mono uppercase tracking-widest">
-              {car.category}
+              {tTypes(car.category as any)}
             </span>
           </div>
         </div>
@@ -76,10 +82,10 @@ export function CarCard({
               <span className="w-px h-3 bg-border" />
               <span className="flex items-center gap-1.5">
                 <RiSettings4Line className="size-3.5" />
-                {car.transmission}
+                {tAttributes(car.transmission as any)}
               </span>
               <span className="w-px h-3 bg-border" />
-              <span>{car.fuelType}</span>
+              <span>{tAttributes(car.fuelType as any)}</span>
             </div>
           </div>
 
@@ -89,7 +95,7 @@ export function CarCard({
                 key={f}
                 className="text-[10px] uppercase tracking-wider px-2 py-1 border border-border text-muted-foreground"
               >
-                {f}
+                {tFeatures(f as any)}
               </span>
             ))}
           </div>
@@ -120,7 +126,7 @@ export function CarCard({
                   </div>
                   <span className="text-sm font-mono text-muted-foreground">
                     ${car.pricePerDay}
-                    <span className="text-xs">/day</span>
+                    <span className="text-xs">{tSummary("perDay")}</span>
                   </span>
                 </div>
 
@@ -142,7 +148,7 @@ export function CarCard({
                   </div>
                   <span className="text-sm font-mono text-muted-foreground">
                     ${car.pricePerDay + driverSurcharge}
-                    <span className="text-xs">/day</span>
+                    <span className="text-xs">{tSummary("perDay")}</span>
                   </span>
                 </div>
               </RadioGroup>
@@ -152,7 +158,7 @@ export function CarCard({
           <div className="mt-auto pt-4 border-t border-border/50 flex items-end justify-between">
             <div>
               <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">
-                Total ({days} days)
+                Total ({days} {tSummary("days")})
               </p>
               <p className="font-display text-xl font-bold text-foreground">
                 ${total}
@@ -160,7 +166,7 @@ export function CarCard({
             </div>
             <p className="text-sm font-medium text-muted-foreground">
               ${car.pricePerDay}
-              <span className="text-xs font-light">/day</span>
+              <span className="text-xs font-light">{tSummary("perDay")}</span>
             </p>
           </div>
         </div>

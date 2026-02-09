@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
-import { DM_Sans, Inter, JetBrains_Mono } from "next/font/google";
+import {
+  DM_Sans,
+  Inter,
+  JetBrains_Mono,
+  Noto_Sans_Arabic,
+} from "next/font/google";
 import "./globals.css";
 import { SmoothScroller } from "@/components/smooth-scroller";
 import { CustomCursor } from "@/components/ui/custom-cursor";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { routing } from "@/i18n/routing";
+import { DirectionProvider } from "@/components/ui/direction";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -20,6 +27,12 @@ const inter = Inter({
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
+  display: "swap",
+});
+
+const notoSansArabic = Noto_Sans_Arabic({
+  subsets: ["arabic"],
+  variable: "--font-arabic",
   display: "swap",
 });
 
@@ -44,21 +57,32 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+type Props = {
   children: React.ReactNode;
-}>) {
+  params: Promise<{ locale?: string }>;
+};
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export default async function RootLayout({ children, params }: Props) {
+  const { locale } = await params;
+  const lang = locale || routing.defaultLocale;
+  const direction = lang === "ar" ? "rtl" : "ltr";
+
   return (
-    <html lang="en">
+    <html lang={lang} dir={direction} suppressHydrationWarning>
       <body
-        className={`${dmSans.variable} ${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+        className={`${dmSans.variable} ${inter.variable} ${jetbrainsMono.variable} ${notoSansArabic.variable} font-sans antialiased`}
       >
-        <SmoothScroller>
-          <CustomCursor />
-          <ScrollProgress />
-          {children}
-        </SmoothScroller>
+        <DirectionProvider direction={direction}>
+          <SmoothScroller>
+            <CustomCursor />
+            <ScrollProgress />
+            {children}
+          </SmoothScroller>
+        </DirectionProvider>
       </body>
     </html>
   );

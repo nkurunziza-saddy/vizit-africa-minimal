@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/input-group";
 import { Label } from "@/components/ui/label";
 import type { TripInfo } from "@/lib/plan_trip-types";
+import { useTranslations } from "next-intl";
 
 interface ContactInfoStepProps {
   tripInfo: TripInfo;
@@ -32,6 +33,9 @@ export function ContactInfoStep({
   onBack,
   canProceed,
 }: ContactInfoStepProps) {
+  const t = useTranslations("PlanTrip.contactInfo");
+  const tCommon = useTranslations("Common");
+
   return (
     <motion.div
       key="step2"
@@ -42,21 +46,17 @@ export function ContactInfoStep({
     >
       <div className="space-y-8">
         <div>
-          <h2 className="font-display text-2xl font-bold mb-2">
-            Contact Information
-          </h2>
-          <p className="text-muted-foreground">
-            How can we reach you about your booking?
-          </p>
+          <h2 className="font-display text-2xl font-bold mb-2">{t("title")}</h2>
+          <p className="text-muted-foreground">{t("subtitle")}</p>
         </div>
 
         <div className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="name">Full Name</Label>
+            <Label htmlFor="name">{t("fullName")}</Label>
             <InputGroup>
               <InputGroupInput
                 id="name"
-                placeholder="John Doe"
+                placeholder={t("namePlaceholder")}
                 value={tripInfo.name}
                 onChange={(e) =>
                   setTripInfo({ ...tripInfo, name: e.target.value })
@@ -66,12 +66,12 @@ export function ContactInfoStep({
           </div>
           <div className="grid sm:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t("email")}</Label>
               <InputGroup>
                 <InputGroupInput
                   id="email"
                   type="email"
-                  placeholder="you@example.com"
+                  placeholder={t("emailPlaceholder")}
                   value={tripInfo.email}
                   onChange={(e) =>
                     setTripInfo({
@@ -86,12 +86,12 @@ export function ContactInfoStep({
               </InputGroup>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="phone">Phone (Optional)</Label>
+              <Label htmlFor="phone">{t("phone")}</Label>
               <InputGroup>
                 <InputGroupInput
                   id="phone"
                   type="tel"
-                  placeholder="+1 234 567 8900"
+                  placeholder={t("phonePlaceholder")}
                   value={tripInfo.phone}
                   onChange={(e) =>
                     setTripInfo({
@@ -110,7 +110,7 @@ export function ContactInfoStep({
 
         <div className="flex gap-3">
           <Button variant="outline" size="lg" onClick={onBack}>
-            <RiArrowLeftLine /> Back
+            <RiArrowLeftLine /> {tCommon("back")}
           </Button>
           <Button
             size="lg"
@@ -118,7 +118,7 @@ export function ContactInfoStep({
             disabled={!canProceed}
             onClick={onNext}
           >
-            Continue to Services
+            {t("continue")}
             <RiArrowRightLine />
           </Button>
         </div>

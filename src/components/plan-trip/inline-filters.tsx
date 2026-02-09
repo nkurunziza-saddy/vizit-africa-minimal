@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { RiSearchLine, RiFilterOffLine } from "@remixicon/react";
 import type { FilterState } from "@/lib/plan_trip-types";
+import { useTranslations } from "next-intl";
 
 interface InlineFiltersProps {
   activeTab: string;
@@ -43,6 +44,8 @@ export function InlineFilters({
   hotelCount,
   carCount,
 }: InlineFiltersProps) {
+  const t = useTranslations("PlanTrip.services.filters");
+
   const hasHotelFilters =
     hotelSearch || hotelPriceFilter !== "all" || hotelStarsFilter !== "all";
   const hasCarFilters = carSearch || carCategoryFilter !== "all";
@@ -65,7 +68,7 @@ export function InlineFilters({
           <div className="relative flex-1 min-w-[180px]">
             <RiSearchLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
             <Input
-              placeholder="Search hotels..."
+              placeholder={t("search")}
               value={hotelSearch}
               onChange={(e) => setHotelSearch(e.target.value)}
               className="pl-9 h-9 bg-white"
@@ -79,13 +82,13 @@ export function InlineFilters({
             }
           >
             <SelectTrigger className="w-[140px] bg-white">
-              <SelectValue placeholder="Price" />
+              <SelectValue placeholder={t("price")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Prices</SelectItem>
-              <SelectItem value="budget">Under $150</SelectItem>
-              <SelectItem value="mid">$150 - $200</SelectItem>
-              <SelectItem value="luxury">$200+</SelectItem>
+              <SelectItem value="all">{t("all")}</SelectItem>
+              <SelectItem value="budget">{t("budget")}</SelectItem>
+              <SelectItem value="mid">{t("mid")}</SelectItem>
+              <SelectItem value="luxury">{t("luxury")}</SelectItem>
             </SelectContent>
           </Select>
 
@@ -96,12 +99,12 @@ export function InlineFilters({
             }
           >
             <SelectTrigger className="w-[130px] bg-white">
-              <SelectValue placeholder="Stars" />
+              <SelectValue placeholder={t("stars")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Stars</SelectItem>
-              <SelectItem value="5">5 Stars</SelectItem>
-              <SelectItem value="4+">4+ Stars</SelectItem>
+              <SelectItem value="all">{t("all")}</SelectItem>
+              <SelectItem value="5">{t("stars5")}</SelectItem>
+              <SelectItem value="4+">{t("stars4plus")}</SelectItem>
               <SelectItem value="3">3 Stars</SelectItem>
             </SelectContent>
           </Select>
@@ -127,7 +130,7 @@ export function InlineFilters({
           <div className="relative flex-1 min-w-[180px]">
             <RiSearchLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
             <Input
-              placeholder="Search vehicles..."
+              placeholder={t("search")}
               value={carSearch}
               onChange={(e) => setCarSearch(e.target.value)}
               className="pl-9 bg-white"
@@ -141,10 +144,10 @@ export function InlineFilters({
             }
           >
             <SelectTrigger className="w-[130px] bg-white">
-              <SelectValue placeholder="Type" />
+              <SelectValue placeholder={t("category")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Types</SelectItem>
+              <SelectItem value="all">{t("all")}</SelectItem>
               <SelectItem value="sedan">Sedan</SelectItem>
               <SelectItem value="suv">SUV</SelectItem>
               <SelectItem value="van">Van</SelectItem>

@@ -2,6 +2,7 @@
 
 import type { Guide } from "../../lib/plan_trip-types";
 import { RiUserStarLine, RiCheckLine } from "@remixicon/react";
+import { useTranslations } from "next-intl";
 
 interface GuideCardProps {
   guide: Guide;
@@ -10,6 +11,8 @@ interface GuideCardProps {
 }
 
 export function GuideCard({ guide, isSelected, onToggle }: GuideCardProps) {
+  const tTypes = useTranslations("PlanTrip.data.guideTypes");
+
   return (
     <div
       onClick={onToggle}
@@ -36,7 +39,7 @@ export function GuideCard({ guide, isSelected, onToggle }: GuideCardProps) {
           <div className="flex items-start justify-between gap-4 mb-2">
             <div>
               <h4 className="font-display text-lg font-bold uppercase tracking-tight text-foreground group-hover:text-primary transition-colors">
-                {guide.type}
+                {tTypes(guide.id as any)}
               </h4>
             </div>
           </div>

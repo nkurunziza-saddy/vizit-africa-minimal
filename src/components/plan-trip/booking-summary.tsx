@@ -2,6 +2,7 @@
 
 import type { Selections, TripInfo } from "../../lib/plan_trip-types";
 import { RiCheckLine } from "@remixicon/react";
+import { useTranslations } from "next-intl";
 
 interface BookingSummaryProps {
   currentStep: number;
@@ -25,37 +26,40 @@ export function BookingSummary({
   serviceFee,
   total,
 }: BookingSummaryProps) {
+  const t = useTranslations("PlanTrip.summary");
   const formatCurrency = (amount: number) => `$${amount.toFixed(2)}`;
 
   return (
     <div className="bg-white border rounded-xl p-5 space-y-4 sticky top-28">
       <h3 className="font-display text-lg font-bold text-foreground">
-        Summary
+        {t("title")}
       </h3>
 
       {currentStep >= 3 ? (
         <>
           <div className="text-sm space-y-2 pb-4 border-b border-border">
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Duration</span>
-              <span className="font-medium">{days} days</span>
+              <span className="text-muted-foreground">{t("days")}</span>
+              <span className="font-medium">
+                {days} {t("days")}
+              </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Travelers</span>
+              <span className="text-muted-foreground">{t("travelers")}</span>
               <span className="font-medium">{travelers}</span>
             </div>
           </div>
 
           <div className="space-y-2 text-sm">
             <SummaryItem
-              label="Hotel"
+              label={t("accommodation")}
               isSelected={!!selections.hotel}
               value={
                 selections.hotel ? selections.hotel.pricePerNight * days : null
               }
             />
             <SummaryItem
-              label="Car"
+              label={t("vehicle")}
               isSelected={!!selections.car}
               value={
                 selections.car
@@ -65,7 +69,7 @@ export function BookingSummary({
               }
             />
             <SummaryItem
-              label="Guide"
+              label={t("guide")}
               isSelected={!!selections.guide}
               value={selections.guide?.price ?? null}
               optional
@@ -74,15 +78,15 @@ export function BookingSummary({
 
           <div className="space-y-2 pt-4 border-t border-border">
             <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Subtotal</span>
+              <span className="text-muted-foreground">{t("subtotal")}</span>
               <span>{formatCurrency(subtotal)}</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Service Fee</span>
+              <span className="text-muted-foreground">{t("serviceFee")}</span>
               <span>{formatCurrency(serviceFee)}</span>
             </div>
             <div className="flex justify-between text-lg font-bold pt-2 border-t border-border">
-              <span>Total (excl. Flight)</span>
+              <span>{t("total")}</span>
               <span className="text-primary">{formatCurrency(total)}</span>
             </div>
           </div>

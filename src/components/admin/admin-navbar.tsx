@@ -13,17 +13,23 @@ import {
 } from "@remixicon/react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-
-const adminLinks = [
-  { href: "/admin", label: "Overview", icon: RiDashboardLine },
-  { href: "/admin/requests", label: "Requests", icon: RiFileListLine },
-  { href: "/admin/bookings", label: "Bookings", icon: RiCheckboxCircleLine },
-  { href: "/admin/inventory", label: "Inventory", icon: RiStoreLine },
-  { href: "/admin/settings", label: "Settings", icon: RiSettings3Line },
-];
+import { useTranslations } from "next-intl";
 
 export function AdminNavbar() {
   const pathname = usePathname();
+  const t = useTranslations("Admin.nav");
+
+  const adminLinks = [
+    { href: "/admin", label: t("overview"), icon: RiDashboardLine },
+    { href: "/admin/requests", label: t("requests"), icon: RiFileListLine },
+    {
+      href: "/admin/bookings",
+      label: t("bookings"),
+      icon: RiCheckboxCircleLine,
+    },
+    { href: "/admin/inventory", label: t("inventory"), icon: RiStoreLine },
+    { href: "/admin/settings", label: t("settings"), icon: RiSettings3Line },
+  ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
@@ -31,7 +37,7 @@ export function AdminNavbar() {
         <div className="mr-8 hidden md:flex">
           <Link href="/admin" className="mr-6 flex items-center space-x-2">
             <span className="font-display text-xl font-bold text-primary">
-              Vizit Admin
+              {t("brand")}
             </span>
           </Link>
         </div>
@@ -41,7 +47,7 @@ export function AdminNavbar() {
             const Icon = link.icon;
             const isActive =
               pathname === link.href ||
-              (link.href !== "/admin" && pathname.startsWith(link.href));
+              (link.href !== "/admin" && pathname?.startsWith(link.href));
 
             return (
               <Link
@@ -65,7 +71,7 @@ export function AdminNavbar() {
           <Link href="/">
             <Button variant="ghost" size="sm" className="text-muted-foreground">
               <RiGlobalLine />
-              <span className="hidden sm:inline">Public Site</span>
+              <span className="hidden sm:inline">{t("publicSite")}</span>
             </Button>
           </Link>
           <Button
@@ -74,7 +80,7 @@ export function AdminNavbar() {
             className="text-muted-foreground hover:text-destructive"
           >
             <RiLogoutBoxRLine />
-            <span className="sr-only">Logout</span>
+            <span className="sr-only">{t("logout")}</span>
           </Button>
         </div>
       </div>
