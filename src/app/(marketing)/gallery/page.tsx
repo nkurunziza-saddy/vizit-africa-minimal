@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { RiCloseLine, RiArrowRightLine } from "@remixicon/react";
 import { Navbar } from "@/components/shared";
 import { Footer } from "@/components/landing";
-import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { RevealText } from "@/components/ui/reveal-text";
 import { ParallaxImage } from "@/components/ui/parallax-image";
 import { cn } from "@/lib/utils";
@@ -134,7 +134,6 @@ export default function GalleryPage() {
     <>
       <Navbar />
       <div className="min-h-screen bg-background pt-32 pb-24">
-        {/* Stark Editorial Header */}
         <header className="px-5 md:px-10 max-w-7xl mx-auto mb-24 md:mb-32">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
             <div className="max-w-2xl">
@@ -215,7 +214,6 @@ export default function GalleryPage() {
           </motion.div>
         </section>
 
-        {/* break */}
         <section className="w-full h-[80vh] relative flex items-center justify-center overflow-hidden mb-32">
           <div className="absolute inset-0 z-0">
             <ParallaxImage

@@ -124,7 +124,6 @@ export function InlineFilters({
     return (
       <div className="mb-4">
         <div className="flex flex-wrap items-center gap-3">
-          {/* search */}
           <div className="relative flex-1 min-w-[180px]">
             <RiSearchLine className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
             <Input

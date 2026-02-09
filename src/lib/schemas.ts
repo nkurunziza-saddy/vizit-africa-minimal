@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-// info: schemas for type inference - replaces database schema
-
 export const userSchema = z.object({
   id: z.string(),
   email: z.string().email(),
@@ -212,7 +210,6 @@ export const teamMemberSchema = z.object({
   bio: z.string().optional(),
 });
 
-// info: inferred types for use throughout the application
 export type User = z.infer<typeof userSchema>;
 export type Request = z.infer<typeof requestSchema>;
 export type Flight = z.infer<typeof flightSchema>;

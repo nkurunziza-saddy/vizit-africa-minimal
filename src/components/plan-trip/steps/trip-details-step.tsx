@@ -177,7 +177,7 @@ export function TripDetailsStep({
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setTripInfo({
                     ...tripInfo,
-                    adults: parseInt(e.target.value) || 1,
+                    adults: parseInt(e.target.value, 10) || 1,
                   })
                 }
               />
@@ -198,7 +198,7 @@ export function TripDetailsStep({
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   setTripInfo({
                     ...tripInfo,
-                    children: parseInt(e.target.value) || 0,
+                    children: parseInt(e.target.value, 10) || 0,
                   })
                 }
               />

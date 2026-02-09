@@ -19,7 +19,6 @@ export function GuideCard({ guide, isSelected, onToggle }: GuideCardProps) {
           : "border-border bg-white hover:border-primary"
       }`}
     >
-      {/* Selection Indicator */}
       <div
         className={`absolute top-0 right-0 p-3 z-10 transition-opacity duration-300 ${isSelected ? "opacity-100" : "opacity-0"}`}
       >

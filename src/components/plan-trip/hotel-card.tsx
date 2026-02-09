@@ -25,7 +25,6 @@ export function HotelCard({
           : "border-border bg-white hover:border-primary"
       }`}
     >
-      {/* Selection Indicator */}
       <div
         className={`absolute top-0 right-0 p-3 z-10 transition-opacity duration-300 ${isSelected ? "opacity-100" : "opacity-0"}`}
       >
@@ -35,12 +34,10 @@ export function HotelCard({
       </div>
 
       <div className="flex flex-col h-full">
-        {/* Image Area */}
         <div className="aspect-[4/3] bg-muted relative overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center bg-muted/50">
             <RiHotelLine className="size-10 text-muted-foreground/30" />
           </div>
-          {/* Star Rating Badge */}
           <div className="absolute bottom-0 left-0 bg-white/90 backdrop-blur-sm px-3 py-1 border-t border-r border-border">
             <div className="flex gap-0.5">
               {Array.from({ length: hotel.stars }).map((_, i) => (
@@ -52,7 +49,6 @@ export function HotelCard({
           </div>
         </div>
 
-        {/* Content */}
         <div className="p-5 flex flex-col flex-1 gap-4">
           <div>
             <h4 className="font-display text-xl font-bold uppercase tracking-tight text-foreground line-clamp-1 group-hover:text-primary transition-colors">

@@ -9,7 +9,6 @@ import { RiSearchLine, RiArrowRightUpLine } from "@remixicon/react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-// Mock Data
 type Category = "Hotels" | "BnBs" | "Car Rentals" | "Guides" | "All";
 type SortOption =
   | "Recommended"
@@ -28,7 +27,6 @@ interface Service {
 }
 
 const servicesData: Service[] = [
-  // HOTELS
   {
     id: "the-retreat",
     title: "The Retreat by Heaven",
@@ -61,7 +59,6 @@ const servicesData: Service[] = [
     ],
   },
 
-  // BnBs
   {
     id: "kigali-soul",
     title: "Kigali Soul Guesthouse",
@@ -94,7 +91,6 @@ const servicesData: Service[] = [
     ],
   },
 
-  // CAR RENTALS
   {
     id: "land-cruiser-v8",
     title: "Toyota Land Cruiser V8",
@@ -126,7 +122,6 @@ const servicesData: Service[] = [
     ],
   },
 
-  // GUIDES
   {
     id: "guide-alex",
     title: "Alex - Expert Birder",
@@ -180,7 +175,7 @@ export default function ServicesPage() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const filteredServices = useMemo(() => {
-    let result = servicesData.filter((service) => {
+    const result = servicesData.filter((service) => {
       const matchesCategory =
         activeCategory === "All" || service.category === activeCategory;
       const matchesSearch =
@@ -192,19 +187,16 @@ export default function ServicesPage() {
     if (sortBy === "Price: Low to High") {
       result.sort(
         (a, b) =>
-          parseInt(a.price.replace(/\D/g, "")) -
-          parseInt(b.price.replace(/\D/g, "")),
+          parseInt(a.price.replace(/\D/g, ""), 10) -
+          parseInt(b.price.replace(/\D/g, ""), 10),
       );
     } else if (sortBy === "Price: High to Low") {
       result.sort(
         (a, b) =>
-          parseInt(b.price.replace(/\D/g, "")) -
-          parseInt(a.price.replace(/\D/g, "")),
+          parseInt(b.price.replace(/\D/g, ""), 10) -
+          parseInt(a.price.replace(/\D/g, ""), 10),
       );
-    } else if (sortBy === "A-Z") {
-      result.sort((a, b) => a.title.localeCompare(b.title));
     }
-    // "Recommended" uses default order
 
     return result;
   }, [searchQuery, activeCategory, sortBy]);
@@ -213,7 +205,6 @@ export default function ServicesPage() {
     <>
       <Navbar />
       <div className="min-h-screen bg-background pt-32 pb-24">
-        {/* Editorial Header */}
         <header className="px-5 md:px-10 max-w-7xl mx-auto mb-20">
           <span className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-4 block">
             The Index
@@ -227,10 +218,8 @@ export default function ServicesPage() {
           </p>
         </header>
 
-        {/* Sticky Toolbar */}
         <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border/50">
           <div className="px-5 md:px-10 max-w-7xl mx-auto py-4 flex flex-col md:flex-row gap-6 md:items-center justify-between">
-            {/* Search */}
             <div className="relative w-full md:w-auto md:min-w-[300px]">
               <RiSearchLine className="absolute left-0 top-1/2 -translate-y-1/2 text-muted-foreground size-5" />
               <input
@@ -242,7 +231,6 @@ export default function ServicesPage() {
               />
             </div>
 
-            {/* Filters & Sort */}
             <div className="flex flex-col md:flex-row gap-6 md:items-center w-full md:w-auto overflow-x-auto pb-2 md:pb-0 no-scrollbar">
               <div className="flex items-center gap-2">
                 {categories.map((cat) => (
@@ -284,7 +272,6 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        {/* Services List (Accordion) */}
         <section className="px-5 md:px-10 max-w-7xl mx-auto py-12 min-h-[50vh]">
           <div className="flex flex-col">
             <AnimatePresence mode="popLayout">

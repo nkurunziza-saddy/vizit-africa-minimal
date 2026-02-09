@@ -421,7 +421,6 @@ export const samplePackage: Package = {
   createdAt: "2025-02-03T09:00:00Z",
 };
 
-// info: faq data for landing page
 export const faqData = [
   {
     question: "How far in advance should I book?",
@@ -465,7 +464,6 @@ export const faqData = [
   },
 ];
 
-// info: partner logos for social proof
 export const partnerLogos = [
   { name: "RwandAir", logo: "/images/partners/rwandair.svg" },
   { name: "Kenya Airways", logo: "/images/partners/kenya-airways.svg" },
@@ -476,14 +474,12 @@ export const partnerLogos = [
   { name: "Radisson", logo: "/images/partners/radisson.svg" },
 ];
 
-// info: stats for why us section
 export const stats = [
   { value: "200+", label: "Happy Travelers" },
   { value: "15+", label: "Countries Served" },
   { value: "4.9", label: "Average Rating" },
 ];
 
-// info: benefits for why us section
 export const benefits = [
   "Real-time pricing from verified partners",
   "Local experts with deep Rwanda knowledge",
@@ -492,7 +488,6 @@ export const benefits = [
   "Transparent costs with no hidden fees",
 ];
 
-// info: services for landing page
 export const services = [
   {
     icon: "plane",
@@ -520,7 +515,6 @@ export const services = [
   },
 ];
 
-// info: process steps for how it works section
 export const processSteps = [
   {
     step: 1,

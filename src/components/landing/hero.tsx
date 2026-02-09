@@ -7,20 +7,26 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { Magnetic } from "@/components/ui/magnetic";
+import { HERO_SLIDES } from "@/lib/landing-data";
 import { RiArrowRightLine } from "@remixicon/react";
-import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-
 import { useEffect, useRef, useState } from "react";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export function Hero() {
-  const containerRef = useRef(null);
-  const { scrollY } = useScroll();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const parallaxRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setCurrentSlide((currentSlide + 1) % SLIDES.length);
+      setCurrentSlide((currentSlide + 1) % HERO_SLIDES.length);
     }, 8000);
     return () => clearTimeout(timer);
   }, [currentSlide]);
@@ -29,19 +35,46 @@ export function Hero() {
     setCurrentSlide(index);
   };
 
-  const slide = SLIDES[currentSlide];
+  const slide = HERO_SLIDES[currentSlide];
 
-  const y = useTransform(scrollY, [0, 1000], [0, 400]);
-  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+  useGSAP(
+    () => {
+      if (!containerRef.current || !parallaxRef.current || !contentRef.current)
+        return;
+
+      gsap.to(parallaxRef.current, {
+        y: 400,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      gsap.to(contentRef.current, {
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "center top",
+          scrub: true,
+        },
+      });
+    },
+    { scope: containerRef },
+  );
 
   return (
     <section
       ref={containerRef}
       className="relative h-[100dvh] min-h-[700px] w-full overflow-hidden bg-[oklch(14%_0_0)]"
     >
-      <motion.div
-        style={{ y }}
-        className="absolute inset-0 w-full h-[120%] -top-[10%] z-0"
+      <div
+        ref={parallaxRef}
+        className="absolute inset-0 w-full h-[120%] -top-[10%] z-0 will-change-transform"
       >
         <AnimatePresence mode="popLayout">
           <motion.div
@@ -55,7 +88,7 @@ export function Hero() {
             <Image
               src={slide.image}
               fill
-              alt={slide.heading1 + " " + slide.heading2}
+              alt={`${slide.heading1} ${slide.heading2}`}
               className="w-full h-full object-cover"
               priority
             />
@@ -64,13 +97,13 @@ export function Hero() {
 
         <div className="absolute inset-0 bg-black/30" />
         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-black/20" />
-      </motion.div>
+      </div>
 
       <div className="absolute inset-0 z-20 pointer-events-none opacity-20 mix-blend-overlay">
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-150" />
       </div>
-      <motion.div
-        style={{ opacity }}
+      <div
+        ref={contentRef}
         className="relative z-30 container mx-auto px-5 md:px-10 h-full flex flex-col justify-end pb-24 md:pb-32"
       >
         <div className="max-w-[1400px]">
@@ -150,7 +183,7 @@ export function Hero() {
             </Magnetic>
 
             <div className="lg:hidden flex items-center gap-4">
-              {SLIDES.map((_, index) => (
+              {HERO_SLIDES.map((_, index) => (
                 <button
                   key={index}
                   type="button"
@@ -166,11 +199,11 @@ export function Hero() {
             </div>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
 
       <div className="hidden lg:flex absolute right-10 bottom-10 z-30 flex-col items-end gap-12">
         <div className="flex flex-col gap-4 text-right">
-          {SLIDES.map((slide, index) => {
+          {HERO_SLIDES.map((slide, index) => {
             const isActive = index === currentSlide;
             return (
               <HoverCard key={index}>
@@ -238,56 +271,3 @@ export function Hero() {
     </section>
   );
 }
-
-const SLIDES = [
-  {
-    id: 1,
-    image:
-      "https://images.unsplash.com/photo-1546422724-3c4be0b20cb5?q=90&w=2400&auto=format&fit=crop",
-    subheading: "Visit Rwanda 2026",
-    heading1: "Majestic",
-    heading2: "Horizon",
-    description:
-      "Discover the untold stories of the heart of Africa. Where mist meets mountain, and silence speaks volumes.",
-  },
-  {
-    id: 2,
-    image:
-      "https://images.unsplash.com/photo-1547471080-7528385f7017?q=90&w=2400&auto=format&fit=crop",
-    subheading: "Wildlife Sanctuary",
-    heading1: "Wild",
-    heading2: "Heart",
-    description:
-      "Experience the pulse of the jungle and the serene beauty of our protected highlands.",
-  },
-  {
-    id: 3,
-    image:
-      "https://images.unsplash.com/photo-1517309995815-46fd4252e1f4?q=90&w=2400&auto=format&fit=crop",
-    subheading: "Gorilla Highlands",
-    heading1: "Mist",
-    heading2: "Valley",
-    description:
-      "Encounter gentle giants in their natural habitat. A profound connection with nature's rarest treasures.",
-  },
-  {
-    id: 4,
-    image:
-      "https://images.unsplash.com/photo-1505245208761-ba872912fac0?q=90&w=2400&auto=format&fit=crop",
-    subheading: "Lake Kivu",
-    heading1: "Serene",
-    heading2: "Shores",
-    description:
-      "Relax by the emerald waters of Lake Kivu. A paradise for relaxation, adventure, and reflection.",
-  },
-  {
-    id: 5,
-    image:
-      "https://images.unsplash.com/photo-1489447068241-b3490214e879?q=90&w=2400&auto=format&fit=crop",
-    subheading: "Vibrant Culture",
-    heading1: "Urban",
-    heading2: "Rhythm",
-    description:
-      "Feel the energy of Kigali. A city of innovation, art, and warm hospitality rising from the hills.",
-  },
-];

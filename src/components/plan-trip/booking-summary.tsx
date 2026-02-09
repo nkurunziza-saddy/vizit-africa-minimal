@@ -35,7 +35,6 @@ export function BookingSummary({
 
       {currentStep >= 3 ? (
         <>
-          {/* info */}
           <div className="text-sm space-y-2 pb-4 border-b border-border">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Duration</span>

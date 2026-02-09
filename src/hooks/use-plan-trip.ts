@@ -4,7 +4,6 @@ import { useState, useMemo, useEffect } from "react";
 import type {
   TripInfo,
   Selections,
-  Hotel,
   FilterState,
 } from "../lib/plan_trip-types";
 import {
@@ -124,9 +123,9 @@ export function usePlanTrip() {
 
   useEffect(
     () => setHotelPage(1),
-    [hotelSearch, hotelPriceFilter, hotelStarsFilter],
+    [],
   );
-  useEffect(() => setCarPage(1), [carSearch, carCategoryFilter]);
+  useEffect(() => setCarPage(1), []);
 
   const subtotal = useMemo(() => {
     let sum = 0;
@@ -137,7 +136,7 @@ export function usePlanTrip() {
     }
     if (selections.guide) sum += selections.guide.price;
     return sum;
-  }, [selections, tripInfo.adults, tripInfo.children, days]);
+  }, [selections, days]);
 
   const serviceFee = subtotal * SERVICE_FEE_RATE;
   const total = subtotal + serviceFee;
@@ -164,7 +163,6 @@ export function usePlanTrip() {
   };
 
   return {
-    // state
     currentStep,
     setCurrentStep,
     tripInfo,
@@ -174,7 +172,6 @@ export function usePlanTrip() {
     activeTab,
     setActiveTab,
 
-    // filters state
     hotelSearch,
     setHotelSearch,
     hotelPriceFilter,
@@ -186,13 +183,11 @@ export function usePlanTrip() {
     carCategoryFilter,
     setCarCategoryFilter,
 
-    // pagination state
     hotelPage,
     setHotelPage,
     carPage,
     setCarPage,
 
-    // derived data
     days,
     travelers,
     subtotal,
@@ -205,12 +200,10 @@ export function usePlanTrip() {
     hotelTotalPages,
     carTotalPages,
 
-    // validation
     canProceedToContact,
     canProceedToServices,
     canProceedToReview,
 
-    // actions
     resetHotelFilters,
     resetCarFilters,
   };

@@ -77,7 +77,6 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
 
-  // memoize data to prevent infinite re-renders (per skill guidance)
   const memoizedData = useMemo(() => data, [data]);
   const memoizedColumns = useMemo(() => columns, [columns]);
 
@@ -108,10 +107,8 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      {/* toolbar */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex flex-1 items-center gap-3">
-          {/* search input */}
           <div className="relative w-full sm:w-80">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
@@ -133,7 +130,6 @@ export function DataTable<TData, TValue>({
             )}
           </div>
 
-          {/* filters */}
           {filters.map((filter) => {
             const column = table.getColumn(filter.columnId);
             if (!column) return null;
@@ -180,7 +176,6 @@ export function DataTable<TData, TValue>({
           })}
         </div>
 
-        {/* active filters + reset */}
         <div className="flex items-center gap-2">
           {activeFilterCount > 0 && (
             <Badge variant="secondary" className="h-6 gap-1">
@@ -205,7 +200,6 @@ export function DataTable<TData, TValue>({
         </div>
       </div>
 
-      {/* table */}
       <div className="rounded-lg border border-border bg-card overflow-hidden">
         <Table>
           <TableHeader>
@@ -305,7 +299,6 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      {/* pagination footer */}
       <div className="flex items-center justify-between px-2">
         <p className="text-sm text-muted-foreground">
           Showing{" "}
@@ -330,7 +323,6 @@ export function DataTable<TData, TValue>({
         </p>
 
         <div className="flex items-center gap-2">
-          {/* rows per page */}
           <div className="flex items-center gap-2">
             <span className="text-sm text-muted-foreground">Rows per page</span>
             <Select
@@ -352,7 +344,6 @@ export function DataTable<TData, TValue>({
             </Select>
           </div>
 
-          {/* page navigation */}
           <div className="flex items-center gap-1">
             <Button
               variant="outline"

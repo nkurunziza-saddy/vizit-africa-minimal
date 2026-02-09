@@ -27,7 +27,6 @@ const stats = [
 export default function AdminDashboard() {
   return (
     <div className="mx-auto max-w-7xl px-5 md:px-10 py-8">
-      {/* header */}
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="font-display text-2xl md:text-3xl font-bold text-foreground">
@@ -39,7 +38,6 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* stats */}
       <div className="grid md:grid-cols-3 gap-4 mb-8">
         {stats.map((stat) => (
           <div
@@ -63,7 +61,6 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      {/* nav tabs */}
       <div className="flex items-center gap-2 mb-6">
         <Link
           href="/admin"
@@ -81,7 +78,6 @@ export default function AdminDashboard() {
         </Link>
       </div>
 
-      {/* recent requests */}
       <div className="bg-card border border-border rounded-lg">
         <div className="p-5 border-b border-border">
           <h2 className="font-semibold text-foreground">Recent Requests</h2>

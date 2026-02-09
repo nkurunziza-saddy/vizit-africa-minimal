@@ -4,10 +4,8 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { RiEditLine, RiDeleteBinLine, RiStarFill } from "@remixicon/react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 import type { Hotel, Car, Guide, Flight } from "@/lib/schemas";
 
-// Actions Cell Component
 const ActionsCell = () => (
   <div className="flex justify-end gap-2">
     <Button

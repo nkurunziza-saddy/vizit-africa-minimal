@@ -1,8 +1,13 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useRef } from "react";
 import Image from "next/image";
 import { SectionTitle } from "./section-title";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Service {
   title: string;
@@ -43,8 +48,38 @@ const services: Service[] = [
 ];
 
 export function Services() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const cards = containerRef.current?.querySelectorAll(".service-card");
+      if (!cards) return;
+
+      gsap.fromTo(
+        cards,
+        {
+          opacity: 0,
+          y: 50,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        },
+      );
+    },
+    { scope: containerRef },
+  );
+
   return (
-    <section className="py-24 md:py-32 bg-background">
+    <section ref={containerRef} className="py-24 md:py-32 bg-background">
       <div className="container max-w-7xl mx-auto px-5 md:px-10">
         <SectionTitle
           overline="Our Services"
@@ -56,13 +91,13 @@ export function Services() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="flex flex-col gap-8 md:mt-0">
             {services.slice(0, 2).map((service, i) => (
-              <ServiceCard key={i} service={service} index={i} />
+              <ServiceCard key={i} service={service} />
             ))}
           </div>
 
           <div className="flex flex-col gap-8 md:mt-12">
             {services.slice(2, 4).map((service, i) => (
-              <ServiceCard key={i} service={service} index={i + 2} />
+              <ServiceCard key={i} service={service} />
             ))}
           </div>
         </div>
@@ -71,15 +106,9 @@ export function Services() {
   );
 }
 
-function ServiceCard({ service, index }: { service: Service; index: number }) {
+function ServiceCard({ service }: { service: Service }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="group relative overflow-hidden rounded-sm aspect-[4/3] md:aspect-[16/10]"
-    >
+    <div className="service-card group relative overflow-hidden rounded-sm aspect-[4/3] md:aspect-[16/10]">
       <div className="absolute inset-0">
         <Image
           src={service.image}
@@ -103,6 +132,6 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           </p>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

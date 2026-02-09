@@ -42,7 +42,6 @@ export interface Guide {
 }
 
 export interface TripInfo {
-  // Travel details
   departureCity: string;
   arrivalDate: string;
   departureDate: string;
@@ -56,7 +55,6 @@ export interface TripInfo {
     | "adventure"
     | "other";
   specialRequests: string;
-  // Contact info
   name: string;
   email: string;
   phone: string;

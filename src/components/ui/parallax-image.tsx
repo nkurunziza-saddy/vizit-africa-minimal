@@ -1,53 +1,77 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 import Image, { type ImageProps } from "next/image";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface ParallaxImageProps extends Omit<ImageProps, "className"> {
   containerClassName?: string;
   imageClassName?: string;
-  parallaxAmount?: string;
+  parallaxAmount?: number;
   className?: string;
 }
 
 export function ParallaxImage({
   containerClassName,
   imageClassName,
-  parallaxAmount = "15%",
+  parallaxAmount = 15,
   className,
   alt,
   ...props
 }: ParallaxImageProps) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
 
-  const y = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [`-${parallaxAmount}`, parallaxAmount],
+  useGSAP(
+    () => {
+      if (!containerRef.current || !imageRef.current) return;
+
+      gsap.fromTo(
+        imageRef.current,
+        {
+          y: `-${parallaxAmount}%`,
+          scale: 1.1,
+        },
+        {
+          y: `${parallaxAmount}%`,
+          scale: 1.1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        },
+      );
+    },
+    { scope: containerRef },
   );
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1.15, 1.1]);
 
   return (
     <div
-      ref={ref}
-      className={cn("overflow-hidden relative", containerClassName, className)}
+      ref={containerRef}
+      className={cn(
+        "overflow-hidden relative h-full w-full",
+        containerClassName,
+        className,
+      )}
     >
-      <motion.div
-        style={{ y, scale }}
-        className="w-full h-full absolute inset-0"
+      <div
+        ref={imageRef}
+        className="w-full h-[130%] -top-[15%] absolute inset-0 will-change-transform"
       >
         <Image
           alt={alt}
           className={cn("object-cover w-full h-full", imageClassName)}
           {...props}
         />
-      </motion.div>
+      </div>
     </div>
   );
 }

@@ -17,7 +17,6 @@ export function CTA() {
     <section id="contact" className="py-24 md:py-32 bg-background">
       <div className="container max-w-7xl mx-auto px-5 md:px-10">
         <div className="relative rounded-sm overflow-hidden bg-[#1a1a1a] text-white isolate">
-          {/* Grain Texture Overlay */}
           <div
             className="absolute inset-0 opacity-[0.03] pointer-events-none z-10 mix-blend-overlay"
             aria-hidden="true"
@@ -37,7 +36,6 @@ export function CTA() {
           </div>
 
           <div className="grid lg:grid-cols-12 gap-0 min-h-[600px]">
-            {/* Left Content (7 cols) */}
             <div className="lg:col-span-7 p-10 md:p-16 flex flex-col relative z-20">
               <div className="flex-1">
                 <motion.div

@@ -3,9 +3,6 @@
 import { Navbar } from "@/components/shared";
 import { Footer } from "@/components/landing";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Empty, EmptyTitle, EmptyDescription } from "@/components/ui/empty";
 import { sampleBookings, sampleRequests } from "@/lib/dummy-data";
 import {
   RiMapPinLine,
@@ -16,7 +13,6 @@ import {
   RiLogoutBoxRLine,
   RiPlaneLine,
 } from "@remixicon/react";
-import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
@@ -26,14 +22,13 @@ type Tab = "overview" | "trips" | "saved" | "settings";
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState<Tab>("overview");
-  const activeTrip = sampleBookings[0];
+  const _activeTrip = sampleBookings[0];
 
   return (
     <>
       <Navbar />
       <main className="pt-32 pb-24 min-h-screen bg-background">
         <div className="mx-auto max-w-7xl px-5 md:px-10">
-          {/* Profile Header */}
           <header className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
             <div>
               <span className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-4 block">
@@ -52,7 +47,6 @@ export default function ProfilePage() {
             </div>
           </header>
 
-          {/* Navigation Tabs */}
           <div className="flex items-center gap-8 border-b border-border/50 mb-12 overflow-x-auto no-scrollbar">
             {[
               { id: "overview", label: "Overview", icon: RiMapPinLine },
@@ -82,7 +76,6 @@ export default function ProfilePage() {
             ))}
           </div>
 
-          {/* Content Area */}
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -93,7 +86,6 @@ export default function ProfilePage() {
             >
               {activeTab === "overview" && (
                 <div className="grid lg:grid-cols-2 gap-12">
-                  {/* Next Trip Card */}
                   <div className="group relative aspect-[4/5] md:aspect-[16/9] lg:aspect-square overflow-hidden rounded-sm bg-muted">
                     <Image
                       src="https://images.unsplash.com/photo-1571896349842-6e547ce2a79b?q=80&w=2600&auto=format&fit=crop"
@@ -143,7 +135,6 @@ export default function ProfilePage() {
                     </div>
                   </div>
 
-                  {/* Recent Activity / Stats */}
                   <div className="space-y-12">
                     <div>
                       <h3 className="font-display text-2xl font-bold mb-6">
@@ -232,7 +223,6 @@ export default function ProfilePage() {
                     </Button>
                   </div>
                   <div className="border-y border-border divide-y divide-border">
-                    {/* Re-using the active trip as a list item example */}
                     <div className="py-8 grid md:grid-cols-4 gap-6 items-center group">
                       <div className="md:col-span-2">
                         <h3 className="font-display text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
@@ -255,7 +245,6 @@ export default function ProfilePage() {
                 </div>
               )}
 
-              {/* Placeholders for other tabs */}
               {activeTab === "saved" && (
                 <div className="text-center py-24 text-muted-foreground">
                   <RiBookmarkLine className="size-12 mx-auto mb-4 opacity-20" />

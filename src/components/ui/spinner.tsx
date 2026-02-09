@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { RiLoaderLine, type RemixiconComponentType } from "@remixicon/react";
+import { RiLoaderLine, } from "@remixicon/react";
 
 function Spinner({ className }: { className?: string }) {
   return (

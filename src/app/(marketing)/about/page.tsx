@@ -3,12 +3,14 @@
 import { Navbar } from "@/components/shared";
 import { Footer } from "@/components/landing";
 import { teamMembers } from "@/lib/dummy-data";
-import { motion, useScroll, useTransform } from "motion/react";
-import Image from "next/image";
 import { RevealText } from "@/components/ui/reveal-text";
 import { ParallaxImage } from "@/components/ui/parallax-image";
 import { useRef } from "react";
-import { cn } from "@/lib/utils";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const values = [
   {
@@ -38,13 +40,35 @@ const values = [
 ];
 
 export default function AboutPage() {
-  const teamContainerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: teamContainerRef,
-    offset: ["start end", "end start"],
-  });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+  useGSAP(
+    () => {
+      const scrollContainer = scrollContainerRef.current;
+      if (!scrollContainer) return;
+
+      const totalWidth = scrollContainer.scrollWidth;
+      const viewportWidth = window.innerWidth;
+      const scrollDistance = totalWidth - viewportWidth + viewportWidth * 0.1;
+
+      if (totalWidth > viewportWidth) {
+        gsap.to(scrollContainer, {
+          x: -scrollDistance,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            pin: true,
+            scrub: 1,
+            start: "top 20%",
+            end: `+=${scrollDistance}`,
+            invalidateOnRefresh: true,
+          },
+        });
+      }
+    },
+    { scope: containerRef },
+  );
 
   return (
     <>
@@ -78,7 +102,10 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="mb-32 md:mb-48 overflow-hidden">
+        <section
+          ref={containerRef}
+          className="mb-32 md:mb-48 overflow-hidden py-12"
+        >
           <div className="px-5 md:px-10 max-w-7xl mx-auto mb-12 flex items-end justify-between">
             <h2 className="font-display text-4xl md:text-6xl font-bold uppercase">
               The Guides
@@ -89,10 +116,10 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div ref={teamContainerRef} className="relative w-full">
-            <motion.div
-              style={{ x }}
-              className="flex gap-8 px-5 md:px-10 w-max cursor-grab active:cursor-grabbing"
+          <div className="w-full">
+            <div
+              ref={scrollContainerRef}
+              className="flex gap-8 px-5 md:px-10 w-max"
             >
               {teamMembers.map((member, i) => (
                 <div
@@ -126,7 +153,7 @@ export default function AboutPage() {
                 </div>
               ))}
               <div className="w-[10vw] shrink-0" />
-            </motion.div>
+            </div>
           </div>
         </section>
 

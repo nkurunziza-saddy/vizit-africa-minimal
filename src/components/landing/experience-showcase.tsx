@@ -1,9 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import { RiArrowRightLine } from "@remixicon/react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const experiences = [
   {
@@ -49,17 +53,42 @@ const experiences = [
 ];
 
 export function ExperienceShowcase() {
-  const targetRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-60%"]);
+  useGSAP(
+    () => {
+      const scrollContainer = scrollContainerRef.current;
+      if (!scrollContainer) return;
+
+      const totalWidth = scrollContainer.scrollWidth;
+      const viewportWidth = window.innerWidth;
+      const scrollDistance = totalWidth - viewportWidth + viewportWidth * 0.1;
+
+      gsap.to(scrollContainer, {
+        x: -scrollDistance,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          pin: true,
+          scrub: 1,
+          start: "top top",
+          end: `+=${totalWidth}`,
+          invalidateOnRefresh: true,
+        },
+      });
+    },
+    { scope: sectionRef },
+  );
 
   return (
-    <section ref={targetRef} className="relative h-[300vh] bg-background">
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
-        <div className="container max-w-7xl mx-auto px-5 mb-12">
+    <section
+      ref={sectionRef}
+      className="relative h-screen bg-background overflow-hidden"
+    >
+      <div ref={containerRef} className="h-full flex flex-col justify-center">
+        <div className="container max-w-7xl mx-auto px-5 mb-12 shrink-0">
           <div className="max-w-2xl">
             <span className="block text-accent-warm uppercase tracking-widest text-xs font-bold mb-4">
               Curated Experiences
@@ -73,25 +102,21 @@ export function ExperienceShowcase() {
         </div>
 
         <div className="w-full pl-5 md:pl-[max(2rem,calc((100vw-80rem)/2))]">
-          <motion.div style={{ x }} className="flex gap-6 w-max">
+          <div ref={scrollContainerRef} className="flex gap-6 w-max">
             {experiences.map((experience) => (
               <div
                 key={experience.id}
-                className="group relative h-[400px] w-[300px] md:h-[500px] md:w-[400px] shrink-0 overflow-hidden bg-muted rounded-sm cursor-pointer focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2"
+                className="group relative h-[400px] w-[300px] md:h-[500px] md:w-[400px] shrink-0 overflow-hidden bg-muted rounded-none cursor-pointer focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2"
               >
-                <motion.div
-                  className="w-full h-full relative"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.5 }}
-                >
+                <div className="w-full h-full relative overflow-hidden">
                   <Image
                     src={experience.image}
                     alt={experience.title}
                     fill
                     sizes="(max-width: 768px) 300px, 400px"
-                    className="object-cover transition-transform duration-500"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                </motion.div>
+                </div>
                 <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
 
                 <div className="absolute bottom-0 left-0 p-8 w-full">
@@ -101,7 +126,7 @@ export function ExperienceShowcase() {
                   <h3 className="text-2xl md:text-3xl font-display font-bold text-white uppercase mb-4 leading-none">
                     {experience.title}
                   </h3>
-                  <div className="h-0 overflow-hidden group-hover:h-auto transition-all duration-300">
+                  <div className="h-0 overflow-hidden group-hover:h-auto transition-all duration-500 ease-out">
                     <p className="text-white/80 line-clamp-3 mb-6 font-light text-sm leading-relaxed translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">
                       {experience.description}
                     </p>
@@ -116,7 +141,7 @@ export function ExperienceShowcase() {
                 </div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

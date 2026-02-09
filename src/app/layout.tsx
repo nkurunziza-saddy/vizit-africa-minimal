@@ -24,6 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://vizitafrica.com"),
   title: "Vizit Africa | Your Journey to Rwanda Starts Here",
   description:
     "Professional travel planning for your Rwanda experience. Flights, hotels, car rentals, and local guides - all in one place.",

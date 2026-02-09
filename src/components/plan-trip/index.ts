@@ -4,3 +4,4 @@ export { GuideCard } from "./guide-card";
 export { InlineFilters } from "./inline-filters";
 export { Pagination } from "./pagination";
 export { BookingSummary } from "./booking-summary";
+export { Stepper } from "./stepper";

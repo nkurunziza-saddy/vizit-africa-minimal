@@ -27,14 +27,11 @@ import type {
   Selections,
   Hotel,
   Car,
-  Guide,
   FilterState,
 } from "@/lib/plan_trip-types";
 import { MOCK_GUIDES, DRIVER_SURCHARGE } from "@/lib/plan-trip-data";
-import { useState } from "react";
 
 interface ServicesStepProps {
-  // State
   selections: Selections;
   setSelections: (selections: Selections) => void;
   activeTab: string;
@@ -42,7 +39,6 @@ interface ServicesStepProps {
   showMobileSummary: boolean;
   setShowMobileSummary: (show: boolean) => void;
 
-  // Data
   tripInfo: TripInfo;
   days: number;
   total: number;
@@ -50,7 +46,6 @@ interface ServicesStepProps {
   subtotal: number;
   serviceFee: number;
 
-  // Filtered Data
   paginatedHotels: Hotel[];
   paginatedCars: Car[];
   hotelTotalPages: number;
@@ -58,7 +53,6 @@ interface ServicesStepProps {
   hotelCount: number;
   carCount: number;
 
-  // Filter Actions
   hotelSearch: string;
   setHotelSearch: (s: string) => void;
   hotelPriceFilter: FilterState["priceRange"];
@@ -70,13 +64,11 @@ interface ServicesStepProps {
   carCategoryFilter: FilterState["category"];
   setCarCategoryFilter: (s: FilterState["category"]) => void;
 
-  // Pagination Actions
   hotelPage: number;
   setHotelPage: (page: number) => void;
   carPage: number;
   setCarPage: (page: number) => void;
 
-  // Navigation
   onNext: () => void;
   onBack: () => void;
   canProceed: boolean;

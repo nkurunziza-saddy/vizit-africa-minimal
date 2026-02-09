@@ -27,7 +27,6 @@ export default async function RequestsPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-5 md:px-10 py-8">
-      {/* header */}
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="font-display text-2xl md:text-3xl font-bold text-foreground">
@@ -39,7 +38,6 @@ export default async function RequestsPage() {
         </div>
       </div>
 
-      {/* nav tabs */}
       <div className="flex items-center gap-2 mb-6">
         <Link
           href="/admin"
@@ -57,7 +55,6 @@ export default async function RequestsPage() {
         </Link>
       </div>
 
-      {/* Unified Data Table with filters */}
       <DataTable columns={columns} data={requests} filters={filters} />
     </div>
   );

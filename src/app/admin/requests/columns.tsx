@@ -1,9 +1,9 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { Request } from "@/lib/schemas"; // Ensure Request type is imported correctly
+import type { Request } from "@/lib/schemas";
 
 export const columns: ColumnDef<Request>[] = [
   {

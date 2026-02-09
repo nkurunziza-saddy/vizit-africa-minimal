@@ -27,14 +27,12 @@ export function CustomCursor() {
 
     window.addEventListener("mousemove", moveCursor);
 
-    // Add event listeners for hoverable elements
     const hoverables = document.querySelectorAll("a, button, [role='button']");
     hoverables.forEach((el) => {
       el.addEventListener("mouseenter", handleMouseEnter);
       el.addEventListener("mouseleave", handleMouseLeave);
     });
 
-    // Mutation observer to handle dynamically added elements
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
@@ -71,7 +69,6 @@ export function CustomCursor() {
 
   return (
     <>
-      {/* Main Dot */}
       <motion.div
         className="fixed top-0 left-0 w-3 h-3 bg-primary rounded-full pointer-events-none z-[9999] mix-blend-difference"
         style={{
@@ -82,7 +79,6 @@ export function CustomCursor() {
         }}
       />
 
-      {/* Outer Ring */}
       <motion.div
         className={cn(
           "fixed top-0 left-0 w-8 h-8 border border-primary rounded-full pointer-events-none z-[9998] transition-all duration-300 ease-out mix-blend-difference",

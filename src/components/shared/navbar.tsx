@@ -49,7 +49,6 @@ export function Navbar({ forceSolid = false }: NavbarProps) {
         <nav className="mx-auto max-w-7xl px-5 md:px-10 flex items-center justify-between">
           <Logo variant={logoVariant} />
 
-          {/* desktop */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link

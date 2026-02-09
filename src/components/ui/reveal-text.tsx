@@ -1,9 +1,13 @@
 "use client";
 
-import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { JSX } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface RevealTextProps {
   text: string;
@@ -18,45 +22,61 @@ export function RevealText({
   delay = 0,
   tagName = "div",
 }: RevealTextProps) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const ref = useRef<HTMLDivElement>(null);
   const Tag = tagName as any;
 
   const words = text.split(" ");
 
+  useGSAP(
+    () => {
+      const chars = ref.current?.querySelectorAll(".reveal-char");
+      if (!chars) return;
+
+      gsap.fromTo(
+        chars,
+        {
+          y: "100%",
+          opacity: 0,
+        },
+        {
+          y: "0%",
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.02,
+          delay: delay,
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        },
+      );
+    },
+    { scope: ref },
+  );
+
   return (
-    <Tag ref={ref} className={cn("inline-block overflow-hidden", className)}>
+    <Tag
+      ref={ref}
+      className={cn("inline-block overflow-hidden leading-tight", className)}
+    >
       <span className="sr-only">{text}</span>
-      <motion.span
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="inline-block"
-      >
-        {words.map((word, wordIndex) => (
-          <span
-            key={wordIndex}
-            className="inline-block whitespace-nowrap mr-[0.25em]"
-          >
-            {word.split("").map((char, charIndex) => (
-              <motion.span
-                key={`${wordIndex}-${charIndex}`}
-                className="inline-block"
-                variants={{
-                  hidden: { y: "100%" },
-                  visible: { y: 0 },
-                }}
-                transition={{
-                  duration: 0.5,
-                  ease: [0.33, 1, 0.68, 1],
-                  delay: delay + wordIndex * 0.05 + charIndex * 0.02,
-                }}
-              >
-                {char}
-              </motion.span>
-            ))}
-          </span>
-        ))}
-      </motion.span>
+      {words.map((word, wordIndex) => (
+        <span
+          key={wordIndex}
+          className="inline-block whitespace-nowrap mr-[0.25em] overflow-hidden align-top"
+        >
+          {word.split("").map((char, charIndex) => (
+            <span
+              key={`${wordIndex}-${charIndex}`}
+              className="reveal-char inline-block will-change-transform"
+            >
+              {char}
+            </span>
+          ))}
+        </span>
+      ))}
     </Tag>
   );
 }

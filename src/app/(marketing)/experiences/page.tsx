@@ -5,13 +5,7 @@ import { Footer } from "@/components/landing";
 import { Button } from "@/components/ui/button";
 import { RevealText } from "@/components/ui/reveal-text";
 import { Magnetic } from "@/components/ui/magnetic";
-import {
-  RiTimeLine,
-  RiMapPinLine,
-  RiArrowRightLine,
-  RiStarFill,
-  RiArrowDownLine,
-} from "@remixicon/react";
+import { RiArrowRightLine, RiArrowDownLine } from "@remixicon/react";
 import Link from "next/link";
 import NextImage from "next/image";
 import { motion, useInView, AnimatePresence } from "motion/react";
@@ -150,10 +144,10 @@ export default function ExperiencesPage() {
               </h1>
             </div>
 
-            {/* nav */}
             <div className="flex flex-wrap gap-4 mb-2">
               {experiences.map((cat) => (
                 <button
+                  type="button"
                   key={cat.category}
                   onClick={() => scrollToCategory(cat.category)}
                   className="text-sm font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 group"
@@ -167,7 +161,6 @@ export default function ExperiencesPage() {
         </header>
 
         <div className="relative flex flex-col md:flex-row">
-          {/* left: scroll */}
           <div className="w-full md:w-1/2 px-5 md:px-10 py-12 md:py-24 space-y-32 md:space-y-48">
             {experiences.map((category) => (
               <div

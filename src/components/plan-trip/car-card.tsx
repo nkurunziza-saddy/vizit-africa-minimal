@@ -42,7 +42,6 @@ export function CarCard({
           : "border-border bg-white hover:border-primary"
       }`}
     >
-      {/* Selection Indicator */}
       <div
         className={`absolute top-0 right-0 p-3 z-10 transition-opacity duration-300 ${isSelected ? "opacity-100" : "opacity-0"}`}
       >
@@ -52,7 +51,6 @@ export function CarCard({
       </div>
 
       <div className="flex flex-col h-full">
-        {/* Header / Image Placeholder */}
         <div className="aspect-[4/3] bg-muted relative overflow-hidden border-b border-border">
           <div className="absolute inset-0 flex items-center justify-center bg-muted/50">
             <RiCarLine className="size-12 text-muted-foreground/30" />
